@@ -1,0 +1,1 @@
+const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/:CAMPUS_CODE/'
