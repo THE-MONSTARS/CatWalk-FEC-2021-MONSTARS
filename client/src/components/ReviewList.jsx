@@ -12,7 +12,7 @@ class ReviewList extends React.Component {
     }
     this.getProductList = this.getProductList.bind(this);
     this.getReviews = this.getReviews.bind(this);
-    this.updateReviews = this.updateReviews.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   componentDidMount() {
@@ -44,19 +44,31 @@ class ReviewList extends React.Component {
     })
     .then(res => {
       console.log(res.data.results)
+      this.updateState('reviews', res.data.results)
     })
   }
 
-  updateReviews(data) {
+  updateState(state, value) {
     this.setState({
-      reviews: data,
+      [state]: value,
     })
 
   }
 
   render() {
+    var mappedReviews = this.state.reviews.map((review, index) => {
+      return (
+        <div key={index}>
+          {review.date}
+          <p> {review.body} </p>
+        </div>
+      )
+    })
     return (
-      <div>ReviewList</div>
+      <div>
+        Reviews:
+        {mappedReviews}
+      </div>
     )
   }
 }
