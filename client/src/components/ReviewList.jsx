@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import credentials from '../../../config.js'
 // import API from '../../../server/router.js'
+import Review from './Review.jsx'
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -56,14 +57,11 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    var mappedReviews = this.state.reviews.map((review, index) => {
-      return (
-        <div key={index}>
-          {review.date}
-          <p> {review.body} </p>
-        </div>
+    var mappedReviews = this.state.reviews.map((review, index) => (
+        <Review summary={review.summary} body={review.body} date={review.date} key={index} reviewer_name={review.reviewer_name} rating={review.rating}/>
       )
-    })
+    )
+
     return (
       <div>
         Reviews:
