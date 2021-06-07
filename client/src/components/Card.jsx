@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 
-export default function Card (props) {
+export default function Card (/*props*/) {
 
   //Will need url and pricing from styles another get request
   //All Get functions will prob be on a component level higher...

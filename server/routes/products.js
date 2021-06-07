@@ -21,6 +21,10 @@ products
   // return the id's of products related to the product specified
 products
   .route('/:product_id/related')
-  .get()
+  .get(((req, res) => {
+    getRelated((err, data) => {
+
+    })
+  }))
 
   module.exports = products;
