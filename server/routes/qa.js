@@ -1,8 +1,10 @@
 const express = require('express');
-const qa = express.router();
+const qa = express.Router();
 
 qa
   .route('/')
-  .get()
+  .get((req, res) => {
+    res.status(200).send('hello from qa!')
+  })
 
   module.exports = qa;

@@ -1,8 +1,10 @@
 const express = require('express');
-const reviews = express.router();
+const reviews = express.Router();
 
 reviews
   .route('/')
-  .get()
+  .get((req, res) => {
+    res.status(200).send('hello from reviews!')
+  })
 
   module.exports = reviews;

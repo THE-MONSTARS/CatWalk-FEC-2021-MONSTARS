@@ -1,8 +1,10 @@
 const express = require('express');
-const cart = express.router();
+const cart = express.Router();
 
 cart
   .route('/')
-  .get()
+  .get((req, res) => {
+    res.status(200).send('hello from cart!')
+  })
 
   module.exports = cart;

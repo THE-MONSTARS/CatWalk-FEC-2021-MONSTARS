@@ -1,10 +1,12 @@
 const express = require('express');
-const products = express.router();
+const products = express.Router();
 
 // retrieves the list of products. takes in 2 parameters {page, count}
 products
   .route('/')
-  .get()
+  .get((req, res) => {
+    res.status(200).send('hello from products!')
+  })
 
 // get all product level information for specified product id
 products
