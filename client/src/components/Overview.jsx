@@ -1,7 +1,7 @@
 import React from 'react';
 
-const UnderView = () => (
+const OverView = () => (
   <h1>This is the overview, goodbye.</h1>
 )
 
-export default UnderView;
+export default OverView;
