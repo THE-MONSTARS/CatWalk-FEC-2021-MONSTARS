@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
-export default function Card () {
-  const [productInfo, setProductInfo] = useState([])
 
-  const getProductInfo = () => {
-    axios.get('/product/productid')
-      .then((rawData) => {
-        setProductInfo([rawData.data])
-      })
-      .catch((err) => {
-        console.log('Error getting Product...', err)
-      })
-  }
+export default function Card (props) {
+
+  //Will need url and pricing from styles another get request
+  //All Get functions will prob be on a component level higher...
+
 
   return (
     <div>
