@@ -21,10 +21,41 @@ module.exports = {
   },
 
   getProductById: function(product_id) {
-    const params = new URLSearchParams({ product_id: product_id, })
     return axios({
       method: 'GET',
-      url: `${endpoint}/products?${params}`,
+      url: `${endpoint}/products/${product_id}`,
+      headers: { 'Authorization': credentials.TOKEN },
+    })
+    .then(res => {
+      console.log(res.data)
+      return res.data
+    })
+    .catch(err => {
+      console.log(err)
+      return err;
+    })
+  },
+
+  getStylesById: function(product_id) {
+    return axios({
+      method: 'GET',
+      url: `${endpoint}/products/${product_id}/styles`,
+      headers: { 'Authorization': credentials.TOKEN },
+    })
+    .then(res => {
+      console.log(res.data)
+      return res.data
+    })
+    .catch(err => {
+      console.log(err)
+      return err;
+    })
+  },
+
+  getRelatedProductsById: function(product_id) {
+    return axios({
+      method: 'GET',
+      url: `${endpoint}/products/${product_id}/related`,
       headers: { 'Authorization': credentials.TOKEN },
     })
     .then(res => {
@@ -57,3 +88,4 @@ module.exports = {
   },
 
 };
+
