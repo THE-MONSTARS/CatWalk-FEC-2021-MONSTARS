@@ -6,4 +6,4 @@ const StarRating = () = > (
   </div>
 );
 
-export default ProductDescription;
+export default StarRating;
