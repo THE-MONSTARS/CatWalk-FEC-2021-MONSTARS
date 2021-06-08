@@ -6,13 +6,12 @@ const API = require('../../apiHelpers/atelier')
 products
   .route('/')
   .get((req, res) => {
-    API.getProducts((err, response) => {
-      if (err) {
-        console.log(err)
-        res.status(400).send("error from products:", err)
-      } else {
-        res.status(200).send(response)
-      }
+    return API.getProducts()
+    .then(data => {
+      res.status(200).send(data)
+    })
+    .catch(err => {
+      res.status(400).send('error retrieving products: ', err)
     })
   })
 
@@ -20,13 +19,12 @@ products
 products
   .route('/:product_id')
   .get((req, res) => {
-    API.getProductById(req.params.id, (err, response) => {
-      if (err) {
-        console.log(err)
-        res.status(400)
-      } else {
-        res.status(200).send(response)
-      }
+    return API.getProductById(req.params.id)
+    .then(data => {
+      res.status(200).send(data)
+    })
+    .catch(err => {
+      res.status(400).send('error retrieving product by id: ', err)
     })
   })
 
@@ -41,3 +39,13 @@ products
   .get()
 
   module.exports = products;
+
+
+    //   (err, response) => {
+    //   if (err) {
+    //     console.log(err)
+    //     res.status(400).send("error from products:", err)
+    //   } else {
+    //     res.status(200).send(response)
+    //   }
+    // }
