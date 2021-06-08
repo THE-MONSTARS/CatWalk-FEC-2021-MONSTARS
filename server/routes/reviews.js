@@ -5,9 +5,9 @@ const API = require('../../apiHelpers/atelier')
 reviews
   .route('/:product_id/:sort_order?')
   .get((req, res) => {
-    var product_id = req.params.product_id;
+    let product_id = req.params.product_id;
     console.log(req.params)
-    var sort_order = 'newest';
+    let sort_order = 'newest';
     if (req.params.sort_order) {
       sort_order = req.params.sort_order
     }
