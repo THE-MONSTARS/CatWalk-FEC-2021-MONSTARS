@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/:hr-la/'
-
-
-=======
 const endpoint = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax'; //note that all endpoints must contain a '/' after 'hr-lax'
 const credentials = require('../config.js')
 // import credentials from '../config.js'
@@ -62,4 +57,4 @@ module.exports = {
   },
 
 };
->>>>>>> 38210ee74768d66f652fe6c1725710f9ee9055d3
+
