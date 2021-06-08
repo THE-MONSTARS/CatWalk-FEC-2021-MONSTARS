@@ -36,7 +36,7 @@ module.exports = {
     })
   },
 
-  getStlyesById: function(product_id) {
+  getStylesById: function(product_id) {
     return axios({
       method: 'GET',
       url: `${endpoint}/products/${product_id}/styles`,

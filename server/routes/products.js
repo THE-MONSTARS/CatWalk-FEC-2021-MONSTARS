@@ -32,7 +32,7 @@ products
 products
   .route('/:product_id/styles')
   .get((req, res) => {
-    return API.getStlyesById(req.params.product_id)
+    return API.getStylesById(req.params.product_id)
     .then(data => {
       res.status(200).send(data)
     })
