@@ -1,5 +1,7 @@
 node_modules
 config.js
 client/dist/bundle.js
+client/src/__tests__
 Tests/
-client/src/sampleData.js
+
+
