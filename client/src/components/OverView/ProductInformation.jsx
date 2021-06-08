@@ -6,6 +6,7 @@ const ProductInformation = () = > (
     <StarRating />
     <p className="product-category"></p>
     <h2 className="product-name"></h2>
+     {/* <Price /> */}
   </div>
 );
 

@@ -4,7 +4,6 @@ import StyleList from './StyleList.jsx';
 
 const StyleSelector = () = > (
   <div>
-    {/* <Price /> */}
     <StyleList />
   </div>
 );
