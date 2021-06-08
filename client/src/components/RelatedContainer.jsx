@@ -18,8 +18,8 @@ export default function RelatedContainer () {
 
     const relatedArrayData = await axios.get(`/products/${dummyId}/related`)
     console.log('RelatedArrayData:', relatedArrayData)
-
-    const allProductData = await Promise.all(relatedArrayData.map(itemId => {
+    //Will do major testing on this once server requests are up and running
+    const allProductData = Promise.all(relatedArrayData.map(itemId => {
       axios.get(`/products/${itemId}`)
         .then((productData) => {
           constructedItem.name = productData.name;
@@ -38,6 +38,7 @@ export default function RelatedContainer () {
           })
         })
       }))
+      setProductsInfo(allProductData)
   }
 
   //filterstyle function
