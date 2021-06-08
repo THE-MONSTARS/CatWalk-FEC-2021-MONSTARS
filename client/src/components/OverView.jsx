@@ -5,8 +5,6 @@ import StyleSelector from './OverView/StyleSelector.jsx';
 import AddToCart from './OverView/AddToCart.jsx';
 import ProductDescription from './OverView/ProductDescription.jsx';
 
-
-
 const OverView = () => (
   <div>
     <ImageGallery />

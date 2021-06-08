@@ -1,5 +1,6 @@
 import React from 'react';
-import ReviewList from './ReviewList.jsx'
+import ReviewList from './ReviewList.jsx';
+import RelatedContainer from './RelatedContainer.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class App extends React.Component {
     return (
       <div>
         Hello from React!
-
+        <RelatedContainer />
         <ReviewList />
       </div>
 
