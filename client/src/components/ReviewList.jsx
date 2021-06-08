@@ -3,24 +3,24 @@ import axios from 'axios';
 import credentials from '../../../config.js'
 // import API from '../../../server/router.js'
 import Review from './Review.jsx'
+const url = 'http://localhost:3000'
 
 function ReviewList() {
-  const [ isLoading, setIsLoading] = useState(false);
-  const [reviews, setReviews] = useState([]);
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ reviews, setReviews ] = useState([]);
+  const [ productId, setProductId ] = useState(16057)
 
   //update reviews
   useEffect(() => {
     function getReviews() {
       setIsLoading(true)
-      const params = new URLSearchParams({ sort: "newest", product_id: '16057', })
       return axios({
         method: 'GET',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/reviews?${params}`,
+        url: `${url}/reviews/${productId}`,
         headers: { 'Authorization': credentials.TOKEN },
       })
       .then(res => {
         setReviews(res.data.results)
-        console.log(res.data.results);
         setIsLoading(false)
       })
       .catch(err => {
@@ -28,7 +28,6 @@ function ReviewList() {
       })
     }
     getReviews();
-    console.log(reviews)
   }, [])
   // return //cleanup
 
@@ -54,9 +53,6 @@ function ReviewList() {
 //     console.log(res.data.results);
 //   })
 // }
-
-
-
 
 // class ReviewList extends React.Component {
 //   constructor(props) {
@@ -90,8 +86,6 @@ function ReviewList() {
 //     })
 //   }
 
-
-
 //   updateState(state, value) {
 //     this.setState({
 //       [state]: value,
@@ -121,6 +115,5 @@ function ReviewList() {
 //     <div></div>
 //   )
 // }
-
 
 export default ReviewList
