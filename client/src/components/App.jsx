@@ -17,10 +17,13 @@ const App = () => {
       const productsData = fetchedProducts.data;
       setProducts(productsData);
 
+      setProducts(prevProducts => {
+        // this is where you would add default style
+      })
       // defaulting current product to first product from products data
       setCurrentProduct(productsData[0]);
 
-      const productId = currentProduct.id;
+      let productId = currentProduct.id;
       const fetchedStyles = await axios.get(`/products/${productId}/styles`);
       const stylesData = fetchedStyles.data.results;
       setStyles(stylesData);
@@ -35,14 +38,14 @@ const App = () => {
     fetchProductAndId();
   }, []);
 
-    const id = currentProduct.id;
+    let id = currentProduct.id;
 
     return (
       isLoading
       ? <div>Loading...</div>
       : (
       <div>
-        <OverView id={id} currentProduct={currentProduct} setStyles={setStyles}/>
+        <OverView id={id} currentProduct={currentProduct} styles ={styles} setStyles={setStyles}/>
         <RelatedContainer id={id} setCurrentProduct={setCurrentProduct}/>
         <ReviewList id={id}/>
       </div>
