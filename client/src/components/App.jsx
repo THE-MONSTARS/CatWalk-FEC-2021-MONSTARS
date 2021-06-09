@@ -13,17 +13,14 @@ const App = () => {
 
   const fetchProductAndId = async () => {
     try {
-      const fetchedProducts = await axios.get('/products')
-      const productsData = fetchedProducts.data;
+      const productsData = await getProduct()
       setProducts(productsData);
 
       // defaulting current product to first product from products data
       setCurrentProduct(productsData[0]);
 
       let productId = productsData[0].id;
-      const fetchedStyles = await axios.get(`/products/${productId}/styles`);
-      const stylesData = fetchedStyles.data.results;
-      console.log('styles data: ', fetchedStyles);
+      const stylesData = await getStyles(productId);
       setStyles(stylesData);
       setIsLoading(false);
 
@@ -31,6 +28,19 @@ const App = () => {
       console.log('error fetching product & styles data: ', err);
     }
   }
+
+  const getProduct = async () => {
+    const fetchedProducts = await axios.get('/products');
+    setProducts(fetchedProducts.data)
+    return fetchedProducts.data;
+  }
+
+  const getStyles = async (id) => {
+    const fetchedStyles = await axios.get(`/products/${id}/styles`);
+    setStyles(fetchedStyles.data.results)
+    return fetchedStyles.data.results;
+  }
+
 
   useEffect(() => {
     fetchProductAndId();
@@ -43,8 +53,8 @@ const App = () => {
       ? <div>Loading...</div>
       : (
       <div>
-        <OverView id={id} currentProduct={currentProduct} styles ={styles} setStyles={setStyles}/>
-        <RelatedContainer id={id} setCurrentProduct={setCurrentProduct}/>
+        <OverView id={id} currentProduct={currentProduct} styles ={styles} getStyles={getStyles}/>
+        <RelatedContainer id={id} getProduct={getProduct}/>
         <ReviewList id={id}/>
       </div>
       )
