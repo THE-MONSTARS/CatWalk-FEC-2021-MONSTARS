@@ -16,10 +16,7 @@ const ProductImage = styled.img`
   min-width: 0;
 `
 
-
 const ImageGallery = ({currentStyle}) => {
-  console.log(currentStyle)
-
   return (
     <ImageGalleryContainer>
       {currentStyle && <ProductImage src={currentStyle.photos[0].url} />}

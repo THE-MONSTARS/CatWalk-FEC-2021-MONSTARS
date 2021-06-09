@@ -23,7 +23,6 @@ const OverView = ({currentProduct, styles, getStyles}) => {
 
   const selectStyle = (id) => {
     const current = styles.find(style => style.style_id === parseInt(id))
-    console.log(id)
     setCurrentStyle(current)
   }
 
