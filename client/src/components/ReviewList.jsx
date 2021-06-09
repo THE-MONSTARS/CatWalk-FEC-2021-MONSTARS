@@ -9,22 +9,23 @@ function ReviewList() {
   const [ reviews, setReviews ] = useState([]);
   const [ productId, setProductId ] = useState(16057);
 
+  function getReviews() {
+    setIsLoading(true)
+    return axios({
+      method: 'GET',
+      url: `${url}/reviews/${productId}`,
+      headers: { 'Authorization': credentials.TOKEN },
+    })
+    .then(res => {
+      setReviews(res.data.results)
+      setIsLoading(false)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   useEffect(() => {
-    function getReviews() {
-      setIsLoading(true)
-      return axios({
-        method: 'GET',
-        url: `${url}/reviews/${productId}`,
-        headers: { 'Authorization': credentials.TOKEN },
-      })
-      .then(res => {
-        setReviews(res.data.results)
-        setIsLoading(false)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    }
     getReviews();
   }, [])
    //cleanup?

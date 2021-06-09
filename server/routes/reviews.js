@@ -6,7 +6,6 @@ reviews
   .route('/:product_id/:sort_order?')
   .get((req, res) => {
     let product_id = req.params.product_id;
-    console.log(req.params)
     let sort_order = 'newest';
     if (req.params.sort_order) {
       sort_order = req.params.sort_order
