@@ -1,7 +1,7 @@
 import React from 'react';
 import StarRating from '../StarRating.jsx';
 
-const ProductInformation = () = > (
+const ProductInformation = () => (
   <div>
     <StarRating />
     <p className="product-category"></p>

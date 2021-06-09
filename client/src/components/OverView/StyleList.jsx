@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StyleList = () = > (
+const StyleList = () => (
   <div>
     <ul>
       <li>hardcoded style 1</li>
