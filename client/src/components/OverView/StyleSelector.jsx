@@ -2,9 +2,9 @@ import React from 'react';
 // import Price from './Price.jsx';
 import StyleList from './StyleList.jsx';
 
-const StyleSelector = () => (
+const StyleSelector = ({styles, selectStyle}) => (
   <div>
-    <StyleList />
+    <StyleList styles={styles} selectStyle={selectStyle}/>
   </div>
 );
 

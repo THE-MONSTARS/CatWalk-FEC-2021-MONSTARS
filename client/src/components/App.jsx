@@ -53,7 +53,7 @@ const App = () => {
       ? <div>Loading...</div>
       : (
       <div>
-        <OverView id={id} currentProduct={currentProduct} styles ={styles} getStyles={getStyles}/>
+        <OverView id={id} currentProduct={currentProduct} styles={styles}/>
         <RelatedContainer id={id} getProduct={getProduct}/>
         <ReviewList id={id}/>
       </div>
