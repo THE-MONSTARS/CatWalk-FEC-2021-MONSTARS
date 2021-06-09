@@ -11,7 +11,6 @@ module.exports = {
       headers: { 'Authorization': credentials.TOKEN },
     })
     .then(res => {
-      console.log(res.data)
       return res.data;
     })
     .catch(err => {
@@ -27,7 +26,6 @@ module.exports = {
       headers: { 'Authorization': credentials.TOKEN },
     })
     .then(res => {
-      console.log(res.data)
       return res.data
     })
     .catch(err => {
@@ -43,7 +41,6 @@ module.exports = {
       headers: { 'Authorization': credentials.TOKEN },
     })
     .then(res => {
-      console.log(res.data)
       return res.data
     })
     .catch(err => {
@@ -59,7 +56,6 @@ module.exports = {
       headers: { 'Authorization': credentials.TOKEN },
     })
     .then(res => {
-      console.log(res.data)
       return res.data
     })
     .catch(err => {
@@ -76,15 +72,12 @@ module.exports = {
       headers: { 'Authorization': credentials.TOKEN },
     })
     .then(res => {
-      // console.log(res.data.results)
       return res.data
-      // this.updateReviews(data)
     })
     .catch(err => {
       console.log(err)
       return err
     })
-  // callback(null, "hello from getReviews!")
   },
 
 };
