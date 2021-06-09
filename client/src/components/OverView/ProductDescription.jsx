@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductDescription = () = > (
+const ProductDescription = () => (
   <div>
     <div>
       <h2 className="product-slogan"></h2>

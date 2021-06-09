@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddToCart = () = > (
+const AddToCart = () => (
   <div className="add-to-cart">
     <select className="select-size">
       <option value="small">small</option>
