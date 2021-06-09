@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StarRating = () = > (
+const StarRating = () => (
   <div>
     {/* Need to figure out how to implement star rating */}
   </div>

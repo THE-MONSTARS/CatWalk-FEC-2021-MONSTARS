@@ -6,41 +6,48 @@ import axios from 'axios';
 
 
 const App = () => {
+  const [ isLoading, setIsLoading ] = useState(true);
   const [ products, setProducts ] = useState([])
-  const [ currentProduct, setCurrentProduct ] = useState()
+  const [ currentProduct, setCurrentProduct ] = useState({})
   const [ styles, setStyles ] = useState([])
-
 
   const fetchProductAndId = async () => {
     try {
       const fetchedProducts = await axios.get('/products')
       const productsData = fetchedProducts.data;
       setProducts(productsData);
+
+      // defaulting current product to first product from products data
       setCurrentProduct(productsData[0]);
 
-      const productId = productsData[0].id;
+      const productId = currentProduct.id;
       const fetchedStyles = await axios.get(`/products/${productId}/styles`);
       const stylesData = fetchedStyles.data.results;
       setStyles(stylesData);
+      setIsLoading(false);
 
     } catch (err) {
       console.log('error fetching product & styles data: ', err);
     }
   }
 
-
   useEffect(() => {
-    fetchProductAndId()
+    fetchProductAndId();
 
   }, []);
 
+    const id = currentProduct.id;
 
     return (
+      isLoading
+      ? <div>Loading...</div>
+      : (
       <div>
-        <OverView />
-        <RelatedContainer />
-        <ReviewList />
+        <OverView id={id} currentProduct={currentProduct}/>
+        <RelatedContainer id={id}/>
+        <ReviewList id={id}/>
       </div>
+      )
     );
 
 }
