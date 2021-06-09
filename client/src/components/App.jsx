@@ -33,7 +33,6 @@ const App = () => {
 
   useEffect(() => {
     fetchProductAndId();
-
   }, []);
 
     const id = currentProduct.id;
