@@ -7,8 +7,6 @@ const YellowStar = (props) => (<img src={'../assets/icons8-star-24-yellow.png'}/
 
 const EmptyStar = (props) => (<img src={'../assets/icons8-star-24-empty.png'}/>)
 
-
-
 const StarRating = (props) => {
   const [ stars, setStars ] = useState([]);
   const [ isLoading, setIsLoading] = useState(true)
@@ -30,8 +28,8 @@ const StarRating = (props) => {
 
   return (
       isLoading?
-    <div> ... </div> :
-    <div> {stars} </div>
+    <a> ... </a> :
+    <a> {stars} </a>
   );
 }
 
