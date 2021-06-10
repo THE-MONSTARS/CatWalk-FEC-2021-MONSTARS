@@ -10,6 +10,7 @@ import styled from 'styled-components';
 const OverViewContainer = styled.div`
   display: flex;
   flex-direction: row;
+  min-width: 600px;
   height: 450px;
 `
 
