@@ -6,7 +6,7 @@ const RDC = styled.div`
   font-family: Helvetica, sans-serif;
   margin-left: 10px;
   margin-right: 10px;
-
+  min-width: 140px;
 `;
 
 const Header = styled.div`
