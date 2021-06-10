@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
 import credentials from '../../../config.js'
-import Review from './Review.jsx'
 const url = 'http://localhost:3000'
 
+import Review from './Review.jsx'
+
+//base component
 function ReviewList() {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ reviews, setReviews ] = useState([]);
