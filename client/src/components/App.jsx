@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
-import ReviewsContainer from './Reviews/ReviewsContainer.jsx';
+import ReviewSorter from './Reviews/ReviewSorter.jsx';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const RVC = styled.div`
+margin-top: 10px;
+display: flex;
+flex-direction: row;
+justify-content: left;
+`;
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
@@ -66,7 +73,7 @@ const App = () => {
       <div>
         <OverView id={id} currentProduct={currentProduct} styles={styles} reviews={reviews}/>
         <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} />
-        <ReviewsContainer id={id} reviews={reviews}/>
+        <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
       </div>
       )
     );
