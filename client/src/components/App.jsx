@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import OverView from './OverView.jsx';
 import ReviewList from './ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
+import ReviewsContainer from './ReviewsContainer.jsx';
 import axios from 'axios';
 
 
@@ -65,7 +66,7 @@ const App = () => {
       <div>
         <OverView id={id} currentProduct={currentProduct} styles={styles} reviews={reviews}/>
         <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} />
-        <ReviewList id={id} reviews={reviews}/>
+        <ReviewsContainer id={id} reviews={reviews}/>
       </div>
       )
     );

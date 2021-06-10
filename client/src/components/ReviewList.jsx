@@ -8,10 +8,10 @@ const url = 'http://localhost:3000'
 import Review from './Review.jsx'
 
 //base component
-function ReviewList() {
+function ReviewList(props) {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ reviews, setReviews ] = useState([]);
-  const [ productId, setProductId ] = useState(16057);
+  const [ productId, setProductId ] = useState(props.id);
 
   function getReviews() {
     setIsLoading(true)
@@ -37,7 +37,7 @@ function ReviewList() {
   return (
     isLoading ?
     <div> Loading Reviews... </div> :
-    <div> Reviews:
+    <div>
         {reviews.map((review, index) => (
         <Review summary={review.summary} body={review.body} date={review.date} key={index} reviewer_name={review.reviewer_name} rating={review.rating}/>))}
     </div>
