@@ -8,11 +8,11 @@ const ImageGalleryContainer = styled.div`
   flex-basis: 60%;
   min-width: 0;
   justify-content: center;
-  object-fit: contain;
+  object-fit: cover;
 `
 
 const ProductImage = styled.img`
-  height: 100%;
+  max-height: 100%;
   min-width: 0;
   flex-shrink: 1;
 `

@@ -35,7 +35,7 @@ const OverView = ({currentProduct, styles, getStyles, reviews}) => {
         <ProductInfoContainer>
           <ProductInformation currentProduct={currentProduct} currentStyle={currentStyle} reviews={reviews}/>
           <StyleSelector styles={styles} currentStyle={currentStyle} selectStyle={selectStyle}/>
-          <AddToCart />
+          <AddToCart currentStyle={currentStyle}/>
         </ProductInfoContainer>
       </OverViewContainer>
 
