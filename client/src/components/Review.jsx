@@ -22,7 +22,8 @@ const ContainerDiv = styled.div`
   border-bottom: 2px solid gray;
   border-color: gray; */
   padding: 10px;
-  width: 800px;
+  min-width: 400px;
+  max-width: 800px;
 `;
 
 const UserAndDate = styled.div`
