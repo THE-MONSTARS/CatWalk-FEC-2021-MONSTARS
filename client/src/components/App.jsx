@@ -74,6 +74,7 @@ const App = () => {
         <OverView id={id} currentProduct={currentProduct} styles={styles} reviews={reviews}/>
         <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} />
         <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
+
       </div>
       )
     );
