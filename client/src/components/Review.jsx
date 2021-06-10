@@ -26,13 +26,10 @@ const ContainerDiv = styled.div`
   max-width: 800px;
 `;
 
-const UserAndDate = styled.div`
-  font-family: Helvetica, sans-serif;
-  font-size: medium;
-  color: gray;
-`;
-
 const StarUserDate = styled.div`
+font-family: Helvetica, sans-serif;
+font-size: medium;
+color: gray;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -42,18 +39,12 @@ const Review = (props) => {
   return (
     <ContainerDiv>
       <StarUserDate>  <StarRating rating={props.rating}/>
-      <UserAndDate>{props.reviewer_name} on {moment(props.date).calendar()}</UserAndDate>
+      {props.reviewer_name} on {moment(props.date).calendar()}
       </StarUserDate>
         <HeaderDiv> {props.summary} </HeaderDiv>
         <TextDiv> {props.body} </TextDiv>
     </ContainerDiv>
   )
 }
-
-
-// const StyledReview = styled(Review)`
-//   border-color: red;
-//   font-weight: bold;
-// `;
 
 export default Review;
