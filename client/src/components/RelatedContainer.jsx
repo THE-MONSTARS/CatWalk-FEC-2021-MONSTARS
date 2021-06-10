@@ -5,11 +5,6 @@ import axios from 'axios';
 
 export default function RelatedContainer ({id, getOneProduct, getStyles}) {
 
-  //Need to be able to get an array of all apporiate data
-  //could look into like a promise all to grab both style and product data then create an array of objects with just the
-  //related data needed. {category,name,img,star,def price, sale price }
-
-  //style data need to search styles find default? to be true and use that data...
   const [productsInfo, setProductsInfo] = useState([1,2,3])//DummyData set to 3 indexes
   const [loading, setLoading] = useState(true)
   const dummyId = 16059;
@@ -20,24 +15,9 @@ export default function RelatedContainer ({id, getOneProduct, getStyles}) {
       return fetchedRelatedProducts;
   }
 
-    async function getProductDetails(productId) {
-      const fetchedProduct = await axios.get(`/products/${productId}`);
-      return fetchedProduct.data;
-
-  }
-
-
-  async function getProductStyle(productId) {
-    const rawData = await axios.get(`/products/${productId}/styles`)
-    const style = rawData.data.results.find(entry =>
-        entry['default?'] === true
-      )
-    return style
-    }
-
 
   const startup = async () => {
-    let relatedProductIds = await getRelatedProducts(id) // assuming this is async function
+    let relatedProductIds = await getRelatedProducts(id)
 
     const relatedProducts = [];
     console.log('Array of Product Ids', relatedProductIds.data)
