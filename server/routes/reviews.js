@@ -24,7 +24,6 @@ reviews
     if (req.params.sort_order) {
       sort_order = req.params.sort_order
     }
-    console.log('oh yea')
     return API.getReviews(product_id, sort_order)
     .then(data => {
       res.status(200).send(data)
