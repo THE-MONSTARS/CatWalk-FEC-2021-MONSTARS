@@ -9,7 +9,7 @@ import Review from './Review.jsx'
 
 //base component
 function ReviewList(props) {
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(true);
   const [ reviews, setReviews ] = useState([]);
   const [ productId, setProductId ] = useState(props.id);
 
