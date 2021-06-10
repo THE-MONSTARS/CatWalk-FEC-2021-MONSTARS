@@ -6,7 +6,11 @@ const RDC = styled.div`
   font-family: Helvetica, sans-serif;
   margin-left: 10px;
   margin-right: 10px;
+<<<<<<< HEAD
   min-width: 140px;
+=======
+
+>>>>>>> 3320ce9e56f25d8dc9f4ee8ef2fb4962ff3a3366
 `;
 
 const Header = styled.div`
