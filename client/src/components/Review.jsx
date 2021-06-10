@@ -1,16 +1,44 @@
 import React from 'react';
+import styled from 'styled-components'
+import moment from 'moment'
+import StarRating from './StarRating.jsx'
+
+const HeaderDiv = styled.div`
+  color: blue;
+  font-weight: bold;
+  font-size: large;
+  font-family: Helvetica, sans-serif;
+  margin: none;
+`;
+
+const TextDiv = styled.div`
+  font-family: Helvetica, sans-serif;
+  border-width: 10px;
+`;
+
+const ContainerDiv = styled.div`
+  margin: 10px;
+  border-style: solid;
+  border-color: blue;
+  padding: 10px;
+`;
 
 const Review = (props) => {
   return (
-    <div>
-      <br></br>
-        <div> <b>{props.summary}</b> </div>
-        <div> Reviewer Name: {props.reviewer_name} </div>
-        <div> Review: {props.body} </div>
-        <div> Rating: {props.rating} </div>
-        <div> Date of Review: {props.date} </div>
-    </div>
+    <ContainerDiv>
+        <HeaderDiv> {props.summary} </HeaderDiv>
+        <TextDiv> Reviewer Name: {props.reviewer_name} </TextDiv>
+        <TextDiv> Rating: {props.rating} <StarRating/></TextDiv>
+        <TextDiv> Review: {props.body} </TextDiv>
+        <TextDiv> Date of Review: {moment(props.date).calendar()} </TextDiv>
+    </ContainerDiv>
   )
 }
+
+
+// const StyledReview = styled(Review)`
+//   border-color: red;
+//   font-weight: bold;
+// `;
 
 export default Review;
