@@ -6,7 +6,6 @@ reviews
   .route('/:product_id/meta')
   .get((req, res) => {
     let product_id = req.params.product_id;
-    console.log(product_id)
     return API.getReviewMeta(product_id)
     .then(data => {
       res.status(200).send(data)
