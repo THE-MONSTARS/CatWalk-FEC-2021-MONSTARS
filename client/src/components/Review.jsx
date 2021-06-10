@@ -27,17 +27,22 @@ const ContainerDiv = styled.div`
 
 const UserAndDate = styled.div`
   font-family: Helvetica, sans-serif;
-  margin: auto;
   font-size: medium;
-  font-color: gray;
-  text-align: right
+  color: gray;
+`;
+
+const StarUserDate = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const Review = (props) => {
   return (
     <ContainerDiv>
-    <UserAndDate>{props.reviewer_name} on {moment(props.date).calendar()}</UserAndDate>
-        <TextDiv>  <StarRating rating={props.rating}/></TextDiv>
+      <StarUserDate>  <StarRating rating={props.rating}/>
+      <UserAndDate>{props.reviewer_name} on {moment(props.date).calendar()}</UserAndDate>
+      </StarUserDate>
         <HeaderDiv> {props.summary} </HeaderDiv>
         <TextDiv> {props.body} </TextDiv>
     </ContainerDiv>
