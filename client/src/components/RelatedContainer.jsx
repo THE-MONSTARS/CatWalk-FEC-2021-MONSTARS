@@ -18,7 +18,6 @@ export default function RelatedContainer ({id, getOneProduct, getStyles}) {
     async function getAverageRating(productId) {
       const fetchedReviewMetaData = await axios.get(`/reviews/${productId}/meta`)
       const ratings = fetchedReviewMetaData.data.ratings
-      console.log(ratings)
 
       let total =0;
       let ratingsTotal=0;
@@ -37,7 +36,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles}) {
     let relatedProductIds = await getRelatedProducts(id)
 
     const relatedProducts = [];
-    console.log('Array of Product Ids', relatedProductIds.data)
+
     for (let productId of relatedProductIds.data) {
 
       const promises = [getOneProduct(productId), getStyles(productId), getAverageRating(productId)]
