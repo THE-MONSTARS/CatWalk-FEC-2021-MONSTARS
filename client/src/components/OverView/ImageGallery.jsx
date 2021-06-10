@@ -14,6 +14,7 @@ const ImageGalleryContainer = styled.div`
 const ProductImage = styled.img`
   height: 100%;
   min-width: 0;
+  flex-shrink: 0;
 `
 
 const ImageGallery = ({currentStyle}) => {

@@ -31,13 +31,13 @@ const OverView = ({currentProduct, styles, getStyles}) => {
       <OverViewContainer>
         <ImageGallery currentStyle={currentStyle}/>
         <ProductInfoContainer>
-          <ProductInformation />
-          <StyleSelector styles={styles} selectStyle={selectStyle}/>
+          <ProductInformation currentProduct={currentProduct} currentStyle={currentStyle}/>
+          <StyleSelector styles={styles} currentStyle={currentStyle} selectStyle={selectStyle}/>
           <AddToCart />
         </ProductInfoContainer>
       </OverViewContainer>
 
-      <ProductDescription />
+      <ProductDescription currentProduct={currentProduct} />
     </div>
   )
 }

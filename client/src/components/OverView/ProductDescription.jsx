@@ -1,20 +1,45 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const ProductDescription = () => (
-  <div>
-    <div>
-      <h2 className="product-slogan"></h2>
-      <p className="description"></p>
-    </div>
-    <div>
-      <ul>
-        <li>hardcoded characteristic 1</li>
-        <li>hardcoded characteristic 2</li>
-        <li>hardcoded characteristic 3</li>
-        <li>hardcoded characteristic 4</li>
-      </ul>
-    </div>
-  </div>
-);
+
+const DescriptionAndFeatures = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const DescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Feature = styled.li`
+`
+
+
+
+const ProductDescription = ({currentProduct}) => {
+  const slogan = currentProduct.slogan;
+  const description = currentProduct.description;
+  const features = currentProduct.features;
+
+
+
+  return (
+    <DescriptionAndFeatures>
+      <DescriptionContainer>
+        {slogan && <h2 className="product-slogan">{slogan}</h2>}
+        {description && <p className="description">{description}</p>}
+      </DescriptionContainer>
+      <div>
+        <ul>
+          {features && features.map((feature, idx) => (
+            <Feature key={idx}>{feature.feature}: {feature.value}</Feature>
+          ))}
+        </ul>
+      </div>
+    </DescriptionAndFeatures>
+  )
+}
+
 
 export default ProductDescription;

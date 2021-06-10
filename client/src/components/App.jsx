@@ -7,20 +7,19 @@ import axios from 'axios';
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
-  const [ products, setProducts ] = useState([])
   const [ currentProduct, setCurrentProduct ] = useState({})
   const [ styles, setStyles ] = useState([])
 
   const fetchProductAndId = async () => {
     try {
-      const productsData = await getProduct()
-      setProducts(productsData);
+      // need to fetch all products first to see what the id for first product is
+      const productsData = await getProducts()
 
-      // defaulting current product to first product from products data
-      setCurrentProduct(productsData[0]);
+      const id = productsData[0].id
+      const productData = await getOneProduct(id);
+      setCurrentProduct(productData);
 
-      let productId = productsData[0].id;
-      const stylesData = await getStyles(productId);
+      const stylesData = await getStyles(id);
       setStyles(stylesData);
       setIsLoading(false);
 
@@ -29,10 +28,15 @@ const App = () => {
     }
   }
 
-  const getProduct = async () => {
+  const getProducts = async () => {
     const fetchedProducts = await axios.get('/products');
-    setProducts(fetchedProducts.data)
     return fetchedProducts.data;
+  }
+
+  const getOneProduct = async (id) => {
+    const fetchedProduct = await axios.get(`/products/${id}`);
+    setCurrentProduct(fetchedProduct.data)
+    return fetchedProduct.data;
   }
 
   const getStyles = async (id) => {
@@ -54,7 +58,7 @@ const App = () => {
       : (
       <div>
         <OverView id={id} currentProduct={currentProduct} styles={styles}/>
-        <RelatedContainer id={id} getProduct={getProduct}/>
+        <RelatedContainer id={id} getOneProduct={getOneProduct}/>
         <ReviewList id={id}/>
       </div>
       )
