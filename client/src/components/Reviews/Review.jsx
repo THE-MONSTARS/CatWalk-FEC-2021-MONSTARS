@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import moment from 'moment'
-import StarRating from './StarRating.jsx'
+import StarRating from '../StarRating.jsx'
 
 const HeaderDiv = styled.div`
   color: blue;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import StarRating from './StarRating';
+import StarRating from '../StarRating.jsx';
 
 const RDC = styled.div`
   font-family: Helvetica, sans-serif;

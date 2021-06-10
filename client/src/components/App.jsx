@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import OverView from './OverView.jsx';
-import ReviewList from './ReviewList.jsx';
+import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
-import ReviewsContainer from './ReviewsContainer.jsx';
+import ReviewsContainer from './Reviews/ReviewsContainer.jsx';
 import axios from 'axios';
 
 
