@@ -28,7 +28,7 @@ const Review = (props) => {
     <ContainerDiv>
         <HeaderDiv> {props.summary} </HeaderDiv>
         <TextDiv> Reviewer Name: {props.reviewer_name} </TextDiv>
-        <TextDiv> Rating: {props.rating} <StarRating/></TextDiv>
+        <TextDiv> Rating: <StarRating rating={props.rating}/></TextDiv>
         <TextDiv> Review: {props.body} </TextDiv>
         <TextDiv> Date of Review: {moment(props.date).calendar()} </TextDiv>
     </ContainerDiv>
