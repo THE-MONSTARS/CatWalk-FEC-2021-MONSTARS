@@ -19,6 +19,7 @@ const SelectableStyleImg = styled.img`
   border-radius: 50%;
 `
 
+
 const StyleList = ({styles, currentStyle, selectStyle}) => (
   <div>
     <SelectedStyle>Style > {currentStyle.name}</SelectedStyle>

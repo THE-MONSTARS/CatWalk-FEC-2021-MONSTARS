@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const Price = styled.span`
   color: ${ props => props.sale ? '#E76D83' : '#393D3F'};
 `
+
 const StruckThroughPrice = styled.span`
   text-decoration: line-through;
 `
