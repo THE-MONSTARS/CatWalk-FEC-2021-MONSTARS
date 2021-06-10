@@ -14,23 +14,32 @@ const HeaderDiv = styled.div`
 const TextDiv = styled.div`
   font-family: Helvetica, sans-serif;
   border-width: 10px;
+  margin: 3px;
 `;
 
 const ContainerDiv = styled.div`
-  margin: 10px;
-  border-style: solid;
-  border-color: blue;
+  margin: 11px;
+  border-bottom: 2px solid gray;
+  border-color: gray; */
   padding: 10px;
+  width: 800px;
+`;
+
+const UserAndDate = styled.div`
+  font-family: Helvetica, sans-serif;
+  margin: auto;
+  font-size: medium;
+  font-color: gray;
+  text-align: right
 `;
 
 const Review = (props) => {
   return (
     <ContainerDiv>
+    <UserAndDate>{props.reviewer_name} on {moment(props.date).calendar()}</UserAndDate>
+        <TextDiv>  <StarRating rating={props.rating}/></TextDiv>
         <HeaderDiv> {props.summary} </HeaderDiv>
-        <TextDiv> Reviewer Name: {props.reviewer_name} </TextDiv>
-        <TextDiv> Rating: <StarRating rating={props.rating}/></TextDiv>
-        <TextDiv> Review: {props.body} </TextDiv>
-        <TextDiv> Date of Review: {moment(props.date).calendar()} </TextDiv>
+        <TextDiv> {props.body} </TextDiv>
     </ContainerDiv>
   )
 }
