@@ -26,10 +26,15 @@ const StarRating = (props) => {
     setIsLoading(false)
   }, [])
 
+  function handleClick(e) {
+    e.preventDefault()
+    console.log(props.rating)
+  }
+
   return (
       isLoading?
     <a> ... </a> :
-    <a> {stars} </a>
+    <a onClick={handleClick}> {stars} </a>
   );
 }
 
