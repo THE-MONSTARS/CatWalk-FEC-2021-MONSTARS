@@ -4,6 +4,12 @@ import styled from 'styled-components'
 const StyleContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: 10px 0;
+  width: 200px;
+`
+
+const SelectedStyle = styled.span`
+  width: 100%;
 `
 
 const SelectableStyleImg = styled.img`
@@ -13,10 +19,10 @@ const SelectableStyleImg = styled.img`
   border-radius: 50%;
 `
 
-const StyleList = ({styles, selectStyle}) => (
+const StyleList = ({styles, currentStyle, selectStyle}) => (
   <div>
+    <SelectedStyle>Style > {currentStyle.name}</SelectedStyle>
     <StyleContainer>
-      <span>Style > {}</span>
       {styles.map(style => (
         <SelectableStyleImg key={style.style_id} id={style.style_id} src={style.photos[0].thumbnail_url} onClick={e=> selectStyle(e.target.id)}/>
       ))}
