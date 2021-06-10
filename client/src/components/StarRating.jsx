@@ -1,9 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
+
+// import YellowStar from '../assets/icons8-star-48-yellow.png'
+
+const yellowStar = styled.span`
+
+`;
+
 
 const StarRating = () => (
   <div>
-    {/* Need to figure out how to implement star rating */}
-  </div>
+<img src='../assets/icons8-star-48-yellow.png'/>
+ </div>
 );
 
 export default StarRating;
