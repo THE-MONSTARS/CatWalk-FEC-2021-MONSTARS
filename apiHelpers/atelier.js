@@ -84,7 +84,7 @@ module.exports = {
     const params = new URLSearchParams({ product_id: `${product_id}`})
     return axios({
       method: 'GET',
-      url: `${endpoint}/reviews/meta?product_id=${product_id}`,
+      url: `${endpoint}/reviews/meta?${params}`,
       headers: { 'Authorization': credentials.TOKEN },
     })
     .then(res => {
