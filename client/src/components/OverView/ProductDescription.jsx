@@ -5,11 +5,17 @@ import styled from 'styled-components';
 const DescriptionAndFeatures = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+  min-width: 600px;
+  margin: 3rem 0 3.5rem 0;
+
 `
 
 const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
+  flex-basis: 60%;
 `
 
 const Feature = styled.li`

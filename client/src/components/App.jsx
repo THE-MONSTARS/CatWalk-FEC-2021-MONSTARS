@@ -9,25 +9,25 @@ const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ currentProduct, setCurrentProduct ] = useState({})
   const [ styles, setStyles ] = useState([])
+  const [ reviews, setReviews ] = useState([])
 
   const fetchProductAndId = async () => {
     try {
       // need to fetch all products first to see what the id for first product is
       const productsData = await getProducts()
+      const id = productsData[0].id;
 
-      const id = productsData[0].id
-      const productData = await getOneProduct(id);
-      setCurrentProduct(productData);
+      // doing this saves time
+      const initialFetchCalls = [getOneProduct(id), getStyles(id), getReviews(id)];
+      await Promise.all(initialFetchCalls)
 
-      const stylesData = await getStyles(id);
-      setStyles(stylesData);
       setIsLoading(false);
 
     } catch (err) {
       console.log('error fetching product & styles data: ', err);
     }
   }
-
+  // this function purely exists to get the first id of the products for initial boot
   const getProducts = async () => {
     const fetchedProducts = await axios.get('/products');
     return fetchedProducts.data;
@@ -45,6 +45,12 @@ const App = () => {
     return fetchedStyles.data.results;
   }
 
+  const getReviews = async (id) => {
+    const fetchedReviews = await axios.get(`/reviews/${id}`);
+    setReviews(fetchedReviews.data.results)
+    return fetchedReviews.data.results;
+  }
+
 
   useEffect(() => {
     fetchProductAndId();
@@ -57,9 +63,9 @@ const App = () => {
       ? <div>Loading...</div>
       : (
       <div>
-        <OverView id={id} currentProduct={currentProduct} styles={styles}/>
-        <RelatedContainer id={id} getOneProduct={getOneProduct}/>
-        <ReviewList id={id}/>
+        <OverView id={id} currentProduct={currentProduct} styles={styles} reviews={reviews}/>
+        <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} />
+        <ReviewList id={id} reviews={reviews}/>
       </div>
       )
     );
