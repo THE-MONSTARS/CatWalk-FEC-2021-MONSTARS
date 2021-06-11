@@ -27,7 +27,10 @@ const App = () => {
 
       // doing this saves time
       const initialFetchCalls = [getOneProduct(id), getStyles(id), getReviews(id)];
-      await Promise.all(initialFetchCalls)
+      const [fetchedProduct, fetchedStyles, fetchedReviews] = await Promise.all(initialFetchCalls)
+      setCurrentProduct(fetchedProduct)
+      setStyles(fetchedStyles)
+      setReviews(fetchedReviews)
 
       setIsLoading(false);
 
@@ -43,19 +46,16 @@ const App = () => {
 
   const getOneProduct = async (id) => {
     const fetchedProduct = await axios.get(`/products/${id}`);
-    setCurrentProduct(fetchedProduct.data)
     return fetchedProduct.data;
   }
 
   const getStyles = async (id) => {
     const fetchedStyles = await axios.get(`/products/${id}/styles`);
-    setStyles(fetchedStyles.data.results)
     return fetchedStyles.data.results;
   }
 
   const getReviews = async (id) => {
     const fetchedReviews = await axios.get(`/reviews/${id}`);
-    setReviews(fetchedReviews.data.results)
     return fetchedReviews.data.results;
   }
 
@@ -72,7 +72,7 @@ const App = () => {
       : (
       <div>
         <OverView id={id} currentProduct={currentProduct} styles={styles} reviews={reviews}/>
-        <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} />
+        <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} setCurrentProduct={setCurrentProduct}/>
         <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
       </div>
       )
