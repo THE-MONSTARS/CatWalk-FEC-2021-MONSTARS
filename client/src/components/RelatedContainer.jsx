@@ -2,24 +2,116 @@
 import React, {useState, useEffect} from 'react';
 import Card from './Card.jsx';
 import axios from 'axios';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-export default function RelatedContainer () {
-  //Need to be able to get an array of all apporiate data
-  //could look into like a promise all to grab both style and product data then create an array of objects with just the
-  //related data needed. {category,name,img,star,def price, sale price }
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1400 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
-  //style data need to search styles find default? to be true and use that data...
-  const [productsInfo, setProductsInfo] = useState([1,2,3])//DummyData set to 3 indexes
-  const dummyId = 1;
+export default function RelatedContainer ({id, getOneProduct, getStyles}) {
+
+  const [productsInfo, setProductsInfo] = useState([])//DummyData set to 3 indexes
+  const [loading, setLoading] = useState(true)
+  const dummyId = 16059;
+
+
+    function getRelatedProducts(productId) {
+      const fetchedRelatedProducts = axios.get(`/products/${productId}/related`);
+      return fetchedRelatedProducts;
+  }
+
+    async function getAverageRating(productId) {
+      const fetchedReviewMetaData = await axios.get(`/reviews/${productId}/meta`)
+      const ratings = fetchedReviewMetaData.data.ratings
+
+      let total =0;
+      let ratingsTotal=0;
+      let average=0;
+
+      for(let number in ratings) {
+        total += Number.parseInt(ratings[number]) * Number.parseInt(number);
+        ratingsTotal+= Number.parseInt(number);
+      }
+      average = total/ratingsTotal;
+      return average.toFixed(1)
+    }
+
+
+  const startup = async () => {
+    let relatedProductIds = await getRelatedProducts(id)
+    const relatedProducts = [];
+
+    for (let productId of relatedProductIds.data) {
+
+      const promises = [getOneProduct(productId), getStyles(productId), getAverageRating(productId)]
+
+      let [ productDetail, productStyles, productRating ] = await Promise.all(promises)
+
+      let currentProductData = {};
+
+      currentProductData.id = productDetail.id;
+      currentProductData.category = productDetail.category;
+      currentProductData.name = productDetail.name;
+
+      let defaultStyle = productStyles.find(entry => entry['default?'] === true || productStyles[0])
+
+      currentProductData.sale_price = defaultStyle.sale_price;
+      currentProductData.original_price = defaultStyle.original_price;
+      currentProductData.image = defaultStyle.photos[0].url
+
+      currentProductData.rating = productRating
+
+
+      relatedProducts.push(currentProductData);
+    }
+    setProductsInfo(relatedProducts)
+    setLoading(false)
+  }
+
+
+  useEffect(()=> {
+    startup()
+  }, [])
+
 
 
   return (
     //map with card component. Inline Style Temp until Css file created
-    <div style={{display: 'flex', flexDirection:'row'}}>
+    <div style={{width: '50%'}}>
+    <Carousel responsive= {responsive} centerMode= {true} >
       {productsInfo.map((entry, index) => (
-        <Card key={index} />
+        <Card key={index} id={entry.id} category={entry.category} name={entry.name} salePrice={entry.sale_price} orginalPrice={entry.original_price} img={entry.image} rating={entry.rating} />
       ))}
+
+    </Carousel>
+
     </div>
   )
 
 }
+
+
+
+
+
+
+
+
+

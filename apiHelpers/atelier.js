@@ -80,5 +80,20 @@ module.exports = {
     })
   },
 
+  getReviewMeta: function(product_id) {
+    const params = new URLSearchParams({ product_id: `${product_id}`})
+    return axios({
+      method: 'GET',
+      url: `${endpoint}/reviews/meta?${params}`,
+      headers: { 'Authorization': credentials.TOKEN },
+    })
+    .then(res => {
+      return res.data
+    })
+    .catch(err => {
+      console.log(err)
+      return err
+    })
+  },
 };
 
