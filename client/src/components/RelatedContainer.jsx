@@ -25,7 +25,7 @@ const responsive = {
   }
 };
 
-export default function RelatedContainer ({id, getOneProduct, getStyles}) {
+export default function RelatedContainer ({id, getOneProduct, getStyles, setCurrentProduct}) {
 
   const [productsInfo, setProductsInfo] = useState([])//DummyData set to 3 indexes
   const [loading, setLoading] = useState(true)
@@ -97,7 +97,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles}) {
     <div style={{width: '50%'}}>
     <Carousel responsive= {responsive} centerMode= {true} >
       {productsInfo.map((entry, index) => (
-        <Card key={index} id={entry.id} category={entry.category} name={entry.name} salePrice={entry.sale_price} orginalPrice={entry.original_price} img={entry.image} rating={entry.rating} />
+        <Card key={index} product={entry} setCurrentProduct={setCurrentProduct}/>
       ))}
 
     </Carousel>
