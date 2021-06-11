@@ -29,6 +29,10 @@ const OverView = ({currentProduct, styles, getStyles, reviews}) => {
     setCurrentStyle(current)
   }
 
+  // useEffect(() => {
+  //   useState(defaultStyle)
+  // }, [styles])
+
   return (
     <div>
       <OverViewContainer>
