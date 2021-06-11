@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default function RelatedContainer ({id, getOneProduct, getStyles}) {
 
-  const [productsInfo, setProductsInfo] = useState([1,2,3])//DummyData set to 3 indexes
+  const [productsInfo, setProductsInfo] = useState([])//DummyData set to 3 indexes
   const [loading, setLoading] = useState(true)
   const dummyId = 16059;
 
@@ -34,7 +34,6 @@ export default function RelatedContainer ({id, getOneProduct, getStyles}) {
 
   const startup = async () => {
     let relatedProductIds = await getRelatedProducts(id)
-
     const relatedProducts = [];
 
     for (let productId of relatedProductIds.data) {

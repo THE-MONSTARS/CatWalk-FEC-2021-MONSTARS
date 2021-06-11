@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import StarRating from './StarRating.jsx';
 
 const StyleCard = styled.div`
 display: flex;
@@ -22,7 +23,7 @@ export default function Card (props) {
       <h4>{props.category}</h4>
       <h2>{props.name}</h2>
       <h3>{props.salePrice ? props.salePrice : props.orginalPrice}</h3>
-      <p>Star Component</p>
+      <StarRating rating={props.rating}/>
     </StyleCard>
   )
 
