@@ -2,6 +2,28 @@
 import React, {useState, useEffect} from 'react';
 import Card from './Card.jsx';
 import axios from 'axios';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1400 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 export default function RelatedContainer ({id, getOneProduct, getStyles}) {
 
@@ -72,11 +94,14 @@ export default function RelatedContainer ({id, getOneProduct, getStyles}) {
 
   return (
     //map with card component. Inline Style Temp until Css file created
-    <div style={{display: 'flex', flexDirection:'row'}}>
+    <div style={{width: '50%'}}>
+    <Carousel responsive= {responsive} centerMode= {true} >
       {productsInfo.map((entry, index) => (
         <Card key={index} id={entry.id} category={entry.category} name={entry.name} salePrice={entry.sale_price} orginalPrice={entry.original_price} img={entry.image} rating={entry.rating} />
       ))}
-      {/* {loading ? <p>Loading...</p> : <p>Not loading! {productsInfo[0].name}</p>} */}
+
+    </Carousel>
+
     </div>
   )
 
