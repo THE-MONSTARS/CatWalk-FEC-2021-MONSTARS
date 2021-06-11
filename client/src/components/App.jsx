@@ -5,6 +5,7 @@ import RelatedContainer from './RelatedContainer.jsx';
 import ReviewSorter from './Reviews/ReviewSorter.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
+import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
 const RVC = styled.div`
 margin-top: 10px;
@@ -15,15 +16,16 @@ justify-content: left;
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
-  const [ currentProduct, setCurrentProduct ] = useState({})
+  const [ currentProduct, setCurrentProduct ] = useState({ id: 16056 })
   const [ styles, setStyles ] = useState([])
   const [ reviews, setReviews ] = useState([])
 
   const fetchProductAndId = async () => {
     try {
       // need to fetch all products first to see what the id for first product is
-      const productsData = await getProducts()
-      const id = productsData[0].id;
+      // const productsData = await getProducts()
+      // const id = productsData[0].id;
+      const id = currentProduct.id;
 
       // doing this saves time
       const initialFetchCalls = [getOneProduct(id), getStyles(id), getReviews(id)];
@@ -38,7 +40,7 @@ const App = () => {
       console.log('error fetching product & styles data: ', err);
     }
   }
-  // this function purely exists to get the first id of the products for initial boot
+
   const getProducts = async () => {
     const fetchedProducts = await axios.get('/products');
     return fetchedProducts.data;
@@ -59,10 +61,18 @@ const App = () => {
     return fetchedReviews.data.results;
   }
 
-
   useEffect(() => {
     fetchProductAndId();
   }, []);
+
+  useEffectAfterRender(async () => {
+    const updateProductCalls = [getStyles(id), getReviews(id)];
+    const [ newStyles, newReviews ] = await Promise.all(updateProductCalls)
+    setStyles(newStyles);
+    setReviews(newReviews);
+    console.log('should ignore on refresh')
+  }, [currentProduct])
+
 
     let id = currentProduct.id;
 

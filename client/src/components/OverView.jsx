@@ -5,6 +5,7 @@ import StyleSelector from './OverView/StyleSelector.jsx';
 import AddToCart from './OverView/AddToCart.jsx';
 import ProductDescription from './OverView/ProductDescription.jsx';
 import styled from 'styled-components';
+import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
 
 const OverViewContainer = styled.div`
@@ -29,9 +30,10 @@ const OverView = ({currentProduct, styles, getStyles, reviews}) => {
     setCurrentStyle(current)
   }
 
-  // useEffect(() => {
-  //   useState(defaultStyle)
-  // }, [styles])
+  useEffect(() => {
+    setCurrentStyle(defaultStyle)
+    console.log('dont show on refresh')
+  }, [styles])
 
   return (
     <div>
