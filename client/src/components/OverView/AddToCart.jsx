@@ -8,6 +8,7 @@ const AddToCartContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
+  flex-grow: 0;
   min-height: 260px;
 `
 
@@ -136,14 +137,65 @@ const QuantityDropDown = styled(SmoothedDropdown)`
   flex-basis: 30%;
 `
 
-const AddToBagButton = styled.button`
-  align-self: flex-end;
+const CTAButton = styled.button`
+   border-radius: 4px;
+   background: linear-gradient(to right, #67b26b, #4ca2cb);
+   border: none;
+   color: #FFFFFF;
+   text-align: center;
+   text-transform: uppercase;
+   font-size: 22px;
+   padding: 10px;
+   transition: all 0.4s;
+   cursor: pointer;
+   margin: 5px;
+   width: 200px;
+`
+
+const AddToBagButton = styled(CTAButton)`
+  width: 150px;
+  font-size: 15px;
+  &:hover ${AddToBagCTA} {
+    padding-right: 25px;
+  }
+  &:hover ${AddToBagCTA}:after {
+    opacity: 1;
+    right: -19px;
+  }
+
+`
+
+const FavoriteButton = styled(CTAButton)`
+  width: 80px;
+  font-size: 15px;
+  &:hover {
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+  }
+`
+
+const AddToBagCTA = styled.span`
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s;
+
+  &:after {
+    content: '>';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
 `
 
 
-
 const AddToCart = ({currentStyle}) => {
-  const [ sizeId, setSizeId ] = useState('')
+  const [ [sizeId, size], setSize ] = useState(['', ''])
   const [ itemStock, setItemStock ] = useState(10)
   const [ quantity, setQuantity ] = useState(1)
   const [ isActive, setIsActive ] = useState(false)
@@ -170,14 +222,25 @@ const AddToCart = ({currentStyle}) => {
   }
 
   const handleClickOutside = (e) => {
-    if (sizeRef.current && !sizeRef.current.contains(e.target)) {
+    // if (sizeRef.current && !sizeRef.current.contains(e.target)) {
+    // }
+    // can keep the above logic if we want the event the not fire for focused element
       setIsActive(false);
       setHasStock(false);
-    }
+  }
+
+  const handleSizeClick = (e) => {
+    let sizeValue = e.target.attributes['value'].value;
+    let sizeIdValue = e.target.attributes['data-id'].value;
+    setSize([sizeIdValue, sizeValue])
+    setQuantity(1)
   }
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true)
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    }
   })
 
   useEffect(() => {
@@ -192,25 +255,20 @@ const AddToCart = ({currentStyle}) => {
       {/* For Select Size Dropdown */}
       <SizeDropDown ref={sizeRef} className="select-size" >
         <DropdownHeader value={null} onClick={() => {setIsActive(prev => !prev)}}>
-          Select Size
+          {size ? size : 'Select Size'}
         </DropdownHeader>
             <CSSTransition in={isActive} unmountOnExit timeout={700} classNames='fade'>
 
               <SizeListContainer>
               {sizes.map(size => (
-                  <DropdownItem key={size.id} data-id={size.id} value={size.size} onClick={e => setSizeId(e.target.attributes['data-id'].value)}>{size.size} </DropdownItem>
+                  <DropdownItem key={size.id} value={size.size} data-id={size.id}  onClick={e => handleSizeClick(e)}>{size.size} </DropdownItem>
                   ))}
               </SizeListContainer>
 
             </CSSTransition>
       </SizeDropDown>
 
-
-
-
-
        {/* For Select Quantity Dropdown */ }
-
         { sizeId
         ?
         <QuantityDropDown >
@@ -231,9 +289,13 @@ const AddToCart = ({currentStyle}) => {
         </QuantityDropDown>
         }
 
-
-      {itemStock && <AddToBagButton className="add-to-bag" type="button">ADD TO BAG</AddToBagButton>}
-      <AddToBagButton className="favorite" type="button">Star Symbol</AddToBagButton>
+      {itemStock &&
+        <AddToBagButton>
+          <AddToBagCTA>ADD TO BAG</AddToBagCTA>
+        </AddToBagButton>}
+        <FavoriteButton className="favorite" type="button">
+          Fav
+        </FavoriteButton>
 
     </AddToCartContainer>
   )
