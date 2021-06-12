@@ -21,19 +21,12 @@ const ProductInfoContainer = styled.div`
   flex-direction: column;
 `
 
-const OverView = ({currentProduct, styles, getStyles, reviews}) => {
-  const defaultStyle = styles.find(style => style['default?']) || styles[0]
-  const [ currentStyle, setCurrentStyle ] = useState(defaultStyle)
+const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getStyles, reviews}) => {
 
   const selectStyle = (id) => {
     const current = styles.find(style => style.style_id === parseInt(id))
     setCurrentStyle(current)
   }
-
-  useEffect(() => {
-    setCurrentStyle(defaultStyle)
-    console.log('dont show on refresh')
-  }, [styles])
 
   return (
     <div>
