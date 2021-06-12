@@ -27,8 +27,8 @@ const responsive = {
 
 export default function RelatedContainer ({id, getOneProduct, getStyles, setCurrentProduct}) {
 
-  const [productsInfo, setProductsInfo] = useState([])//DummyData set to 3 indexes
-  const [loading, setLoading] = useState(true)
+  const [productsInfo, setProductsInfo] = useState([])
+  const [currentId, setCurrentId] = useState()
   const dummyId = 16059;
 
 
@@ -82,13 +82,13 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
       relatedProducts.push(currentProductData);
     }
     setProductsInfo(relatedProducts)
-    setLoading(false)
+    setCurrentId(id)
   }
 
 
   useEffect(()=> {
     startup()
-  }, [])
+  }, [id])
 
 
 

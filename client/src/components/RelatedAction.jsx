@@ -15,6 +15,10 @@ height: 50px;
 export default function RelatedAction () {
   const [isRelated, setIsRelated] = useState(true)
 
+  // const function showCompare() {
+
+  // }
+
   return (
     <StyleImg src={isRelated? EmptyStar : CrossCircle}/>
   )
