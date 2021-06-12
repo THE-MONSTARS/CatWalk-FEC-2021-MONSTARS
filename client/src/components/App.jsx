@@ -28,7 +28,7 @@ const App = () => {
 
       const initialFetchCalls = [getOneProduct(id), getStyles(id), getReviews(id)];
       const [fetchedProduct, fetchedStyles, fetchedReviews] = await Promise.all(initialFetchCalls)
-      const defaultStyle = fetchedStyles.find(style => style['default?']) || styles[0];
+      const defaultStyle = fetchedStyles.find(style => style['default?']) || fetchedStyles[0];
 
       setCurrentProduct(fetchedProduct);
       setStyles(fetchedStyles);
@@ -45,7 +45,7 @@ const App = () => {
   const updateProductAndId = async () => {
     const updateProductCalls = [getStyles(id), getReviews(id)];
     const [ newStyles, newReviews ] = await Promise.all(updateProductCalls)
-    const defaultStyle = newStyles.find(style => style['default?']) || styles[0];
+    const defaultStyle = newStyles.find(style => style['default?']) || newStyles[0];
 
     setStyles(newStyles);
     setCurrentStyle(defaultStyle)
