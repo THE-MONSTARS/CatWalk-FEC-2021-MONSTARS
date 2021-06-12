@@ -5,6 +5,7 @@ import StyleSelector from './OverView/StyleSelector.jsx';
 import AddToCart from './OverView/AddToCart.jsx';
 import ProductDescription from './OverView/ProductDescription.jsx';
 import styled from 'styled-components';
+import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
 
 const OverViewContainer = styled.div`
@@ -20,18 +21,12 @@ const ProductInfoContainer = styled.div`
   flex-direction: column;
 `
 
-const OverView = ({currentProduct, styles, getStyles, reviews}) => {
-  const defaultStyle = styles.find(style => style['default?']) || styles[0]
-  const [ currentStyle, setCurrentStyle ] = useState(defaultStyle)
+const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getStyles, reviews}) => {
 
   const selectStyle = (id) => {
     const current = styles.find(style => style.style_id === parseInt(id))
     setCurrentStyle(current)
   }
-
-  // useEffect(() => {
-  //   useState(defaultStyle)
-  // }, [styles])
 
   return (
     <div>
