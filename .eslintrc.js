@@ -6,6 +6,7 @@ module.exports = {
         "jest/globals": true
     },
     "extends": [
+        "airbnb-base",
         "eslint:recommended",
         "plugin:react/recommended"
     ],
