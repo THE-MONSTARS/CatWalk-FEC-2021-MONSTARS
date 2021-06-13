@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition, Transition, TransitionGroup } from 'react-transition-group';
+import { DropDownHeader } from './styles.jsx';
 import styled from 'styled-components';
-// import SizeDropDown from './SizeDropDown.jsx';
-// import QuantityDropDown from './QuantityDropDown.jsx';
+import SizeDropDown from './SizeDropDown.jsx';
+import QuantityDropDown from './QuantityDropDown.jsx';
 
 
 const AddToCartContainer = styled.div`
@@ -22,7 +23,6 @@ const DropDownContainer = styled.div`
 `
 
 const ButtonContainer = styled.div`
-
   display: flex;
   flex-direction: row;
   flex-basis: 100%;
@@ -39,127 +39,14 @@ const ButtonContainer = styled.div`
   &.fadebtn-enter-done {
     opacity: 1;
   }
-
   &.fadebtn-exit {
     opacity: 1;
   }
-
   &.fadebtn-exit-active {
     opacity: 0;
     transition: opacity 0.4s;
   }
 `
-
-const SmoothedDropdown = styled.div`
-  min-width: 80px;
-  margin: 5px 0;
-  /* border: 1px solid black; */
-  outline: none;
-`
-
-
-
-const SizeListContainer = styled.div`
-  position: absolute;
-  display: flex;
-  border: 0.5px solid #090302;
-  flex-direction: column;
-  background: white;
-  border-radius: 0.5px;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-
-  &.fade-enter {
-    opacity: 0;
-  }
-  &.fade-enter-active {
-    opacity: 1;
-    transition: opacity 0.4s;
-  }
-  &.fade-enter-done {
-    opacity: 1;
-  }
-
-  &.fade-exit {
-    opacity: 1;
-  }
-
-  &.fade-exit-active {
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-`
-
-const QuantityListContainer = styled.div`
-  position: absolute;
-  display: flex;
-  border: 0.5px solid #090302;
-  flex-direction: column;
-  background: white;
-  border-radius: 0.5px;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-
-  &.fadestock-enter {
-    opacity: 0;
-  }
-  &.fadestock-enter-active {
-    opacity: 1;
-    transition: opacity 0.4s;
-  }
-  &.fadestock-enter-done {
-    opacity: 1;
-  }
-
-  &.fadestock-exit {
-    opacity: 1;
-  }
-
-  &.fadestock-exit-active {
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-`
-
-const DropdownHeader = styled.button`
-  background: white;
-  padding: 6px 0;
-  width: 102px;
-  border: 1px solid #090302;
-  color: black;
-  align-self: flex-start;
-  &:focus + ul {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-`
-const DropdownItem = styled.li`
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  padding: 4px 0;
-  width: 100%;
-  height: 100%;
-  /* opacity: 0; */
-  transition: all 0.2s ease;
-
-  &:hover {
-    cursor: default;
-    background-color: #C0E8F9
-  }
-`
-
-const SizeDropDown = styled(SmoothedDropdown)`
-  flex-basis: 50%;
-  /* transition: all 0.4s ease; */
-`
-const QuantityDropDown = styled(SmoothedDropdown)`
-  flex-basis: 30%;
-`
-
 const CTAButton = styled.button`
    border-radius: 1px;
    background: white;
@@ -238,13 +125,7 @@ const AddToCart = ({currentStyle}) => {
     }
   }
 
-  const createQuantityDropDown = () => {
-    const items = [];
-    for (let i = 1; i <= (itemStock > 15 ? 15 : itemStock); i++) {
-      items.push(i)
-    }
-    return items
-  }
+
 
   const handleClickOutside = (e) => {
     // if (sizeRef.current && !sizeRef.current.contains(e.target)) {
@@ -273,55 +154,18 @@ const AddToCart = ({currentStyle}) => {
     setItemStock(stock)
   }, [sizeId])
 
-  const quantityDropDownComponents = createQuantityDropDown();
 
   return (
     <AddToCartContainer>
-
       <DropDownContainer>
 
-        {/* <SizeDropDown /> */}
-        {/* For Select Size Dropdown */}
-        <SizeDropDown ref={sizeRef} className="select-size" >
-          <DropdownHeader value={null} onClick={() => {setIsActive(prev => !prev)}}>
-            {size ? size : 'Select Size'}
-          </DropdownHeader>
-              <CSSTransition in={isActive} unmountOnExit timeout={700} classNames='fade'>
+        <SizeDropDown size={size} sizes={sizes} isActive={isActive} setIsActive={setIsActive} handleSizeClick={handleSizeClick}/>
 
-                <SizeListContainer>
-                {sizes.map(size => (
-                    <DropdownItem key={size.id} value={size.size} data-id={size.id}  onClick={e => handleSizeClick(e)}>{size.size} </DropdownItem>
-                    ))}
-                </SizeListContainer>
-
-              </CSSTransition>
-        </SizeDropDown>
-
-       {/* For Select Quantity Dropdown */ }
-        { sizeId
-        ?
-        <QuantityDropDown >
-          <DropdownHeader value={null} onClick={() => {setHasStock(prev => !prev)}}>{quantity}</DropdownHeader>
-
-            <CSSTransition key={itemStock} in={hasStock} unmountOnExit timeout={400} classNames='fadestock'>
-              <QuantityListContainer>
-                {quantityDropDownComponents.map(itemStock => (
-                  <DropdownItem key={itemStock} value={itemStock} onClick={e => setQuantity(e.target.value)}>{itemStock}</DropdownItem>
-                ))}
-              </QuantityListContainer>
-            </CSSTransition>
-
-        </QuantityDropDown>
-        :
-        <QuantityDropDown>
-          <DropdownHeader value={null}>-</DropdownHeader>
-        </QuantityDropDown>
-        }
+        {sizeId
+        ? <QuantityDropDown setHasStock={setHasStock} quantity={quantity} setQuantity={setQuantity} itemStock={itemStock} hasStock={hasStock} />
+        : <DropDownHeader value={null}>-</DropDownHeader>}
 
       </DropDownContainer>
-
-      {/* DropDowns end here */}
-
 
         <CSSTransition in={size.length > 0} unmountOnExit timeout={400} classNames='fadebtn'>
           <ButtonContainer>
@@ -338,8 +182,6 @@ const AddToCart = ({currentStyle}) => {
 
           </ButtonContainer>
         </CSSTransition>
-
-
     </AddToCartContainer>
   )
 }
