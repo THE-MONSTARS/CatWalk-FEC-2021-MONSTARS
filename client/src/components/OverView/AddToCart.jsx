@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition, Transition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
+// import SizeDropDown from './SizeDropDown.jsx';
+// import QuantityDropDown from './QuantityDropDown.jsx';
 
 
 const AddToCartContainer = styled.div`
@@ -122,7 +124,7 @@ const QuantityListContainer = styled.div`
 `
 
 const DropdownHeader = styled.button`
-  background: none;
+  background: white;
   padding: 6px 0;
   width: 102px;
   border: 1px solid #090302;
@@ -159,10 +161,10 @@ const QuantityDropDown = styled(SmoothedDropdown)`
 `
 
 const CTAButton = styled.button`
-   border-radius: 4px;
-   background: linear-gradient(to right, #67b26b, #4ca2cb);
-   border: none;
-   color: #FFFFFF;
+   border-radius: 1px;
+   background: white;
+   border: 1px solid #343a40;
+   color: #343a40;
    text-align: center;
    text-transform: uppercase;
    font-size: 22px;
@@ -174,7 +176,7 @@ const CTAButton = styled.button`
 `
 
 const AddToBagButton = styled(CTAButton)`
-  width: 80px;
+  width: 90px;
   font-size: 10px;
   flex-basis: 60%;
   &:hover ${AddToBagCTA} {
@@ -277,6 +279,8 @@ const AddToCart = ({currentStyle}) => {
     <AddToCartContainer>
 
       <DropDownContainer>
+
+        {/* <SizeDropDown /> */}
         {/* For Select Size Dropdown */}
         <SizeDropDown ref={sizeRef} className="select-size" >
           <DropdownHeader value={null} onClick={() => {setIsActive(prev => !prev)}}>
@@ -319,11 +323,13 @@ const AddToCart = ({currentStyle}) => {
       {/* DropDowns end here */}
 
 
-        <CSSTransition in={size} unmountOnExit timeout={400} classNames='fadebtn'>
+        <CSSTransition in={size.length > 0} unmountOnExit timeout={400} classNames='fadebtn'>
           <ButtonContainer>
 
             <AddToBagButton>
-              <AddToBagCTA>ADD TO BAG</AddToBagCTA>
+              <AddToBagCTA>
+                ADD TO BAG
+              </AddToBagCTA>
             </AddToBagButton>
 
             <FavoriteButton>

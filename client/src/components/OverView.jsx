@@ -9,16 +9,20 @@ import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
 
 const OverViewContainer = styled.div`
+  border: 1px solid black;
+  /* overflow: hidden; */
   display: flex;
-  flex-direction: row;
-  min-width: 600px;
-  max width: 800px;
+  /* flex-direction: row; */
+  /* min-width: 600px; */
+  max-width: 800px;
   height: 450px;
 `
 
 const ProductInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 50%;
 `
 
 const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getStyles, reviews}) => {
@@ -29,7 +33,7 @@ const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getSty
   }
 
   return (
-    <div>
+    <React.Fragment>
       <OverViewContainer>
         <ImageGallery currentStyle={currentStyle}/>
         <ProductInfoContainer>
@@ -40,7 +44,7 @@ const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getSty
       </OverViewContainer>
 
       <ProductDescription currentProduct={currentProduct} />
-    </div>
+    </React.Fragment>
   )
 }
 
