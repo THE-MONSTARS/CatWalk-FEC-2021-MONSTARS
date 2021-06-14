@@ -7,13 +7,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
-const RVC = styled.div`
-margin-top: 10px;
-display: flex;
-flex-direction: row;
-justify-content: left;
-`;
-
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ currentProduct, setCurrentProduct ] = useState({ id: 16056 })
@@ -103,7 +96,10 @@ const App = () => {
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
       />
-      <ReviewsContainer id={id} reviews={reviews} isLoading={isLoading}/>
+      <ReviewsContainer
+        id={id}
+        reviews={reviews}
+        isLoading={isLoading}/>
     </div>
     )
   );
