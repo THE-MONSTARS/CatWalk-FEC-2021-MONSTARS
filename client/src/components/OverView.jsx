@@ -5,12 +5,14 @@ import StyleSelector from './OverView/StyleSelector.jsx';
 import AddToCart from './OverView/AddToCart.jsx';
 import ProductDescription from './OverView/ProductDescription.jsx';
 import styled from 'styled-components';
+import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
 
 const OverViewContainer = styled.div`
   display: flex;
   flex-direction: row;
   min-width: 600px;
+  max width: 800px;
   height: 450px;
 `
 
@@ -19,8 +21,7 @@ const ProductInfoContainer = styled.div`
   flex-direction: column;
 `
 
-const OverView = ({currentProduct, styles, getStyles}) => {
-  const [ currentStyle, setCurrentStyle ] = useState(styles[0])
+const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getStyles, reviews}) => {
 
   const selectStyle = (id) => {
     const current = styles.find(style => style.style_id === parseInt(id))
@@ -32,9 +33,9 @@ const OverView = ({currentProduct, styles, getStyles}) => {
       <OverViewContainer>
         <ImageGallery currentStyle={currentStyle}/>
         <ProductInfoContainer>
-          <ProductInformation currentProduct={currentProduct} currentStyle={currentStyle}/>
+          <ProductInformation currentProduct={currentProduct} currentStyle={currentStyle} reviews={reviews}/>
           <StyleSelector styles={styles} currentStyle={currentStyle} selectStyle={selectStyle}/>
-          <AddToCart />
+          <AddToCart currentStyle={currentStyle}/>
         </ProductInfoContainer>
       </OverViewContainer>
 

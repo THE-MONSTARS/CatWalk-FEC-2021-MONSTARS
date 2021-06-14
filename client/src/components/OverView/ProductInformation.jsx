@@ -11,16 +11,19 @@ const StruckThroughPrice = styled.span`
   text-decoration: line-through;
 `
 
-const ProductInformation = ({currentProduct, currentStyle}) => {
+const ProductInformation = ({currentProduct, currentStyle, reviews}) => {
   const productName = currentProduct.name;
   const productCategory = currentProduct.category;
   const salePrice = currentStyle.sale_price;
   const originalPrice = currentStyle.original_price;
 
+  const averageRating = reviews.reduce((acc, review) => {
+    return acc + review.rating
+  }, 0) / reviews.length;
 
   return (
     <div>
-      <StarRating />
+      <StarRating rating={averageRating}/>
       <p className="product-category">{productCategory}</p>
       <h2 className="product-name">{productName}</h2>
       <Price sale={salePrice}>{salePrice ? salePrice : originalPrice}</Price>
