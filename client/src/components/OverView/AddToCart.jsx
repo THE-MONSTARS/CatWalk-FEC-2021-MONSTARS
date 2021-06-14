@@ -5,11 +5,47 @@ import styled from 'styled-components';
 
 const AddToCartContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   flex-wrap: wrap;
   flex-grow: 0;
   min-height: 260px;
+`
+
+const DropDownContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  justify-content: space-between;
+`
+
+const ButtonContainer = styled.div`
+
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 8px;
+  &.fadebtn-enter {
+    opacity: 0;
+  }
+  &.fadebtn-enter-active {
+    opacity: 1;
+    transition: opacity 0.4s;
+  }
+  &.fadebtn-enter-done {
+    opacity: 1;
+  }
+
+  &.fadebtn-exit {
+    opacity: 1;
+  }
+
+  &.fadebtn-exit-active {
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
 `
 
 const SmoothedDropdown = styled.div`
@@ -19,22 +55,7 @@ const SmoothedDropdown = styled.div`
   outline: none;
 `
 
-const FadeP = styled.section`
-  &.fade-enter {
-    opacity: 0;
-  }
-  &.fade-enter-active {
-    opacity: 1;
-    transition: opacity 0.7s;
-  }
-  &.fade-exit {
-    opacity: 1;
-  }
-  &.fade-exit-active {
-    opacity: 0;
-    transition: opacity: 0.7s;
-  }
-`
+
 
 const SizeListContainer = styled.div`
   position: absolute;
@@ -153,8 +174,9 @@ const CTAButton = styled.button`
 `
 
 const AddToBagButton = styled(CTAButton)`
-  width: 150px;
-  font-size: 15px;
+  width: 80px;
+  font-size: 10px;
+  flex-basis: 60%;
   &:hover ${AddToBagCTA} {
     padding-right: 25px;
   }
@@ -167,7 +189,8 @@ const AddToBagButton = styled(CTAButton)`
 
 const FavoriteButton = styled(CTAButton)`
   width: 80px;
-  font-size: 15px;
+  font-size: 10px;
+  flex-basis: 40%;
   &:hover {
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
@@ -196,8 +219,8 @@ const AddToBagCTA = styled.span`
 
 const AddToCart = ({currentStyle}) => {
   const [ [sizeId, size], setSize ] = useState(['', ''])
-  const [ itemStock, setItemStock ] = useState(10)
-  const [ quantity, setQuantity ] = useState(1)
+  const [ itemStock, setItemStock ] = useState('')
+  const [ quantity, setQuantity ] = useState(0)
   const [ isActive, setIsActive ] = useState(false)
   const [ hasStock, setHasStock ] = useState(false)
   const sizeRef = useRef(null)
@@ -252,21 +275,23 @@ const AddToCart = ({currentStyle}) => {
 
   return (
     <AddToCartContainer>
-      {/* For Select Size Dropdown */}
-      <SizeDropDown ref={sizeRef} className="select-size" >
-        <DropdownHeader value={null} onClick={() => {setIsActive(prev => !prev)}}>
-          {size ? size : 'Select Size'}
-        </DropdownHeader>
-            <CSSTransition in={isActive} unmountOnExit timeout={700} classNames='fade'>
 
-              <SizeListContainer>
-              {sizes.map(size => (
-                  <DropdownItem key={size.id} value={size.size} data-id={size.id}  onClick={e => handleSizeClick(e)}>{size.size} </DropdownItem>
-                  ))}
-              </SizeListContainer>
+      <DropDownContainer>
+        {/* For Select Size Dropdown */}
+        <SizeDropDown ref={sizeRef} className="select-size" >
+          <DropdownHeader value={null} onClick={() => {setIsActive(prev => !prev)}}>
+            {size ? size : 'Select Size'}
+          </DropdownHeader>
+              <CSSTransition in={isActive} unmountOnExit timeout={700} classNames='fade'>
 
-            </CSSTransition>
-      </SizeDropDown>
+                <SizeListContainer>
+                {sizes.map(size => (
+                    <DropdownItem key={size.id} value={size.size} data-id={size.id}  onClick={e => handleSizeClick(e)}>{size.size} </DropdownItem>
+                    ))}
+                </SizeListContainer>
+
+              </CSSTransition>
+        </SizeDropDown>
 
        {/* For Select Quantity Dropdown */ }
         { sizeId
@@ -289,13 +314,25 @@ const AddToCart = ({currentStyle}) => {
         </QuantityDropDown>
         }
 
-      {itemStock &&
-        <AddToBagButton>
-          <AddToBagCTA>ADD TO BAG</AddToBagCTA>
-        </AddToBagButton>}
-        <FavoriteButton className="favorite" type="button">
-          Fav
-        </FavoriteButton>
+      </DropDownContainer>
+
+      {/* DropDowns end here */}
+
+
+        <CSSTransition in={size} unmountOnExit timeout={400} classNames='fadebtn'>
+          <ButtonContainer>
+
+            <AddToBagButton>
+              <AddToBagCTA>ADD TO BAG</AddToBagCTA>
+            </AddToBagButton>
+
+            <FavoriteButton>
+              WOOO
+            </FavoriteButton>
+
+          </ButtonContainer>
+        </CSSTransition>
+
 
     </AddToCartContainer>
   )
