@@ -4,11 +4,19 @@ import { DropDownHeader, ListContainer, DropDownItem } from './styles.jsx';
 import styled from 'styled-components';
 
 const QuantityDropDownContainer = styled.div`
-  flex-basis: 30%;
+  width: 50px;
 `
 
 const QuantityListContainer = styled(ListContainer)`
+  width: 50px;
+`
 
+const QuantityDropDownHeader = styled(DropDownHeader)`
+  width: 100%;
+`
+
+const QuantityDropDownItem = styled(DropDownItem)`
+  width: 100%;
 `
 
 const QuantityDropDown = ({setHasStock, quantity, setQuantity, itemStock, hasStock}) => {
@@ -24,13 +32,19 @@ const QuantityDropDown = ({setHasStock, quantity, setQuantity, itemStock, hasSto
   const quantityDropDownComponents = createQuantityDropDown();
 
   return (
-    <QuantityDropDownContainer >
-      <DropDownHeader value={null} onClick={() => {setHasStock(prev => !prev)}}>{quantity}</DropDownHeader>
+    <QuantityDropDownContainer>
+      <QuantityDropDownHeader value={null} onClick={() => {setHasStock(prev => !prev)}}>{quantity}</QuantityDropDownHeader>
 
         <CSSTransition key={itemStock} in={hasStock} unmountOnExit timeout={400} classNames='fade'>
           <QuantityListContainer>
             {quantityDropDownComponents.map(itemStock => (
-              <DropDownItem key={itemStock} value={itemStock} onClick={e => setQuantity(e.target.value)}>{itemStock}</DropDownItem>
+              <DropDownItem
+                key={itemStock}
+                value={itemStock}
+                onClick={e => setQuantity(e.target.value)}
+              >
+                {itemStock}
+              </DropDownItem>
             ))}
           </QuantityListContainer>
         </CSSTransition>

@@ -7,28 +7,35 @@ import QuantityDropDown from './QuantityDropDown.jsx';
 
 
 const AddToCartContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: flex-start;
+
   flex-grow: 0;
   min-height: 260px;
 `
 
-const DropDownContainer = styled.div`
+const DropDownsContainer = styled.div`
+/* border: 1px solid orange; */
   display: flex;
   flex-direction: row;
-  flex-basis: 100%;
+  width: 100%;
   justify-content: space-between;
+  flex-grow: 0;
+`
+
+const DisabledDropDownHeader = styled(DropDownHeader)`
+  width: 50px;
 `
 
 const ButtonContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
-  flex-basis: 100%;
   justify-content: space-between;
   align-items: center;
-  margin: 5px 8px;
+  margin: 5px 0;
   &.fadebtn-enter {
     opacity: 0;
   }
@@ -58,14 +65,14 @@ const CTAButton = styled.button`
    padding: 10px;
    transition: all 0.4s;
    cursor: pointer;
-   margin: 5px;
+   margin: 5px 0;
    width: 200px;
 `
 
 const AddToBagButton = styled(CTAButton)`
-  width: 90px;
+  width: 120px;
   font-size: 10px;
-  flex-basis: 60%;
+
   &:hover ${AddToBagCTA} {
     padding-right: 25px;
   }
@@ -79,7 +86,7 @@ const AddToBagButton = styled(CTAButton)`
 const FavoriteButton = styled(CTAButton)`
   width: 80px;
   font-size: 10px;
-  flex-basis: 40%;
+
   &:hover {
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
@@ -157,15 +164,27 @@ const AddToCart = ({currentStyle}) => {
 
   return (
     <AddToCartContainer>
-      <DropDownContainer>
+      <DropDownsContainer>
 
-        <SizeDropDown size={size} sizes={sizes} isActive={isActive} setIsActive={setIsActive} handleSizeClick={handleSizeClick}/>
+        <SizeDropDown
+          size={size}
+          sizes={sizes}
+          isActive={isActive}
+          setIsActive={setIsActive}
+          handleSizeClick={handleSizeClick}
+        />
 
         {sizeId
-        ? <QuantityDropDown setHasStock={setHasStock} quantity={quantity} setQuantity={setQuantity} itemStock={itemStock} hasStock={hasStock} />
-        : <DropDownHeader value={null}>-</DropDownHeader>}
+        ? <QuantityDropDown
+          setHasStock={setHasStock}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          itemStock={itemStock}
+          hasStock={hasStock}
+        />
+        : <DisabledDropDownHeader value={null}>-</DisabledDropDownHeader>}
 
-      </DropDownContainer>
+      </DropDownsContainer>
 
         <CSSTransition in={size.length > 0} unmountOnExit timeout={400} classNames='fadebtn'>
           <ButtonContainer>
