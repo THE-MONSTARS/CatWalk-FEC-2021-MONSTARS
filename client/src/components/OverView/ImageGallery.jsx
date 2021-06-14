@@ -17,6 +17,7 @@ const ScrollingGallery = styled(Swiper)`
   .swiper-slide {
     display: flex;
     justify-content: center;
+    overflow: hidden;
   }
   .swiper-slide img {
 	  object-fit: contain;
