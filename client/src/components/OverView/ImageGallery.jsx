@@ -1,27 +1,68 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper-bundle.css';
+
+SwiperCore.use([Navigation, Pagination])
 
 
-const ImageGalleryContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-basis: 60%;
-  min-width: 0;
-  justify-content: center;
-  object-fit: cover;
+const ScrollingGallery = styled(Swiper)`
+  /* &.swiper-container { } */
+  .swiper-wrapper {
+    width: 500px;
+    display: flex;
+    transition: all 0.2s;
+  }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
+  .swiper-slide img {
+	  object-fit: contain;
+	  /* width: 100%; */
+	  height: 100%;
+  }
+  .swiper-button-disabled {
+    opacity: 0;
+  }
 `
 
 const ProductImage = styled.img`
-  max-height: 100%;
-  min-width: 0;
-  flex-shrink: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 100%; */
+  /* max-height: 100%; */
+  /* min-width: 0; */
+  /* flex-shrink: 1; */
+  object-fit: cover;
+
 `
 
 const ImageGallery = ({currentStyle}) => {
+
+  const slides = currentStyle.photos.map((photo, idx) => {
+    return (
+      <SwiperSlide key={idx}>
+        <img src={photo.url}/>
+      </SwiperSlide>
+    )
+  })
+
   return (
-    <ImageGalleryContainer>
-      {currentStyle && <ProductImage src={currentStyle.photos[0].url} />}
-    </ImageGalleryContainer>
+    <>
+      <ScrollingGallery
+        id="main"
+        slideToClickedSlide={true}
+        spaceBetween={30}
+        navigation
+        pagination
+      >
+        {slides}
+      </ScrollingGallery>
+    </>
   )
 }
 
