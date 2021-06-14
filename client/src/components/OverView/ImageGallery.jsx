@@ -1,20 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper-bundle.css';
+
+SwiperCore.use([Navigation, Pagination])
 
 
-const ImageGalleryContainer = styled.div`
-  position: relative;
-  /* overflow: hidden; */
-  /* display: flex; */
-  /* align-items: center; */
-  width: 50%;
-  height: 100%;
-  /* max-width: 100%; */
-  /* height: 0; */
-  /* padding-bottom: 75%; */
-  /* min-width: 0; */
-  /* justify-content: center; */
-
+const ScrollingGallery = styled(Swiper)`
+  /* &.swiper-container { } */
+  .swiper-wrapper {
+    width: 500px;
+    display: flex;
+  }
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
+  .swiper-slide img {
+	  object-fit: contain;
+	  /* width: 100%; */
+	  height: 100%;
+  }
+  .swiper-button-disabled {
+    opacity: 0;
+  }
 `
 
 const ProductImage = styled.img`
@@ -22,7 +32,7 @@ const ProductImage = styled.img`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   /* max-height: 100%; */
   /* min-width: 0; */
   /* flex-shrink: 1; */
@@ -31,10 +41,27 @@ const ProductImage = styled.img`
 `
 
 const ImageGallery = ({currentStyle}) => {
+
+  const slides = currentStyle.photos.map((photo, idx) => {
+    return (
+      <SwiperSlide key={idx}>
+        <img src={photo.url}/>
+      </SwiperSlide>
+    )
+  })
+
   return (
-    <ImageGalleryContainer>
-      {currentStyle && <ProductImage src={currentStyle.photos[0].url} />}
-    </ImageGalleryContainer>
+    <>
+      <ScrollingGallery
+        id="main"
+        slideToClickedSlide={true}
+        spaceBetween={30}
+        navigation
+        pagination
+      >
+        {slides}
+      </ScrollingGallery>
+    </>
   )
 }
 
