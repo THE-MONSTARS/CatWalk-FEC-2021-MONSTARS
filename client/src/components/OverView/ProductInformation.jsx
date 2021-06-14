@@ -2,6 +2,8 @@ import React from 'react';
 import StarRating from '../StarRating.jsx';
 import styled from 'styled-components';
 
+const ProductInfoContainer = styled.div`
+`
 
 const Price = styled.span`
   color: ${ props => props.sale ? '#E76D83' : '#393D3F'};
@@ -22,14 +24,14 @@ const ProductInformation = ({currentProduct, currentStyle, reviews}) => {
   }, 0) / reviews.length;
 
   return (
-    <div>
+    <ProductInfoContainer>
       <StarRating rating={averageRating}/>
       <p className="product-category">{productCategory}</p>
       <h2 className="product-name">{productName}</h2>
       <Price sale={salePrice}>{salePrice ? salePrice : originalPrice}</Price>
       {salePrice &&
       <StruckThroughPrice>{originalPrice}</StruckThroughPrice>}
-    </div>
+    </ProductInfoContainer>
   )
 };
 

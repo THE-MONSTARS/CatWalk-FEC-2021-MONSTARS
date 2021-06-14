@@ -18,11 +18,12 @@ const OverViewContainer = styled.div`
   height: 450px;
 `
 
-const ProductInfoContainer = styled.div`
+const ProductContainer = styled.div`
+  border: 1px solid green;
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
-  align-items: center;
-  width: 50%;
+  width: 30%;
 `
 
 const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getStyles, reviews}) => {
@@ -36,11 +37,11 @@ const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getSty
     <React.Fragment>
       <OverViewContainer>
         <ImageGallery currentStyle={currentStyle}/>
-        <ProductInfoContainer>
+        <ProductContainer>
           <ProductInformation currentProduct={currentProduct} currentStyle={currentStyle} reviews={reviews}/>
           <StyleSelector styles={styles} currentStyle={currentStyle} selectStyle={selectStyle}/>
           <AddToCart currentStyle={currentStyle}/>
-        </ProductInfoContainer>
+        </ProductContainer>
       </OverViewContainer>
 
       <ProductDescription currentProduct={currentProduct} />

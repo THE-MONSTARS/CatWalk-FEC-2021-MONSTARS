@@ -3,10 +3,11 @@ import styled from 'styled-components'
 export const DropDownHeader = styled.button`
   background: white;
   padding: 6px 0;
-  width: 102px;
+  /* width: 100px; */
   border: 1px solid #343a40;
   color: #343a40;
   align-self: flex-start;
+  flex-grow: 0;
   &:focus + ul {
     opacity: 1;
     pointer-events: all;
@@ -21,7 +22,7 @@ export const ListContainer = styled.div`
   flex-direction: column;
   background: white;
   border-radius: 0.5px;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   width: 100px;
 
