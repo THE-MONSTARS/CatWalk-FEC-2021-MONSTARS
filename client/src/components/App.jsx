@@ -99,7 +99,8 @@ const App = () => {
       <ReviewsContainer
         id={id}
         reviews={reviews}
-        isLoading={isLoading}/>
+        isLoading={isLoading}
+      />
     </div>
     )
   );
