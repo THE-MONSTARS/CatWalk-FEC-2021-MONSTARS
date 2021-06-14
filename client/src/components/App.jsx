@@ -77,21 +77,6 @@ const App = () => {
     fetchProductAndId();
   }, []);
 
-// <<<<<<< HEAD
-//     let id = currentProduct.id;
-
-//     return (
-//       isLoading
-//       ? <div>Loading...</div>
-//       : (
-//       <div>
-//         <OverView id={id} currentProduct={currentProduct} styles={styles} reviews={reviews}/>
-//         <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} />
-//         <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
-//       </div>
-//       )
-//     );
-// =======
   useEffectAfterRender(() => {
     updateProductAndId();
   }, [currentProduct])
@@ -109,7 +94,6 @@ const App = () => {
     </div>
     )
   );
-// >>>>>>> 9b7e2a70a8be290d8fb5b32f64877ec773777cb8
 
 }
 
