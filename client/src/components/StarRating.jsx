@@ -9,7 +9,6 @@ const EmptyStar = (props) => (<img src={'../assets/icons8-star-24-empty.png'}/>)
 
 const StarRating = (props) => {
   const [ stars, setStars ] = useState([]);
-  const [ isLoading, setIsLoading] = useState(true)
 
   function displayStars(stars) {
     const starArray = [];
@@ -23,7 +22,6 @@ const StarRating = (props) => {
 
   useEffect(() => {
     displayStars(props.rating)
-    setIsLoading(false)
   }, [])
 
   function handleClick(e) {
@@ -32,9 +30,9 @@ const StarRating = (props) => {
   }
 
   return (
-      isLoading?
-    <a> ... </a> :
-    <a onClick={handleClick}> {stars} </a>
+    stars?
+      <a /*onClick={props.filterReviews} */> {stars} </a> :
+      <a> ... </a>
   );
 }
 

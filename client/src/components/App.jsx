@@ -2,17 +2,10 @@ import React, { useEffect, useState } from 'react';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
-import ReviewSorter from './Reviews/ReviewSorter.jsx';
+import ReviewsContainer from './ReviewsContainer.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
-
-const RVC = styled.div`
-margin-top: 10px;
-display: flex;
-flex-direction: row;
-justify-content: left;
-`;
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
@@ -50,6 +43,7 @@ const App = () => {
     setStyles(newStyles);
     setCurrentStyle(defaultStyle)
     setReviews(newReviews);
+    setIsLoading(false);
   }
 
   // API calls
@@ -102,7 +96,11 @@ const App = () => {
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
       />
-      <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
+      <ReviewsContainer
+        id={id}
+        reviews={reviews}
+        isLoading={isLoading}
+      />
     </div>
     )
   );
