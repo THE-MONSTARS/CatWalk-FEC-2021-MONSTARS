@@ -4,12 +4,20 @@ import { DropDownHeader, ListContainer, DropDownItem } from './styles.jsx';
 import styled from 'styled-components';
 
 const SizeDropDownContainer = styled.div`
-  flex-basis: 50%;
+  width: 140px;
 `
 
 
 const SizeListContainer = styled(ListContainer)`
+  width: 140px;
+`
 
+const SizeDropDownHeader = styled(DropDownHeader)`
+  width: 100%;
+`
+
+const SizeDropDownItem = styled(DropDownItem)`
+  /* width: 100%; */
 `
 
 const SizeDropDown = ({size, sizes, isActive, setIsActive, handleSizeClick}) => {
@@ -17,9 +25,9 @@ const SizeDropDown = ({size, sizes, isActive, setIsActive, handleSizeClick}) => 
 
   return (
     <SizeDropDownContainer>
-      <DropDownHeader value={null} onClick={() => {setIsActive(prev => !prev)}}>
+      <SizeDropDownHeader value={null} onClick={() => {setIsActive(prev => !prev)}}>
         {size ? size : 'Select Size'}
-      </DropDownHeader>
+      </SizeDropDownHeader>
         <CSSTransition in={isActive} unmountOnExit timeout={700} classNames='fade'>
 
           <SizeListContainer>

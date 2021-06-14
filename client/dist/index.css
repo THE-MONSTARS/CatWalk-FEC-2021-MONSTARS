@@ -47,26 +47,3 @@ table {
 	border-spacing: 0;
 }
 
-/* .swiper-container {
-	display: flex;
-} */
-
-/* .swiper-wrapper {
-	width: 500px;
-	display: flex;
-}
-
-.swiper-slide {
-	display: flex;
-	justify-content: center;
-}
-
-.swiper-slide img {
-	object-fit: contain;
-	width: 100%;
-	height: 100%;
-}
-
-.swiper-button-disabled {
-	opacity: 0;
-} */

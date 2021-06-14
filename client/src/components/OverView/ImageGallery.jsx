@@ -12,6 +12,7 @@ const ScrollingGallery = styled(Swiper)`
   .swiper-wrapper {
     width: 500px;
     display: flex;
+    transition: all 0.2s;
   }
   .swiper-slide {
     display: flex;

@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
 
+const StyleListContainer = styled.div`
+  width: 100%;
+`
+
 const StyleContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -21,14 +25,14 @@ const SelectableStyleImg = styled.img`
 
 
 const StyleList = ({styles, currentStyle, selectStyle}) => (
-  <div>
+  <StyleListContainer>
     <SelectedStyle>Style > {currentStyle.name}</SelectedStyle>
     <StyleContainer>
       {styles.map(style => (
         <SelectableStyleImg key={style.style_id} id={style.style_id} src={style.photos[0].thumbnail_url} onClick={e=> selectStyle(e.target.id)}/>
       ))}
     </StyleContainer>
-  </div>
+  </StyleListContainer>
 )
 
 export default StyleList;

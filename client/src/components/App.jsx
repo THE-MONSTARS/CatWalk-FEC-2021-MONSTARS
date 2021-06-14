@@ -88,8 +88,20 @@ const App = () => {
     ? <div>Loading...</div>
     : (
     <div>
-      <OverView id={id} currentProduct={currentProduct} styles={styles} currentStyle={currentStyle} reviews={reviews} setCurrentStyle={setCurrentStyle}/>
-      <RelatedContainer id={id} getOneProduct={getOneProduct} getStyles={getStyles} setCurrentProduct={setCurrentProduct}/>
+      <OverView
+        id={id}
+        currentProduct={currentProduct}
+        styles={styles}
+        currentStyle={currentStyle}
+        reviews={reviews}
+        setCurrentStyle={setCurrentStyle}
+      />
+      <RelatedContainer
+        id={id}
+        getOneProduct={getOneProduct}
+        getStyles={getStyles}
+        setCurrentProduct={setCurrentProduct}
+      />
       <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
     </div>
     )
