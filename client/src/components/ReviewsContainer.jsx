@@ -17,7 +17,7 @@ export default function ReviewsContainer (props) {
 
   return (
     <RVC>
-      <ReviewSorter /> <ReviewList id={props.id} reviews={props.reviews}/>
+      <ReviewSorter /> <ReviewList id={props.id} reviews={props.reviews} isLoading={props.isLoading}/>
     </RVC>
   )
 }

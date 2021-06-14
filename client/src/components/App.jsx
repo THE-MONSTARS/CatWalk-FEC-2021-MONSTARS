@@ -50,6 +50,7 @@ const App = () => {
     setStyles(newStyles);
     setCurrentStyle(defaultStyle)
     setReviews(newReviews);
+    setIsLoading(false);
   }
 
   // API calls
@@ -102,7 +103,7 @@ const App = () => {
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
       />
-      <ReviewsContainer id={id} reviews={reviews}/>
+      <ReviewsContainer id={id} reviews={reviews} isLoading={isLoading}/>
     </div>
     )
   );
