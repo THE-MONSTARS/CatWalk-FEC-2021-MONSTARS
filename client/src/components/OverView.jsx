@@ -9,7 +9,7 @@ import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
 
 const OverViewContainer = styled.div`
-  border: 1px solid black;
+
   /* overflow: hidden; */
   display: flex;
   /* flex-direction: row; */
@@ -19,10 +19,10 @@ const OverViewContainer = styled.div`
 `
 
 const ProductContainer = styled.div`
-  border: 1px solid green;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  margin-left: 25px;
   width: 30%;
 `
 
