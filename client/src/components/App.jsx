@@ -6,6 +6,12 @@ import ReviewsContainer from './ReviewsContainer.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+
+const FadingBackground = styled(BaseModalBackground)`
+  opacity: ${(props) => props.opacity};
+  transition: all 0.3s ease-in-out;
+`;
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
@@ -81,7 +87,8 @@ const App = () => {
     isLoading
     ? <div>Loading...</div>
     : (
-    <div>
+      <div>
+      <ModalProvider backgroundComponent={FadingBackground}>
       <OverView
         id={id}
         currentProduct={currentProduct}
@@ -95,12 +102,14 @@ const App = () => {
         getOneProduct={getOneProduct}
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
+        currentProduct = {currentProduct}
       />
       <ReviewsContainer
         id={id}
         reviews={reviews}
         isLoading={isLoading}
       />
+      </ModalProvider>
     </div>
     )
   );
