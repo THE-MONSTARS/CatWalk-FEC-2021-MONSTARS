@@ -15,7 +15,7 @@ const SA = styled.a`
 const StarRating = (props) => {
   const [ stars, setStars ] = useState([]);
 
-  function displayStars(stars) {
+  function renderStars(stars) {
     const starArray = [];
     for (let i = 0; i < 5; i++) {
       (i < stars) ?
@@ -26,13 +26,9 @@ const StarRating = (props) => {
   }
 
   useEffect(() => {
-    displayStars(props.rating)
+    renderStars(props.rating)
+    return () => (setStars([]))
   }, [])
-
-  function handleClick(e) {
-    e.preventDefault()
-    console.log(props.rating)
-  }
 
   return (
     stars?

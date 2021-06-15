@@ -13,7 +13,8 @@ function ReviewList(props) {
     props.isLoading ?
     <div> Loading Reviews... </div> :
     <div>
-        { props.reviews.map((review, index) => (
+        { props.reviews.filter(props.currentStarRating ? review => review.rating === props.currentStarRating : review => review)
+        .map((review, index) => (
           <Review
             summary={review.summary}
             body={review.body}
@@ -21,7 +22,9 @@ function ReviewList(props) {
             key={index}
             reviewer_name={review.reviewer_name}
             rating={review.rating}
-          />))}
+          />))
+
+          }
     </div>
   )
 }

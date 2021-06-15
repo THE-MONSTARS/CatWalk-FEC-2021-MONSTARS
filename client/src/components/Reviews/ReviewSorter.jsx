@@ -22,7 +22,7 @@ const Button = styled.button`
 
 export default function ReviewSorter (props) {
   const [ starRatings, setStarRatings ] = useState([]);
-  const [ currentStarRating, setCurrentStarRating ] = useState([])
+  const [ currentStarRating, setCurrentStarRating ] = useState(null)
 
 
 
@@ -57,6 +57,7 @@ export default function ReviewSorter (props) {
     <RDC> <br/>
       <Header> Sort by Rating: </Header>
       {starRatings}
+      <button value={null} onClick={ props.filterReviews }> All Ratings </button>
     </RDC> :
     <div> Loading... </div>
 

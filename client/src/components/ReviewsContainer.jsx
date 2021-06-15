@@ -14,12 +14,20 @@ const RVC = styled.div`
 `;
 
 export default function ReviewsContainer (props) {
-  const [ currentStarRating, setCurrentStarRating ] = useState([])
+  const [ currentStarRating, setCurrentStarRating ] = useState(null)
 
   function filterReviews(e) {
     e.preventDefault();
-    console.log('clicked', e.target.value)
+    console.log('show only ratings: ', e.target.value)
+    setCurrentStarRating(Number(e.target.value))
   }
+
+  // useEffect(() => {
+  //     return () => {
+  //       setCurrentStarRating(null)
+  //     }
+  //   }
+  // )
 
   return (
     <RVC>
@@ -30,34 +38,8 @@ export default function ReviewsContainer (props) {
         id={props.id}
         reviews={props.reviews}
         isLoading={props.isLoading}
+        currentStarRating={currentStarRating}
       />
     </RVC>
   )
 }
-
-// export default class ReviewsContainer extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.filterReviews.bind(this);
-//   }
-
-//   filterReviews(e) {
-//     e.preventDefault();
-//     console.log('clicked', e.target.value)
-//   }
-
-//   render() {
-//     return (
-//       <RVC>
-//         <ReviewSorter
-//           filterReviews={this.filterReviews}
-//         />
-//         <ReviewList
-//           id={this.props.id}
-//           reviews={this.props.reviews}
-//           isLoading={this.props.isLoading}
-//         />
-//       </RVC>
-//   )
-//   }
-// }
