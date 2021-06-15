@@ -30,7 +30,7 @@ export default function ReviewsContainer (props) {
   // )
 
   return (
-    <RVC>
+    <RVC ref={props.reference}>
       <ReviewSorter
         setStarRatingFilter={setStarRatingFilter}
       />

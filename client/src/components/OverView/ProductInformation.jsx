@@ -3,6 +3,23 @@ import StarRating from '../StarRating.jsx';
 import styled from 'styled-components';
 
 const ProductInfoContainer = styled.div`
+  width: 100%;
+`
+
+const RatingsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const GoToReviews = styled.p`
+  font-family: 'Roboto';
+  font-size: 10px;
+  margin-left: 5px;
+  text-decoration: underline;
+  &:hover {
+    color: blue;
+    cursor: pointer;
+  }
 `
 
 const ProductCategory = styled.p`
@@ -35,7 +52,7 @@ const StruckThroughPrice = styled.span`
   text-decoration: line-through;
 `
 
-const ProductInformation = ({currentProduct, currentStyle, reviews}) => {
+const ProductInformation = ({currentProduct, currentStyle, reviews, handleScrollToRef}) => {
   const productName = currentProduct.name;
   const productCategory = currentProduct.category;
   const salePrice = currentStyle.sale_price;
@@ -47,7 +64,11 @@ const ProductInformation = ({currentProduct, currentStyle, reviews}) => {
 
   return (
     <ProductInfoContainer>
-      <StarRating rating={averageRating}/>
+      <RatingsContainer>
+        <StarRating rating={averageRating}/>
+        <GoToReviews onClick={() => handleScrollToRef()}>Read all reviews</GoToReviews>
+      </RatingsContainer>
+
       <ProductCategory>{productCategory}</ProductCategory>
       <ProductName>{productName}</ProductName>
       <Price sale={salePrice}>{salePrice ? salePrice : originalPrice}</Price>
