@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
-import ReviewSorter from './Reviews/ReviewSorter.jsx';
+import ReviewsContainer from './ReviewsContainer.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+
 
 const RVC = styled.div`
 margin-top: 10px;
@@ -56,6 +57,7 @@ const App = () => {
     setStyles(newStyles);
     setCurrentStyle(defaultStyle)
     setReviews(newReviews);
+    setIsLoading(false);
   }
 
   // API calls
@@ -110,7 +112,11 @@ const App = () => {
         setCurrentProduct={setCurrentProduct}
         currentProduct = {currentProduct}
       />
-      <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
+      <ReviewsContainer
+        id={id}
+        reviews={reviews}
+        isLoading={isLoading}
+      />
       </ModalProvider>
     </div>
     )

@@ -15,24 +15,26 @@ const Header = styled.div`
   margin-bottom: 5px;
 `;
 
-
+const Button = styled.div`
+  border: 0;
+  background-color: 0;
+`;
 
 export default function ReviewSorter (props) {
   const [ starRatings, setStarRatings ] = useState([]);
-  const [ isLoading, setIsLoading ] = useState(true);
+  const [ currentStarRating, setCurrentStarRating ] = useState([])
 
   function filterReviews(e) {
-    e.preventDefault();
-    console.log('clicked', e.target)
+    // e.preventDefault();
+    console.log('clicked', e.target.value)
   }
 
   function starCategories() {
     let allStarRatings = [];
     for (let i = 5; i > 0; i--) {
-      allStarRatings.push(<div key={i}> <StarRating rating={i} onClick={filterReviews}/> </div>)
+      allStarRatings.push(<Button key={i} value={i} onClick={ (e)=>filterReviews(e) } > <StarRating rating={i}/> </Button>)
     }
     setStarRatings(allStarRatings);
-    setIsLoading(false);
   }
 
   useEffect(()=> {
@@ -40,11 +42,12 @@ export default function ReviewSorter (props) {
   }, [])
 
   return (
-    isLoading ?
-    <div> Loading... </div> :
+    starRatings ?
     <RDC> <br/>
       <Header> Sort by Rating: </Header>
       {starRatings}
-    </RDC>
+    </RDC> :
+    <div> Loading... </div>
+
   )
 }
