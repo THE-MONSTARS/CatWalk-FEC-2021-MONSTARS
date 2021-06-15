@@ -46,7 +46,7 @@ const ThumbsGallery = styled(Swiper)`
   height: 100%;
   &.swiper-container-thumbs {
     width: 100%;
-    margin-right: 10px;
+    margin-right: 20px;
     display: flex;
     justify-content: flex-end;
   }
@@ -61,7 +61,7 @@ const ThumbsGallery = styled(Swiper)`
   .swiper-button-prev {
     position: relative;
     top: 10px;
-    left: 21px;
+    left: 54px;
     transform: rotate(90deg);
   }
   .swiper-button-prev:after {
@@ -69,8 +69,8 @@ const ThumbsGallery = styled(Swiper)`
   }
   .swiper-button-next {
     position: relative;
-    top: 300px;
-    left: 21px;
+    top: 337px;
+    left: 36px;
     transform: rotate(90deg);
   }
   .swiper-slide {
