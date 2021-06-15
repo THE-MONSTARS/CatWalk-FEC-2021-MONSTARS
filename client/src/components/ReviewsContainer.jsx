@@ -16,7 +16,7 @@ const RVC = styled.div`
 export default function ReviewsContainer (props) {
   const [ currentStarRating, setCurrentStarRating ] = useState(null)
 
-  function filterReviews(e) {
+  function setStarRatingFilter(e) {
     e.preventDefault();
     console.log('show only ratings: ', e.target.value)
     setCurrentStarRating(Number(e.target.value))
@@ -32,7 +32,7 @@ export default function ReviewsContainer (props) {
   return (
     <RVC>
       <ReviewSorter
-        filterReviews={filterReviews}
+        setStarRatingFilter={setStarRatingFilter}
       />
       <ReviewList
         id={props.id}

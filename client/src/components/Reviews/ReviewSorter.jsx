@@ -34,7 +34,7 @@ export default function ReviewSorter (props) {
           <Button
             // key={i}
             value={i}
-            onClick={ props.filterReviews }
+            onClick={ props.setStarRatingFilter }
             // onClick={ (e)=> props.filterReviews(e) }
 
           >
@@ -57,7 +57,7 @@ export default function ReviewSorter (props) {
     <RDC> <br/>
       <Header> Sort by Rating: </Header>
       {starRatings}
-      <button value={null} onClick={ props.filterReviews }> All Ratings </button>
+      <button value={null} onClick={ props.setStarRatingFilter }> All Ratings </button>
     </RDC> :
     <div> Loading... </div>
 

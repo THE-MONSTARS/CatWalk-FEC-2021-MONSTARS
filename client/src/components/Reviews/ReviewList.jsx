@@ -9,22 +9,25 @@ import Review from './Review.jsx'
 
 //base component
 function ReviewList(props) {
+
+
+
   return (
     props.isLoading ?
     <div> Loading Reviews... </div> :
     <div>
         { props.reviews.filter(props.currentStarRating ? review => review.rating === props.currentStarRating : review => review)
-        .map((review, index) => (
-          <Review
-            summary={review.summary}
-            body={review.body}
-            date={review.date}
-            key={index}
-            reviewer_name={review.reviewer_name}
-            rating={review.rating}
-          />))
-
-          }
+          .map((review, index) => (
+            <Review
+              summary={review.summary}
+              body={review.body}
+              date={review.date}
+              key={review.review_id}
+              reviewer_name={review.reviewer_name}
+              rating={review.rating}
+            />
+          ))
+        }
     </div>
   )
 }
