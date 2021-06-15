@@ -14,16 +14,32 @@ const RVC = styled.div`
 `;
 
 export default function ReviewsContainer (props) {
-  const [ starRating, setStarRating ] = useState([])
+  const [ currentStarRating, setCurrentStarRating ] = useState(null)
+
+  function setStarRatingFilter(e) {
+    e.preventDefault();
+    console.log('show only ratings: ', e.target.value)
+    setCurrentStarRating(Number(e.target.value))
+  }
+
+  // useEffect(() => {
+  //     return () => {
+  //       setCurrentStarRating(null)
+  //     }
+  //   }
+  // )
 
   return (
     <RVC>
-      <ReviewSorter />
-        <ReviewList
-          id={props.id}
-          reviews={props.reviews}
-          isLoading={props.isLoading}
-        />
+      <ReviewSorter
+        setStarRatingFilter={setStarRatingFilter}
+      />
+      <ReviewList
+        id={props.id}
+        reviews={props.reviews}
+        isLoading={props.isLoading}
+        currentStarRating={currentStarRating}
+      />
     </RVC>
   )
 }

@@ -7,10 +7,15 @@ const YellowStar = (props) => (<img src={'../assets/icons8-star-24-yellow.png'}/
 
 const EmptyStar = (props) => (<img src={'../assets/icons8-star-24-empty.png'}/>)
 
+const SA = styled.a`
+  z-index: -1;
+  position: relative;
+`;
+
 const StarRating = (props) => {
   const [ stars, setStars ] = useState([]);
 
-  function displayStars(stars) {
+  function renderStars(stars) {
     const starArray = [];
     for (let i = 0; i < 5; i++) {
       (i < stars) ?
@@ -21,17 +26,13 @@ const StarRating = (props) => {
   }
 
   useEffect(() => {
-    displayStars(props.rating)
+    renderStars(props.rating)
+    return () => (setStars([]))
   }, [])
-
-  function handleClick(e) {
-    e.preventDefault()
-    console.log(props.rating)
-  }
 
   return (
     stars?
-      <a /*onClick={props.filterReviews} */> {stars} </a> :
+      <SA> {stars} </SA> :
       <a> ... </a>
   );
 }

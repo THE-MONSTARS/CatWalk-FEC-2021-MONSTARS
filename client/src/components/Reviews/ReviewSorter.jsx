@@ -15,24 +15,35 @@ const Header = styled.div`
   margin-bottom: 5px;
 `;
 
-const Button = styled.div`
-  border: 0;
-  background-color: 0;
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
 `;
 
 export default function ReviewSorter (props) {
   const [ starRatings, setStarRatings ] = useState([]);
-  const [ currentStarRating, setCurrentStarRating ] = useState([])
+  const [ currentStarRating, setCurrentStarRating ] = useState(null)
 
-  function filterReviews(e) {
-    // e.preventDefault();
-    console.log('clicked', e.target.value)
-  }
+
 
   function starCategories() {
     let allStarRatings = [];
     for (let i = 5; i > 0; i--) {
-      allStarRatings.push(<Button key={i} value={i} onClick={ (e)=>filterReviews(e) } > <StarRating rating={i}/> </Button>)
+      allStarRatings.push(
+        <div key={i}>
+          <Button
+            // key={i}
+            value={i}
+            onClick={ props.setStarRatingFilter }
+            // onClick={ (e)=> props.filterReviews(e) }
+
+          >
+          <StarRating
+            rating={i}
+          />
+          </Button>
+        </div>
+      )
     }
     setStarRatings(allStarRatings);
   }
@@ -46,6 +57,7 @@ export default function ReviewSorter (props) {
     <RDC> <br/>
       <Header> Sort by Rating: </Header>
       {starRatings}
+      <button value={null} onClick={ props.setStarRatingFilter }> All Ratings </button>
     </RDC> :
     <div> Loading... </div>
 
