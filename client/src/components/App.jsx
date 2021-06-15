@@ -8,14 +8,6 @@ import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-
-const RVC = styled.div`
-margin-top: 10px;
-display: flex;
-flex-direction: row;
-justify-content: left;
-`;
-
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
   transition: all 0.3s ease-in-out;
