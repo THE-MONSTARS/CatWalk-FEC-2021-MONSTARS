@@ -5,7 +5,7 @@ import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-const responsive= {
+const responsive={
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
@@ -27,9 +27,9 @@ const responsive= {
 
 export default function RelatedContainer ({id, getOneProduct, getStyles, setCurrentProduct, currentProduct}) {
 
-  const [productsInfo, setProductsInfo] = useState([])
-  const [currentId, setCurrentId] = useState()
-  const dummyId= 16059;
+  const [productsInfo, setProductsInfo]=useState([])
+  const [currentId, setCurrentId]=useState()
+  const dummyId=16059;
 
 
     function getRelatedProducts(productId) {
@@ -38,44 +38,44 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
   }
 
     async function getAverageRating(productId) {
-      const fetchedReviewMetaData= await axios.get(`/reviews/${productId}/meta`)
-      const ratings = fetchedReviewMetaData.data.ratings
+      const fetchedReviewMetaData=await axios.get(`/reviews/${productId}/meta`)
+      const ratings=fetchedReviewMetaData.data.ratings
 
-      let total= 0;
-      let ratingsTotal= 0;
-      let average= 0;
+      let total=0;
+      let ratingsTotal=0;
+      let average=0;
 
       for(let number in ratings) {
-        total+= Number.parseInt(ratings[number]) * Number.parseInt(number);
-        ratingsTotal+= Number.parseInt(number);
+        total+=Number.parseInt(ratings[number]) * Number.parseInt(number);
+        ratingsTotal+=Number.parseInt(number);
       }
-      average= total/ratingsTotal;
+      average=total/ratingsTotal;
       return average.toFixed(1)
     }
 
 
-  const startup= async () => {
-    let relatedProductIds= await getRelatedProducts(id)
-    const relatedProducts= [];
+  const startup=async () => {
+    let relatedProductIds=await getRelatedProducts(id)
+    const relatedProducts=[];
 
     for (let productId of relatedProductIds.data) {
 
-      const promises= [getOneProduct(productId), getStyles(productId), getAverageRating(productId)]
+      const promises=[getOneProduct(productId), getStyles(productId), getAverageRating(productId)]
 
-      let [ productDetail, productStyles, productRating ] = await Promise.all(promises)
+      let [ productDetail, productStyles, productRating ]=await Promise.all(promises)
 
-      let currentProductData= {};
+      let currentProductData={};
 
-      currentProductData.id= productDetail.id;
-      currentProductData.category= productDetail.category;
-      currentProductData.name= productDetail.name;
-      currentProductData.features= productDetail.features;
+      currentProductData.id=productDetail.id;
+      currentProductData.category=productDetail.category;
+      currentProductData.name=productDetail.name;
+      currentProductData.features=productDetail.features;
 
-      let defaultStyle= productStyles.find(entry => entry['default?'] === true || productStyles[0])
+      let defaultStyle=productStyles.find(entry => entry['default?'] === true || productStyles[0])
 
-      currentProductData.sale_price= defaultStyle.sale_price;
-      currentProductData.original_price= defaultStyle.original_price;
-      currentProductData.image= defaultStyle.photos[0].url
+      currentProductData.sale_price=defaultStyle.sale_price;
+      currentProductData.original_price=defaultStyle.original_price;
+      currentProductData.image=defaultStyle.photos[0].url
 
       currentProductData.rating= productRating
 
@@ -95,10 +95,10 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
 
   return (
     //map with card component. Inline Style Temp until Css file created
-    <div style= {{width: '50%'}}>
-    <Carousel responsive= {responsive} centerMode= {true} >
+    <div style={{width: '50%'}}>
+    <Carousel responsive={responsive} centerMode= {true} >
       {productsInfo.map((entry, index) => (
-        <Card key= {index} product= {entry} setCurrentProduct= {setCurrentProduct} overviewProduct= {currentProduct}/>
+        <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct={currentProduct}/>
       ))}
 
     </Carousel>
