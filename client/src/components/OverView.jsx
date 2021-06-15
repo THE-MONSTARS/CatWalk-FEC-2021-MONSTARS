@@ -26,7 +26,7 @@ const ProductContainer = styled.div`
   width: 30%;
 `
 
-const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getStyles, reviews}) => {
+const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getStyles, reviews, handleScrollToRef}) => {
 
   const selectStyle = (id) => {
     const current = styles.find(style => style.style_id === parseInt(id))
@@ -38,7 +38,7 @@ const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getSty
       <OverViewContainer>
         <ImageGallery currentStyle={currentStyle}/>
         <ProductContainer>
-          <ProductInformation currentProduct={currentProduct} currentStyle={currentStyle} reviews={reviews}/>
+          <ProductInformation currentProduct={currentProduct} currentStyle={currentStyle} reviews={reviews} handleScrollToRef={handleScrollToRef}/>
           <StyleSelector styles={styles} currentStyle={currentStyle} selectStyle={selectStyle}/>
           <AddToCart currentStyle={currentStyle}/>
         </ProductContainer>

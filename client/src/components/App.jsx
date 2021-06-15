@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
@@ -13,6 +13,8 @@ const App = () => {
   const [ styles, setStyles ] = useState([])
   const [ currentStyle, setCurrentStyle ] = useState({})
   const [ reviews, setReviews ] = useState([])
+
+  const reviewsRef = useRef(null);
 
   // product update on startup
   const fetchProductAndId = async () => {
@@ -67,6 +69,10 @@ const App = () => {
     return fetchedReviews.data.results;
   }
 
+  const handleScrollToRef = () => {
+    reviewsRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
+
   useEffect(() => {
     fetchProductAndId();
   }, []);
@@ -89,6 +95,7 @@ const App = () => {
         currentStyle={currentStyle}
         reviews={reviews}
         setCurrentStyle={setCurrentStyle}
+        handleScrollToRef={handleScrollToRef}
       />
       <RelatedContainer
         id={id}
@@ -100,6 +107,7 @@ const App = () => {
         id={id}
         reviews={reviews}
         isLoading={isLoading}
+        reference={reviewsRef}
       />
     </div>
     )
