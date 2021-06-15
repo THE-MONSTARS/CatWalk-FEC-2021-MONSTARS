@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Header from './Header.jsx';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
@@ -6,6 +7,12 @@ import ReviewsContainer from './ReviewsContainer.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
@@ -87,7 +94,8 @@ const App = () => {
     isLoading
     ? <div>Loading...</div>
     : (
-    <div>
+    <AppContainer>
+      <Header/>
       <OverView
         id={id}
         currentProduct={currentProduct}
@@ -109,7 +117,7 @@ const App = () => {
         isLoading={isLoading}
         reference={reviewsRef}
       />
-    </div>
+    </AppContainer>
     )
   );
 
