@@ -4,15 +4,17 @@ import { DropDownHeader, ListContainer, DropDownItem } from './styles.jsx';
 import styled from 'styled-components';
 
 const QuantityDropDownContainer = styled.div`
+  font-family: 'Roboto';
   width: 50px;
 `
 
 const QuantityListContainer = styled(ListContainer)`
-  width: 50px;
+  width: 48px;
 `
 
 const QuantityDropDownHeader = styled(DropDownHeader)`
-  width: 100%;
+  font-family: 'Roboto';
+  width: 50px;
 `
 
 const QuantityDropDownItem = styled(DropDownItem)`

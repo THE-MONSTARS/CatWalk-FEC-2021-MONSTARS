@@ -47,3 +47,22 @@ table {
 	border-spacing: 0;
 }
 
+@font-face {
+  font-family: 'Bebas Neue';
+  src: local('Bebas Neue'), url(./fonts/BebasNeue-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: local('Montserrat'), url(./fonts/Montserrat/Montserrat-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url(./fonts/Roboto/Roboto-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: local('Roboto-Bold'), url(./fonts/Roboto/Roboto-Bold.ttf) format('truetype');
+}

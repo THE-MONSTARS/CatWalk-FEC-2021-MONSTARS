@@ -8,6 +8,7 @@ export const DropDownHeader = styled.button`
   color: #343a40;
   align-self: flex-start;
   flex-grow: 0;
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 4px 6px 25px rgba(166,173,201,.2);
   &:focus + ul {
     opacity: 1;
     pointer-events: all;
