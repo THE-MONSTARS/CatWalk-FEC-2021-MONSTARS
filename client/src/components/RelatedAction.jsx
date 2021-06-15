@@ -104,21 +104,21 @@ export default function RelatedAction ({product, overviewProduct}) {
         opacity = {opacity}
         backgroundProps = {{opacity}}
       >
-        <div>comparing</div>
-        <table style ={{border: "1px solid black"}}>
+        <div style= {{padding: "8px",textAlign: "left"}}>COMPARING</div>
+        <table style ={{border: "1px solid black", width: "100%",tableLayout: "fixed"}}>
           <thead>
-          <tr>
-            <th>{product.name}</th>
-            <th ></th>
-            <th>{overviewProduct.name}</th>
+          <tr >
+            <th style= {{padding: "5px 8px 15px", textAlign: "left"}}>{product.name}</th>
+            <th style= {{textAlign: "center"}}></th>
+            <th style= {{padding: "5px 8px 15px", textAlign: "right"}}>{overviewProduct.name}</th>
           </tr>
           </thead>
           <tbody>
           {compareInfo.map((entry, index) => (
             <tr key={index}>
-              <td>{entry.valueA}</td>
-              <td>{entry.feature}</td>
-              <td>{entry.valueB}</td>
+              <td style= {{padding: "5px",textAlign: "left"}}>{entry.valueA === true ? "√" : entry.valueA}</td>
+              <td style= {{padding: "5px",textAlign: "center"}}>{entry.feature}</td>
+              <td style= {{padding: "5px",textAlign: "right"}}>{entry.valueB}</td>
             </tr>
           ))}
           </tbody>
