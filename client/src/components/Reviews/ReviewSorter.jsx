@@ -24,10 +24,7 @@ export default function ReviewSorter (props) {
   const [ starRatings, setStarRatings ] = useState([]);
   const [ currentStarRating, setCurrentStarRating ] = useState([])
 
-  function filterReviews(e) {
-    e.preventDefault();
-    console.log('clicked', e.target.value)
-  }
+
 
   function starCategories() {
     let allStarRatings = [];
@@ -37,7 +34,9 @@ export default function ReviewSorter (props) {
           <Button
             // key={i}
             value={i}
-            onClick={ (e)=>filterReviews(e) }
+            onClick={ props.filterReviews }
+            // onClick={ (e)=> props.filterReviews(e) }
+
           >
           <StarRating
             rating={i}

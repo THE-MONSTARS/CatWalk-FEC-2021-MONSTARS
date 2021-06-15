@@ -16,9 +16,16 @@ const RVC = styled.div`
 export default function ReviewsContainer (props) {
   const [ currentStarRating, setCurrentStarRating ] = useState([])
 
+  function filterReviews(e) {
+    e.preventDefault();
+    console.log('clicked', e.target.value)
+  }
+
   return (
     <RVC>
-      <ReviewSorter />
+      <ReviewSorter
+        filterReviews={filterReviews}
+      />
       <ReviewList
         id={props.id}
         reviews={props.reviews}
@@ -27,3 +34,30 @@ export default function ReviewsContainer (props) {
     </RVC>
   )
 }
+
+// export default class ReviewsContainer extends React.Component {
+//   constructor(props) {
+//     super(props)
+//     this.filterReviews.bind(this);
+//   }
+
+//   filterReviews(e) {
+//     e.preventDefault();
+//     console.log('clicked', e.target.value)
+//   }
+
+//   render() {
+//     return (
+//       <RVC>
+//         <ReviewSorter
+//           filterReviews={this.filterReviews}
+//         />
+//         <ReviewList
+//           id={this.props.id}
+//           reviews={this.props.reviews}
+//           isLoading={this.props.isLoading}
+//         />
+//       </RVC>
+//   )
+//   }
+// }
