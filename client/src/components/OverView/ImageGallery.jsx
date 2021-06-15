@@ -90,6 +90,10 @@ const ThumbsGallery = styled(Swiper)`
 	  object-fit: cover;
 	  width: 100%;
 	  height: 100%;
+    &:hover {
+      cursor: pointer;
+      box-shadow:  1px 1px 2px 0.3px #1d62bd
+    }
   }
   .swiper-button-disabled {
     opacity: 0;

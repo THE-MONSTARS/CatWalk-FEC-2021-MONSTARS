@@ -5,11 +5,33 @@ import styled from 'styled-components';
 const ProductInfoContainer = styled.div`
 `
 
+const ProductCategory = styled.p`
+  margin-top: 10px;
+  font-size: 14px;
+  font-family: 'Roboto';
+  color: #343a40;
+`
+
+const ProductName = styled.h3`
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-family: 'Bebas Neue', cursive;
+  color: #343a40;
+  font-size: 40px;
+`
+
 const Price = styled.span`
+  margin-top: 10px;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Roboto';
+  color: #343a40;
   color: ${ props => props.sale ? '#E76D83' : '#393D3F'};
 `
 
 const StruckThroughPrice = styled.span`
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  margin-left: 10px;
   text-decoration: line-through;
 `
 
@@ -26,8 +48,8 @@ const ProductInformation = ({currentProduct, currentStyle, reviews}) => {
   return (
     <ProductInfoContainer>
       <StarRating rating={averageRating}/>
-      <p className="product-category">{productCategory}</p>
-      <h2 className="product-name">{productName}</h2>
+      <ProductCategory>{productCategory}</ProductCategory>
+      <ProductName>{productName}</ProductName>
       <Price sale={salePrice}>{salePrice ? salePrice : originalPrice}</Price>
       {salePrice &&
       <StruckThroughPrice>{originalPrice}</StruckThroughPrice>}
