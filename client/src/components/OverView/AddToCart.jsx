@@ -7,7 +7,7 @@ import QuantityDropDown from './QuantityDropDown.jsx';
 
 
 const AddToCartContainer = styled.div`
-  width: 100%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -72,6 +72,7 @@ const CTAButton = styled.button`
 const AddToBagButton = styled(CTAButton)`
   width: 120px;
   font-size: 10px;
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
 
   &:hover ${AddToBagCTA} {
     padding-right: 25px;
@@ -86,6 +87,7 @@ const AddToBagButton = styled(CTAButton)`
 const FavoriteButton = styled(CTAButton)`
   width: 80px;
   font-size: 10px;
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
 
   &:hover {
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
