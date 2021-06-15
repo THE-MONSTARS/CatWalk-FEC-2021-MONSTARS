@@ -25,7 +25,7 @@ const responsive = {
   }
 };
 
-export default function RelatedContainer ({id, getOneProduct, getStyles, setCurrentProduct}) {
+export default function RelatedContainer ({id, getOneProduct, getStyles, setCurrentProduct, currentProduct}) {
 
   const [productsInfo, setProductsInfo] = useState([])
   const [currentId, setCurrentId] = useState()
@@ -40,6 +40,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
     async function getAverageRating(productId) {
       const fetchedReviewMetaData = await axios.get(`/reviews/${productId}/meta`)
       const ratings = fetchedReviewMetaData.data.ratings
+      console.log('Ratings...', ratings)
 
       let total =0;
       let ratingsTotal=0;
@@ -69,6 +70,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
       currentProductData.id = productDetail.id;
       currentProductData.category = productDetail.category;
       currentProductData.name = productDetail.name;
+      currentProductData.features = productDetail.features;
 
       let defaultStyle = productStyles.find(entry => entry['default?'] === true || productStyles[0])
 
@@ -97,7 +99,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
     <div style={{width: '50%'}}>
     <Carousel responsive= {responsive} centerMode= {true} >
       {productsInfo.map((entry, index) => (
-        <Card key={index} product={entry} setCurrentProduct={setCurrentProduct}/>
+        <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct ={currentProduct}/>
       ))}
 
     </Carousel>

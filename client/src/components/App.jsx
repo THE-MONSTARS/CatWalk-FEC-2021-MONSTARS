@@ -6,12 +6,18 @@ import ReviewSorter from './Reviews/ReviewSorter.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 const RVC = styled.div`
 margin-top: 10px;
 display: flex;
 flex-direction: row;
 justify-content: left;
+`;
+
+const FadingBackground = styled(BaseModalBackground)`
+  opacity: ${(props) => props.opacity};
+  transition: all 0.3s ease-in-out;
 `;
 
 const App = () => {
@@ -87,7 +93,8 @@ const App = () => {
     isLoading
     ? <div>Loading...</div>
     : (
-    <div>
+      <div>
+      <ModalProvider backgroundComponent={FadingBackground}>
       <OverView
         id={id}
         currentProduct={currentProduct}
@@ -101,8 +108,10 @@ const App = () => {
         getOneProduct={getOneProduct}
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
+        currentProduct = {currentProduct}
       />
       <RVC> <ReviewSorter /> <ReviewList id={id} reviews={reviews}/> </RVC>
+      </ModalProvider>
     </div>
     )
   );

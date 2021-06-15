@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
 import styled from 'styled-components';
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 
 const EmptyStar = '../assets/icons8-star-24-empty.png'
@@ -10,16 +11,121 @@ const StyleImg = styled.img`
 width: 50px;
 height: 50px;
 `
+const StyledModal = Modal.styled`
+width: 500px;
+height: 500px;
+display: absolute;
+align-items: center;
+justify-content: center;
+background-color: white;
+
+opacity: ${(props) => props.opacity};
+transition: all 0.3s ease-in-out;
+`
 
 
-export default function RelatedAction () {
-  const [isRelated, setIsRelated] = useState(true)
+export default function RelatedAction ({product, overviewProduct}) {
+  const [isRelated, setIsRelated] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+  const [compareInfo, setCompareInfo] = useState([1,2,3]);
 
-  // const function showCompare() {
+  const clickHandle = (e) => {
+    console.log('element', product);
+    toggleModal()
+    comparisionData()
+  }
 
-  // }
+  const toggleModal = (e) => {
+    setOpacity(0);
+    setIsOpen(!isOpen);
+  }
+
+  const afterOpen = () => {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 100);
+  }
+
+  const beforeClose = () => {
+    return new Promise((resolve) => {
+      setOpacity(0);
+      setTimeout(resolve, 300);
+    });
+  }
+
+
+  const comparisionData = () => {
+    const charArray = new Set();
+    let compareData = [];
+    console.log('ProductA Features:', product.features)
+    console.log('ProductB Features:', overviewProduct.features)
+    product.features.forEach(entry => charArray.add(entry.feature));
+    overviewProduct.features.forEach(entry => charArray.add(entry.feature));
+    console.log('CombinedFeatures:', charArray)
+
+    for(var i =0; charArray.size > i; i++) {
+      let data = {};
+      let feature = Array.from(charArray)[i]
+      const productA = product.features;
+      const productB = overviewProduct.features;
+      if(productA.some(entry => entry.feature === feature) && productB.some(entry => entry.feature === feature)) {
+        console.log('Both Match')
+        data.feature = feature;
+        data.valueA = product.features.find(entry => entry.feature === feature).value;
+        data.valueB = overviewProduct.features.find(entry => entry.feature === feature).value;
+        compareData.push(data);
+      } else if (productA.some(entry => entry.feature === feature)) {
+        console.log('Product A match')
+        data.feature = feature;
+        data.valueA = product.features.find(entry => entry.feature === feature).value;
+        data.valueB = null;
+        compareData.push(data);
+      } else {
+        console.log('Prodcut B match')
+        data.feature = feature;
+        data.valueA = null;
+        data.valueB = overviewProduct.features.find(entry => entry.feature === feature).value;
+        compareData.push(data);
+      }
+    }
+    setCompareInfo(compareData);
+  }
 
   return (
-    <StyleImg src={isRelated? EmptyStar : CrossCircle}/>
+    <div>
+      <StyleImg onClick ={(e) => clickHandle(e)} src={isRelated? EmptyStar : CrossCircle}/>
+      <StyledModal
+        isOpen= {isOpen}
+        afterOpen={ afterOpen}
+        beforeClose = {beforeClose}
+        onBackgroundClick= {toggleModal}
+        onEscapeKeydown = {toggleModal}
+        opacity = {opacity}
+        backgroundProps = {{opacity}}
+      >
+        <div>comparing</div>
+        <table style ={{border: "1px solid black"}}>
+          <thead>
+          <tr>
+            <th>{product.name}</th>
+            <th ></th>
+            <th>{overviewProduct.name}</th>
+          </tr>
+          </thead>
+          <tbody>
+          {compareInfo.map((entry, index) => (
+            <tr key={index}>
+              <td>{entry.valueA}</td>
+              <td>{entry.feature}</td>
+              <td>{entry.valueB}</td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
+      </StyledModal>
+    </div>
+
+
   )
 }
