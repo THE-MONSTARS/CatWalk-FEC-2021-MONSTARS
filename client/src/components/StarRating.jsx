@@ -7,6 +7,11 @@ const YellowStar = (props) => (<img src={'../assets/icons8-star-24-yellow.png'}/
 
 const EmptyStar = (props) => (<img src={'../assets/icons8-star-24-empty.png'}/>)
 
+const SA = styled.a`
+  z-index: -1;
+  position: relative;
+`;
+
 const StarRating = (props) => {
   const [ stars, setStars ] = useState([]);
 
@@ -31,7 +36,7 @@ const StarRating = (props) => {
 
   return (
     stars?
-      <a /*onClick={props.filterReviews} */> {stars} </a> :
+      <SA> {stars} </SA> :
       <a> ... </a>
   );
 }

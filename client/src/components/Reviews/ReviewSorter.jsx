@@ -15,9 +15,9 @@ const Header = styled.div`
   margin-bottom: 5px;
 `;
 
-const Button = styled.div`
-  border: 0;
-  background-color: 0;
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
 `;
 
 export default function ReviewSorter (props) {
@@ -25,14 +25,26 @@ export default function ReviewSorter (props) {
   const [ currentStarRating, setCurrentStarRating ] = useState([])
 
   function filterReviews(e) {
-    // e.preventDefault();
+    e.preventDefault();
     console.log('clicked', e.target.value)
   }
 
   function starCategories() {
     let allStarRatings = [];
     for (let i = 5; i > 0; i--) {
-      allStarRatings.push(<Button key={i} value={i} onClick={ (e)=>filterReviews(e) } > <StarRating rating={i}/> </Button>)
+      allStarRatings.push(
+        <div key={i}>
+          <Button
+            // key={i}
+            value={i}
+            onClick={ (e)=>filterReviews(e) }
+          >
+          <StarRating
+            rating={i}
+          />
+          </Button>
+        </div>
+      )
     }
     setStarRatings(allStarRatings);
   }

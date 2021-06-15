@@ -14,16 +14,16 @@ const RVC = styled.div`
 `;
 
 export default function ReviewsContainer (props) {
-  const [ starRating, setStarRating ] = useState([])
+  const [ currentStarRating, setCurrentStarRating ] = useState([])
 
   return (
     <RVC>
       <ReviewSorter />
-        <ReviewList
-          id={props.id}
-          reviews={props.reviews}
-          isLoading={props.isLoading}
-        />
+      <ReviewList
+        id={props.id}
+        reviews={props.reviews}
+        isLoading={props.isLoading}
+      />
     </RVC>
   )
 }
