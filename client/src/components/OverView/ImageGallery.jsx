@@ -11,9 +11,8 @@ SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard])
 const GalleriesHolder = styled.div`
   display: flex;
   align-items: flex-start;
-  /* position: relative; */
 `
-
+// containers
 const ThumbsGalleryContainer = styled.div`
   width: 80px;
   height: 350px;
@@ -27,6 +26,7 @@ const MainGalleryContainer = styled.div`
   display: flex;
 `
 
+// Swiper instances
 const MainGallery = styled(Swiper)`
   height: 100%;
   .swiper-wrapper {
@@ -42,13 +42,8 @@ const MainGallery = styled(Swiper)`
   }
   .swiper-slide img {
 	  object-fit: cover;
-	  /* height: 100%; */
   }
-  /* &.swiper-button-disabled {
-    opacity: 0;
-  } */
 `
-
 const ThumbsGallery = styled(Swiper)`
   height: 100%;
   &.swiper-container-thumbs {
@@ -63,13 +58,6 @@ const ThumbsGallery = styled(Swiper)`
     align-items: center;
     height: 300px;
     width: 70px;
-  }
-
-  &.swiper-navigation-prev button {
-    height: 15px
-  }
-  .swiper-button-prev:after {
-    width: 15px;
   }
   .swiper-button-next {
     position: relative;
@@ -87,8 +75,6 @@ const ThumbsGallery = styled(Swiper)`
   }
   .swiper-slide-thumb-active {
     box-shadow: 0px 2.5px 10px #1d62bd;
-    /* -webkit-box-shadow: 0px 5px 40px -10px #6d97ce; */
-    /* -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57); */
     transition: all 0.2s ease 0s;
   }
   .swiper-slide img {
@@ -102,11 +88,7 @@ const ThumbsGallery = styled(Swiper)`
       box-shadow:  1px 1px 2px 0.3px #1d62bd;
     }
   }
-  /* .swiper-button-disabled {
-    opacity: 0;
-  } */
 `
-
 const ExpandedGallery = styled(Swiper)`
   height: 100%;
   width: 80vw;
@@ -124,47 +106,23 @@ const ExpandedGallery = styled(Swiper)`
   }
   .swiper-slide img {
 	  object-fit: cover;
-	  /* height: 100%; */
   }
   .swiper-button-disabled {
     opacity: 0;
   }
-
-  &.appear-enter {
-    opacity: 0;
-  }
-  &.appear-enter-active {
-    opacity: 0.5;
-    transition: opacity 0.4s;
-  }
-  &.appear-enter-done {
-    opacity: 1;
-  }
-
-  &.appear-exit {
-    opacity: 1;
-  }
-
-  &.appear-exit-active {
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-
   .ReactModal__Overlay {
     opacity: 0;
     transition: opacity 2000ms ease-in-out;
   }
-
   .ReactModal__Overlay--after-open{
     opacity: 1;
   }
-
   .ReactModal__Overlay--before-close{
     opacity: 0;
   }
-
 `
 
+// Nav buttons
 const CleanButton = styled.button`
   background: none;
 	color: inherit;
@@ -174,26 +132,25 @@ const CleanButton = styled.button`
 	cursor: pointer;
 	outline: inherit;
 `
-
-const ThumbsPreviousButton = styled(CleanButton)`
+// Thumbs Nav
+const ThumbsNav = styled(CleanButton)`
   &.swiper-button-disabled {
     opacity: 0;
   }
-  transform: rotate(90deg);
   height: 20px;
+`
+const ThumbsPreviousButton = styled(ThumbsNav)`
+  transform: rotate(90deg);
   padding-top: 2px;
 `
-const ThumbsNextButton = styled(CleanButton)`
-  &.swiper-button-disabled {
-    opacity: 0;
-  }
+const ThumbsNextButton = styled(ThumbsNav)`
   transform: rotate(-90deg);
-  height: 20px;
 `
 
-const MainPreviousButton = styled(CleanButton)`
+
+// Main Nav
+const MainNav = styled(CleanButton)`
   position: relative;
-  left: 50px;
   z-index: 10;
   &.swiper-button-disabled {
     opacity: 0;
@@ -202,16 +159,11 @@ const MainPreviousButton = styled(CleanButton)`
     width: 40px;
   }
 `
-const MainNextButton = styled(CleanButton)`
-  position: relative;
+const MainPreviousButton = styled(MainNav)`
+  left: 50px;
+`
+const MainNextButton = styled(MainNav)`
   right: 50px;
-  z-index: 10;
-  &.swiper-button-disabled {
-    opacity: 0;
-  }
-  img {
-    width: 40px;
-  }
 `
 
 

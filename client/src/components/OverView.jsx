@@ -9,11 +9,7 @@ import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 
 
 const OverViewContainer = styled.div`
-
-  /* overflow: hidden; */
   display: flex;
-  /* flex-direction: row; */
-  /* min-width: 600px; */
   max-width: 80%;
   height: 450px;
 `
