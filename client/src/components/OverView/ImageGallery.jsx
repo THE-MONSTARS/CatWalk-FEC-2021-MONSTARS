@@ -10,6 +10,7 @@ SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard])
 
 const GalleriesHolder = styled.div`
   display: flex;
+  align-items: flex-start;
   /* position: relative; */
 `
 
@@ -19,6 +20,11 @@ const ThumbsGalleryContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+`
+
+const MainGalleryContainer = styled.div`
+  height: 100%;
+  display: flex;
 `
 
 const MainGallery = styled(Swiper)`
@@ -38,9 +44,9 @@ const MainGallery = styled(Swiper)`
 	  object-fit: cover;
 	  /* height: 100%; */
   }
-  .swiper-button-disabled {
+  /* &.swiper-button-disabled {
     opacity: 0;
-  }
+  } */
 `
 
 const ThumbsGallery = styled(Swiper)`
@@ -96,9 +102,9 @@ const ThumbsGallery = styled(Swiper)`
       box-shadow:  1px 1px 2px 0.3px #1d62bd;
     }
   }
-  .swiper-button-disabled {
+  /* .swiper-button-disabled {
     opacity: 0;
-  }
+  } */
 `
 
 const ExpandedGallery = styled(Swiper)`
@@ -185,6 +191,29 @@ const ThumbsNextButton = styled(CleanButton)`
   height: 20px;
 `
 
+const MainPreviousButton = styled(CleanButton)`
+  position: relative;
+  left: 50px;
+  z-index: 10;
+  &.swiper-button-disabled {
+    opacity: 0;
+  }
+  img {
+    width: 40px;
+  }
+`
+const MainNextButton = styled(CleanButton)`
+  position: relative;
+  right: 50px;
+  z-index: 10;
+  &.swiper-button-disabled {
+    opacity: 0;
+  }
+  img {
+    width: 40px;
+  }
+`
+
 
 const ProductImage = styled.img`
   position: absolute;
@@ -220,7 +249,6 @@ const ImageGallery = ({currentStyle}) => {
   return (
     <GalleriesHolder>
       <ThumbsGalleryContainer>
-
         <ThumbsPreviousButton type="button" className="swiper-navigation-prev">
           <img src ="/assets/left-arrow.png"/>
         </ThumbsPreviousButton>
@@ -242,25 +270,33 @@ const ImageGallery = ({currentStyle}) => {
         <ThumbsNextButton type="button" className="swiper-navigation-next">
           <img src ="/assets/left-arrow.png" />
         </ThumbsNextButton>
-
       </ThumbsGalleryContainer>
 
-      <MainGallery
-        id="main"
-        thumbs={ {swiper: thumbsSwiper} }
-        slideToClickedSlide={true}
-        onClick={() => setIsOpen(true)}
-        keyboard
-        navigation
-        pagination
-      >
-        {slides}
-      </MainGallery>
-    <CSSTransition
-      in={isOpen}
-      timeout={400}
-      classNames='fade'
-    >
+      <MainGalleryContainer>
+        <MainPreviousButton type="button" className="main-navigation-prev">
+          <img src ="/assets/main-left-nav.png" />
+        </MainPreviousButton>
+
+        <MainGallery
+          id="main"
+          thumbs={ {swiper: thumbsSwiper} }
+          slideToClickedSlide={true}
+          onClick={() => setIsOpen(true)}
+          keyboard
+          navigation={{
+            nextEl: ".main-navigation-next",
+            prevEl: ".main-navigation-prev"
+          }}
+          pagination
+        >
+          {slides}
+        </MainGallery>
+
+        <MainNextButton type="button" className="main-navigation-next">
+          <img src ="/assets/main-right-nav.png" />
+        </MainNextButton>
+      </MainGalleryContainer>
+
       <Modal
         isOpen={isOpen}
         onEscapeKeydown={() => setIsOpen(false)}
@@ -274,7 +310,7 @@ const ImageGallery = ({currentStyle}) => {
             {slides}
         </ExpandedGallery>
       </Modal>
-    </CSSTransition>
+
 
     </GalleriesHolder>
   )
