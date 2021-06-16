@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { CSSTransition } from 'react-transition-group';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Thumbs, Keyboard, Ally } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Thumbs, Keyboard, Controller } from 'swiper';
 import 'swiper/swiper-bundle.css';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
-SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard])
+SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard, Controller])
 
 const GalleriesHolder = styled.div`
   display: flex;
@@ -178,8 +178,11 @@ const ProductImage = styled.img`
 
 const ImageGallery = ({currentStyle}) => {
   const [ thumbsSwiper, setThumbsSwiper ] = useState(null);
+  const [ mainSwiper, setMainSwiper ] = useState(null);
+  const [ expandedSwiper, setExpandedSwiper ] = useState(null);
   const [ expanded, setExpanded ] = useState(false);
-  const [isOpen, setIsOpen ] = useState(false);
+  const [ isOpen, setIsOpen ] = useState(false);
+  const [ currentSlide, setCurrentSlide ] = useState(0);
   const sizeRef = useRef(null)
 
   const slides = currentStyle.photos.map((photo, idx) => (
@@ -197,6 +200,7 @@ const ImageGallery = ({currentStyle}) => {
   const toggleExpandedView = () => {
     setIsOpen(prev => !prev);
   }
+
 
   return (
     <GalleriesHolder>
@@ -231,9 +235,11 @@ const ImageGallery = ({currentStyle}) => {
 
         <MainGallery
           id="main"
+          onSwiper={setMainSwiper}
           thumbs={ {swiper: thumbsSwiper} }
           slideToClickedSlide={true}
           onClick={() => setIsOpen(true)}
+          onActiveIndexChange={() => setCurrentSlide(mainSwiper.activeIndex)}
           keyboard
           navigation={{
             nextEl: ".main-navigation-next",
@@ -251,14 +257,18 @@ const ImageGallery = ({currentStyle}) => {
 
       <Modal
         isOpen={isOpen}
+        onSwiper={setExpandedSwiper}
         onEscapeKeydown={() => setIsOpen(false)}
         closeTimeoutMS={500}
-        >
+      >
         <ExpandedGallery
           id="expanded"
           ref={sizeRef}
+          controller={{ control: mainSwiper }}
           navigation
-          >
+          initialSlide={currentSlide}
+
+        >
             {slides}
         </ExpandedGallery>
       </Modal>
