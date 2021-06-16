@@ -8,12 +8,13 @@ const HeaderDiv = styled.div`
   color: blue;
   font-weight: bold;
   font-size: large;
-  font-family: Helvetica, sans-serif;
+  font-family: 'Bebas Neue';
+  letter-spacing: 1px;
   margin: none;
 `;
 
 const TextDiv = styled.div`
-  font-family: Helvetica, sans-serif;
+  font-family: 'Roboto';
   border-width: 10px;
   margin: 3px;
 `;
@@ -28,7 +29,8 @@ const ContainerDiv = styled.div`
 `;
 
 const StarUserDate = styled.div`
-font-family: Helvetica, sans-serif;
+font-family: 'Roboto';
+font-weight: bold;
 font-size: medium;
 color: gray;
   display: flex;
@@ -39,12 +41,14 @@ color: gray;
 const Review = (props) => {
   return (
     <ContainerDiv>
-      <StarUserDate>  <StarRating rating={props.rating}/>
-      {props.reviewer_name} on {moment(props.date).calendar()}
+      <StarUserDate>
+        <StarRating rating={props.rating}/>
+        {props.reviewer_name} on {moment(props.date).calendar()}
       </StarUserDate>
         <HeaderDiv> {props.summary} </HeaderDiv>
         <TextDiv> {props.body} </TextDiv>
         <ReviewThumbs
+          name={`Review photos`}
           photos={props.photos}
           selectPhoto={props.selectPhoto}
           selectedPhoto={props.selectedPhoto}
