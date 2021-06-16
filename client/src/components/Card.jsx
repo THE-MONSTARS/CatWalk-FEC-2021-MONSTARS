@@ -4,13 +4,19 @@ import StarRating from './StarRating.jsx';
 import RelatedAction from './RelatedAction.jsx';
 
 const StyleCard = styled.div`
-display: flex;
-flex-direction: column;
+/* display: flex;
+flex-direction: column; */
 margin: 10px;
 width: 200px;
+height: 400px;
 border: 1px solid;
 padding: 10px;
 `
+
+const Image = styled.img`
+  max-width: 180px;
+  max-height: 380px;
+`;
 
 export default function Card ({product, setCurrentProduct, overviewProduct}) {
 
@@ -20,7 +26,7 @@ export default function Card ({product, setCurrentProduct, overviewProduct}) {
   return (
     <StyleCard id={product.id} >
       <RelatedAction product={product} overviewProduct={overviewProduct}/>
-      <img src={product.image} onClick={() => setCurrentProduct(product)}></img>
+      <Image src={product.image} onClick={() => setCurrentProduct(product)}></Image>
       <h4>{product.category}</h4>
       <h2>{product.name}</h2>
       <h3>{product.salePrice ? product.sale_price : product.original_price}</h3>

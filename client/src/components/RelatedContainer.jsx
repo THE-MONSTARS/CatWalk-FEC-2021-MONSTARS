@@ -4,6 +4,7 @@ import Card from './Card.jsx';
 import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import styled from 'styled-components';
 
 const responsive={
   superLargeDesktop: {
@@ -12,15 +13,15 @@ const responsive={
     items: 5
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1400 },
+    breakpoint: { max: 1600, min: 1400 },
     items: 3
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
+    breakpoint: { max: 1024, min: 950 },
     items: 2
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 949, min: 0 },
     items: 1
   }
 };
@@ -30,7 +31,6 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
   const [productsInfo, setProductsInfo]=useState([])
   const [currentId, setCurrentId]=useState()
   const dummyId=16059;
-
 
     function getRelatedProducts(productId) {
       const fetchedRelatedProducts= axios.get(`/products/${productId}/related`);
@@ -52,7 +52,6 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
       average=total/ratingsTotal;
       return average.toFixed(1)
     }
-
 
   const startup=async () => {
     let relatedProductIds=await getRelatedProducts(id)
@@ -79,33 +78,26 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
 
       currentProductData.rating= productRating
 
-
       relatedProducts.push(currentProductData);
     }
     setProductsInfo(relatedProducts)
     setCurrentId(id)
   }
 
-
   useEffect(() => {
     startup()
   }, [id])
 
-
-
   return (
     //map with card component. Inline Style Temp until Css file created
-    <div style={{width: '50%'}}>
-    <Carousel responsive={responsive} centerMode= {true} >
-      {productsInfo.map((entry, index) => (
-        <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct={currentProduct}/>
-      ))}
-
-    </Carousel>
-
+    <div style={{width: '50%', margin: '10px'}}>
+      <Carousel responsive={responsive} centerMode= {false} >
+        {productsInfo.map((entry, index) => (
+          <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct={currentProduct}/>
+        ))}
+      </Carousel>
     </div>
   )
-
 }
 
 
