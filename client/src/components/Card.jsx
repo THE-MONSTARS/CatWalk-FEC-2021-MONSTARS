@@ -3,13 +3,20 @@ import styled from 'styled-components';
 import StarRating from './StarRating.jsx';
 import RelatedAction from './RelatedAction.jsx';
 
-const StyleCard = styled.div`
+const StyleCard=styled.div`
 display: flex;
+position: relative;
 flex-direction: column;
 margin: 10px;
-width: 200px;
+width: 250px;
+height: 350px;
 border: 1px solid;
 padding: 10px;
+`
+
+const StyleName=styled.h2`
+font-family: 'Roboto-Bold';
+padding: 5px 0;
 `
 
 export default function Card ({product, setCurrentProduct, overviewProduct}) {
@@ -19,12 +26,16 @@ export default function Card ({product, setCurrentProduct, overviewProduct}) {
 
   return (
     <StyleCard id={product.id} >
+      <div style={{width: "100%", height: "75%"}}>
       <RelatedAction product={product} overviewProduct={overviewProduct}/>
-      <img src={product.image} onClick={() => setCurrentProduct(product)}></img>
+      <img style={{objectFit: "cover", width: "250px", height: "262.5px"}} src={product.image} onClick={() => setCurrentProduct(product)}></img>
+      </div>
+      <div>
       <h4>{product.category}</h4>
-      <h2>{product.name}</h2>
+      <StyleName>{product.name}</StyleName>
       <h3>{product.salePrice ? product.sale_price : product.original_price}</h3>
       <StarRating rating={product.rating}/>
+      </div>
     </StyleCard>
   )
 

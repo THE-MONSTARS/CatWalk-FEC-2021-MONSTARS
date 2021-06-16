@@ -11,6 +11,7 @@ import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
   transition: all 0.3s ease-in-out;
+  z-index: 2000;
 `;
 
 const App = () => {
