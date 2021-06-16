@@ -6,22 +6,9 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 const responsive={
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
   desktop: {
-    breakpoint: { max: 3000, min: 1400 },
+    breakpoint: { max: 3000, min: 1100 },
     items: 3
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
   }
 };
 
@@ -75,7 +62,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
 
       currentProductData.sale_price=defaultStyle.sale_price;
       currentProductData.original_price=defaultStyle.original_price;
-      currentProductData.image=defaultStyle.photos[0].url
+      currentProductData.image=defaultStyle.photos[0].thumbnail_url
 
       currentProductData.rating= productRating
 
@@ -95,8 +82,9 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
 
   return (
     //map with card component. Inline Style Temp until Css file created
-    <div style={{width: '50%'}}>
-    <Carousel responsive={responsive} centerMode= {true} >
+    <div style={{width: '1200px', minHeight: '400px'}}>
+    <span style={{padding:"10px"}}>RELATED</span>
+    <Carousel responsive={responsive} centerMode= {true}>
       {productsInfo.map((entry, index) => (
         <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct={currentProduct}/>
       ))}

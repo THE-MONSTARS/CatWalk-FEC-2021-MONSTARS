@@ -8,17 +8,17 @@ const EmptyStar='../assets/icons8-star-24-empty.png'
 const CrossCircle='../assets/outline_highlight_off_black_24dp.png'
 
 const StyleImg=styled.img`
-width: 50px;
-height: 50px;
+width: 24px;
+height: 24px;
 `
 const StyledModal=Modal.styled`
 width: 500px;
 height: 500px;
-display: absolute;
+position: absolute;
 align-items: center;
 justify-content: center;
 background-color: white;
-
+z-index: 2000;
 opacity: ${(props) => props.opacity};
 transition: all 0.3s ease-in-out;
 `
@@ -87,7 +87,7 @@ export default function RelatedAction ({product, overviewProduct}) {
   }
 
   return (
-    <div>
+    <div  style={{zIndex: "10", position: "absolute"}} >
       <StyleImg onClick={(e) => clickHandle(e)} src= {isRelated? EmptyStar : CrossCircle}/>
       <StyledModal
         isOpen={isOpen}
@@ -99,15 +99,15 @@ export default function RelatedAction ({product, overviewProduct}) {
         backgroundProps={{opacity}}
       >
         <div style={{padding: "8px",textAlign: "left"}}>COMPARING</div>
-        <table style={{border: "1px solid black", width: "100%",tableLayout: "fixed"}}>
+        <table style={{width: "100%",tableLayout: "fixed"}}>
           <thead>
           <tr >
-            <th style={{padding: "5px 8px 15px", textAlign: "left"}}>{product.name}</th>
+            <th style={{padding: "5px 8px 15px", textAlign: "left", fontFamily: 'Roboto-Bold'}}>{product.name}</th>
             <th style={{textAlign: "center"}}></th>
-            <th style={{padding: "5px 8px 15px", textAlign: "right"}}>{overviewProduct.name}</th>
+            <th style={{padding: "5px 8px 15px", textAlign: "right", fontFamily: 'Roboto-Bold'}}>{overviewProduct.name}</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody style={{overflowY: "scroll", maxHeight: "430px", overflow: "auto"}}>
           {compareInfo.map((entry, index) => (
             <tr key={index}>
               <td style={{padding: "5px",textAlign: "left"}}>{entry.valueA === true ? "√" : entry.valueA}</td>
