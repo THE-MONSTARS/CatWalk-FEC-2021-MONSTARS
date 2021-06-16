@@ -5,11 +5,12 @@ import styled from 'styled-components';
 
 const QuantityDropDownContainer = styled.div`
   font-family: 'Roboto';
+  position: relative;
   width: 50px;
 `
 
 const QuantityListContainer = styled(ListContainer)`
-  width: 48px;
+  width: 98%;
 `
 
 const QuantityDropDownHeader = styled(DropDownHeader)`

@@ -88,7 +88,7 @@ const ThumbsGallery = styled(Swiper)`
   }
   .swiper-slide img {
     padding: 0;
-    margin-left: -1px;
+    margin-left: -2px;
     border: 1px solid #343a40;
 	  object-fit: cover;
 	  width: 100%;
