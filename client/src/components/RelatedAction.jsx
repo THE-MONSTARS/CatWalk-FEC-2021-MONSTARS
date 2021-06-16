@@ -14,11 +14,11 @@ height: 24px;
 const StyledModal=Modal.styled`
 width: 500px;
 height: 500px;
-position:absolute;
+position: absolute;
 align-items: center;
 justify-content: center;
 background-color: white;
-z-index:2000;
+z-index: 2000;
 opacity: ${(props) => props.opacity};
 transition: all 0.3s ease-in-out;
 `
@@ -87,7 +87,7 @@ export default function RelatedAction ({product, overviewProduct}) {
   }
 
   return (
-    <div  style={{zIndex: "10", position:"absolute"}} >
+    <div  style={{zIndex: "10", position: "absolute"}} >
       <StyleImg onClick={(e) => clickHandle(e)} src= {isRelated? EmptyStar : CrossCircle}/>
       <StyledModal
         isOpen={isOpen}
@@ -107,7 +107,7 @@ export default function RelatedAction ({product, overviewProduct}) {
             <th style={{padding: "5px 8px 15px", textAlign: "right", fontFamily: 'Roboto-Bold'}}>{overviewProduct.name}</th>
           </tr>
           </thead>
-          <tbody style={{overflowY:"scroll", maxHeight:"430px", overflow:"auto"}}>
+          <tbody style={{overflowY: "scroll", maxHeight: "430px", overflow: "auto"}}>
           {compareInfo.map((entry, index) => (
             <tr key={index}>
               <td style={{padding: "5px",textAlign: "left"}}>{entry.valueA === true ? "√" : entry.valueA}</td>
