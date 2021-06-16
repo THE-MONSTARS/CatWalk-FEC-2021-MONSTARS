@@ -6,12 +6,13 @@ import styled from 'styled-components';
 const SizeDropDownContainer = styled.div`
   font-family: 'Roboto';
   width: 140px;
+  position: relative;
 `
 
 
 const SizeListContainer = styled(ListContainer)`
-  width: 139px;
-  /* max-width: 140px; */
+  width: 99%;
+  max-width: 140px;
 `
 
 const SizeDropDownHeader = styled(DropDownHeader)`

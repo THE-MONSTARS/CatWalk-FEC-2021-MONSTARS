@@ -6,23 +6,21 @@ import 'swiper/swiper-bundle.css';
 
 SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard])
 
-const OverViewContainer = styled.div`
-  display: flex;
-
-  /* background: #DDDDDD; */
-`
-
 const GalleriesHolder = styled.div`
-  position: relative;
+  display: flex;
+  /* position: relative; */
 `
 
 const ThumbsGalleryContainer = styled.div`
   width: 80px;
-  height: 200px;
+  height: 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 `
 
 const MainGallery = styled(Swiper)`
-height: 100%;
+  height: 100%;
   .swiper-wrapper {
     width: 500px;
     display: flex;
@@ -32,10 +30,11 @@ height: 100%;
     display: flex;
     justify-content: center;
     overflow: hidden;
+    background: #EEEEEE;
   }
   .swiper-slide img {
-	  object-fit: contain;
-	  height: 100%;
+	  object-fit: cover;
+	  /* height: 100%; */
   }
   .swiper-button-disabled {
     opacity: 0;
@@ -43,11 +42,13 @@ height: 100%;
 `
 
 const ThumbsGallery = styled(Swiper)`
-  position: absolute;
-  top: 10px;
-  /* left: 5px; */
-  .swiper-container-thumbs {
-    width: 100px;
+  /* position: absolute; */
+  height: 100%;
+  &.swiper-container-thumbs {
+    width: 100%;
+    margin-right: 20px;
+    display: flex;
+    justify-content: flex-end;
   }
   .swiper-wrapper {
     display: flex;
@@ -60,7 +61,7 @@ const ThumbsGallery = styled(Swiper)`
   .swiper-button-prev {
     position: relative;
     top: 10px;
-    left: 21px;
+    left: 54px;
     transform: rotate(90deg);
   }
   .swiper-button-prev:after {
@@ -68,8 +69,8 @@ const ThumbsGallery = styled(Swiper)`
   }
   .swiper-button-next {
     position: relative;
-    top: 300px;
-    left: 21px;
+    top: 337px;
+    left: 36px;
     transform: rotate(90deg);
   }
   .swiper-slide {
@@ -86,6 +87,8 @@ const ThumbsGallery = styled(Swiper)`
     transition: all 0.2s ease 0s;
   }
   .swiper-slide img {
+    padding: 0;
+    margin-left: -2px;
     border: 1px solid #343a40;
 	  object-fit: cover;
 	  width: 100%;
@@ -126,7 +129,7 @@ const ImageGallery = ({currentStyle}) => {
 
 
   return (
-    <OverViewContainer>
+    <GalleriesHolder>
       <ThumbsGalleryContainer>
         <ThumbsGallery
           id="thumbs"
@@ -151,7 +154,7 @@ const ImageGallery = ({currentStyle}) => {
         {slides}
       </MainGallery>
 
-    </OverViewContainer>
+    </GalleriesHolder>
   )
 }
 

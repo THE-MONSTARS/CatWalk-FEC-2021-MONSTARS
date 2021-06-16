@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import StarRating from '../StarRating.jsx';
 import styled from 'styled-components';
 
 const ProductInfoContainer = styled.div`
+  width: 100%;
+`
+
+const RatingsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const GoToReviews = styled.p`
+  font-family: 'Roboto';
+  font-size: 10px;
+  margin-left: 5px;
+  text-decoration: underline;
+  &:hover {
+    color: blue;
+    cursor: pointer;
+  }
 `
 
 const ProductCategory = styled.p`
@@ -35,19 +52,32 @@ const StruckThroughPrice = styled.span`
   text-decoration: line-through;
 `
 
-const ProductInformation = ({currentProduct, currentStyle, reviews}) => {
+const ProductInformation = ({currentProduct, currentStyle, reviews, handleScrollToRef}) => {
+  const [ averageRating, setAverageRating ] = useState(3)
   const productName = currentProduct.name;
   const productCategory = currentProduct.category;
   const salePrice = currentStyle.sale_price;
   const originalPrice = currentStyle.original_price;
 
-  const averageRating = reviews.reduce((acc, review) => {
-    return acc + review.rating
-  }, 0) / reviews.length;
+  const getAverageRating = () => {
+    return reviews.reduce((acc, review) => {
+      return acc + review.rating
+    }, 0) / reviews.length;
+  }
+
+  useEffect(() => {
+    let average = getAverageRating();
+    console.log(average);
+    setAverageRating(average);
+  }, [reviews])
 
   return (
     <ProductInfoContainer>
-      <StarRating rating={averageRating}/>
+      <RatingsContainer>
+        <StarRating rating={averageRating}/>
+        <GoToReviews onClick={() => handleScrollToRef()}>Read all reviews</GoToReviews>
+      </RatingsContainer>
+
       <ProductCategory>{productCategory}</ProductCategory>
       <ProductName>{productName}</ProductName>
       <Price sale={salePrice}>{salePrice ? salePrice : originalPrice}</Price>

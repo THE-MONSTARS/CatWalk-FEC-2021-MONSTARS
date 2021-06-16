@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import Header from './Header.jsx';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
@@ -14,12 +15,20 @@ const FadingBackground = styled(BaseModalBackground)`
   z-index: 2000;
 `;
 
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ currentProduct, setCurrentProduct ] = useState({ id: 16056 })
   const [ styles, setStyles ] = useState([])
   const [ currentStyle, setCurrentStyle ] = useState({})
   const [ reviews, setReviews ] = useState([])
+
+  const reviewsRef = useRef(null);
 
   // product update on startup
   const fetchProductAndId = async () => {
@@ -74,6 +83,10 @@ const App = () => {
     return fetchedReviews.data.results;
   }
 
+  const handleScrollToRef = () => {
+    reviewsRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
+
   useEffect(() => {
     fetchProductAndId();
   }, []);
@@ -88,7 +101,8 @@ const App = () => {
     isLoading
     ? <div>Loading...</div>
     : (
-      <div>
+    <AppContainer>
+      <Header/>
       <ModalProvider backgroundComponent={FadingBackground}>
       <OverView
         id={id}
@@ -97,6 +111,7 @@ const App = () => {
         currentStyle={currentStyle}
         reviews={reviews}
         setCurrentStyle={setCurrentStyle}
+        handleScrollToRef={handleScrollToRef}
       />
       <RelatedContainer
         id={id}
@@ -109,9 +124,12 @@ const App = () => {
         id={id}
         reviews={reviews}
         isLoading={isLoading}
+        reference={reviewsRef}
       />
       </ModalProvider>
-    </div>
+    </AppContainer>
+
+      
     )
   );
 
