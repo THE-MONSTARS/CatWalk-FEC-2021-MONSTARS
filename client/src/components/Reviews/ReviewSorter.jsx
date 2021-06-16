@@ -32,10 +32,9 @@ export default function ReviewSorter (props) {
       allStarRatings.push(
         <div key={i}>
           <Button
-            // key={i}
             value={i}
             onClick={ props.setStarRatingFilter }
-            // onClick={ (e)=> props.filterReviews(e) }
+            name={`click to view only ${i}-star reviews`}
 
           >
           <StarRating
