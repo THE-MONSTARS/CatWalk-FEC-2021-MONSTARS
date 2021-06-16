@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import StarRating from '../StarRating.jsx';
 import styled from 'styled-components';
 
@@ -53,14 +53,23 @@ const StruckThroughPrice = styled.span`
 `
 
 const ProductInformation = ({currentProduct, currentStyle, reviews, handleScrollToRef}) => {
+  const [ averageRating, setAverageRating ] = useState(3)
   const productName = currentProduct.name;
   const productCategory = currentProduct.category;
   const salePrice = currentStyle.sale_price;
   const originalPrice = currentStyle.original_price;
 
-  const averageRating = reviews.reduce((acc, review) => {
-    return acc + review.rating
-  }, 0) / reviews.length;
+  const getAverageRating = () => {
+    return reviews.reduce((acc, review) => {
+      return acc + review.rating
+    }, 0) / reviews.length;
+  }
+
+  useEffect(() => {
+    let average = getAverageRating();
+    console.log(average);
+    setAverageRating(average);
+  }, [reviews])
 
   return (
     <ProductInfoContainer>

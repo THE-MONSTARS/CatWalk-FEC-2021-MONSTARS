@@ -14,7 +14,7 @@ const OverViewContainer = styled.div`
   display: flex;
   /* flex-direction: row; */
   /* min-width: 600px; */
-  max-width: 900px;
+  max-width: 80%;
   height: 450px;
 `
 

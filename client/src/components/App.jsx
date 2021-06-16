@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import Header from './Header.jsx';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
@@ -12,6 +13,12 @@ const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
   transition: all 0.3s ease-in-out;
 `;
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const App = () => {
   const [ isLoading, setIsLoading ] = useState(true);
@@ -93,7 +100,8 @@ const App = () => {
     isLoading
     ? <div>Loading...</div>
     : (
-      <div>
+    <AppContainer>
+      <Header/>
       <ModalProvider backgroundComponent={FadingBackground}>
       <OverView
         id={id}
@@ -118,7 +126,9 @@ const App = () => {
         reference={reviewsRef}
       />
       </ModalProvider>
-    </div>
+    </AppContainer>
+
+      
     )
   );
 
