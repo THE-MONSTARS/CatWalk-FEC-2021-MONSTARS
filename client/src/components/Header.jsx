@@ -29,7 +29,9 @@ const Header = () => {
         Monstars Inc.
       </div>
       <div>
-        <UselessSearchBar type="search"></UselessSearchBar>
+        <label htmlFor="search"> Search: </label>
+        <UselessSearchBar type="search" id="search"></UselessSearchBar>
+
       </div>
     </HeaderContainer>
   )
