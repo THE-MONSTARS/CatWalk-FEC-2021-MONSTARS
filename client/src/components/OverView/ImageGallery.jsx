@@ -11,6 +11,7 @@ SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard, Controller])
 const GalleriesHolder = styled.div`
   display: flex;
   align-items: flex-start;
+  height: 100%;
 `
 // containers
 const ThumbsGalleryContainer = styled.div`
@@ -41,7 +42,12 @@ const MainGallery = styled(Swiper)`
     background: #EEEEEE;
   }
   .swiper-slide img {
-	  object-fit: cover;
+	  object-fit: contain;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  &:hover {
+    cursor: zoom-in;
   }
 `
 const ThumbsGallery = styled(Swiper)`
@@ -91,21 +97,27 @@ const ThumbsGallery = styled(Swiper)`
 `
 const ExpandedGallery = styled(Swiper)`
   height: 100%;
-  width: 80vw;
+
   position: absolute;
   .swiper-wrapper {
-    width: 500px;
     display: flex;
+    flex-shrink: 1;
+    max-width: 1000px;
     transition: all 0.2s;
   }
   .swiper-slide {
     display: flex;
+    flex-grow: 1;
+    back
+    flex-basis: 100%;
     justify-content: center;
     overflow: hidden;
-    background: #EEEEEE;
+    background: none;
   }
   .swiper-slide img {
-	  object-fit: cover;
+	  object-fit: contain;
+    flex-grow: 1;
+    flex-shrink: 1;
   }
   .swiper-button-disabled {
     opacity: 0;
@@ -166,24 +178,35 @@ const MainNextButton = styled(MainNav)`
   right: 50px;
 `
 
-
 const ProductImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   object-fit: cover;
+`
 
+const ExpandedModal = Modal.styled`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: ${(props) => props.opacity};
+  transition: all 0.2s ease;
 `
 
 const ImageGallery = ({currentStyle}) => {
   const [ thumbsSwiper, setThumbsSwiper ] = useState(null);
   const [ mainSwiper, setMainSwiper ] = useState(null);
-  const [ expandedSwiper, setExpandedSwiper ] = useState(null);
   const [ expanded, setExpanded ] = useState(false);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ currentSlide, setCurrentSlide ] = useState(0);
+  const [ modalOpacity, setModalOpacity ] = useState(0);
   const sizeRef = useRef(null)
+
+  // variables for expanded modal classnames
+  const className = 'expanded';
+  const contentClassName = `${className}__content`;
+  const overlayClassName = `${className}__overlay`;
 
   const slides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
@@ -255,11 +278,14 @@ const ImageGallery = ({currentStyle}) => {
         </MainNextButton>
       </MainGalleryContainer>
 
-      <Modal
+      <ExpandedModal
         isOpen={isOpen}
-        onSwiper={setExpandedSwiper}
         onEscapeKeydown={() => setIsOpen(false)}
         closeTimeoutMS={500}
+        onBackgroundClick={() => setIsOpen(false)}
+        afterOpen={() => setModalOpacity(1)}
+        afterClose={() => setModalOpacity(0)}
+        opacity={modalOpacity}
       >
         <ExpandedGallery
           id="expanded"
@@ -267,11 +293,11 @@ const ImageGallery = ({currentStyle}) => {
           controller={{ control: mainSwiper }}
           navigation
           initialSlide={currentSlide}
-
+          keyboard
         >
             {slides}
         </ExpandedGallery>
-      </Modal>
+      </ExpandedModal>
 
 
     </GalleriesHolder>
