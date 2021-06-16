@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import moment from 'moment'
 import StarRating from '../StarRating.jsx'
+import ReviewThumbs from './ReviewThumbs.jsx'
 
 const HeaderDiv = styled.div`
   color: blue;
@@ -43,6 +44,11 @@ const Review = (props) => {
       </StarUserDate>
         <HeaderDiv> {props.summary} </HeaderDiv>
         <TextDiv> {props.body} </TextDiv>
+        <ReviewThumbs
+          photos={props.photos}
+          selectPhoto={props.selectPhoto}
+          selectedPhoto={props.selectedPhoto}
+        />
     </ContainerDiv>
   )
 }
