@@ -44,7 +44,6 @@ const Helpful = styled.div`
 
 const TextLink = styled.a`
   text-decoration: underline;
-
 `;
 
 export default function Review (props) {
@@ -76,6 +75,11 @@ export default function Review (props) {
       </StarUserDate>
         <HeaderDiv> {props.summary} </HeaderDiv>
         <TextDiv> {props.body} </TextDiv>
+        <br></br>
+        <TextDiv>
+          {props.recommend && <img src={'../assets/icons8-checkmark-24.png'} /> }
+          {props.recommend && "yes, I recommend this product" }
+        </TextDiv>
         <ReviewThumbs
           name={`Review photos`}
           photos={props.photos}

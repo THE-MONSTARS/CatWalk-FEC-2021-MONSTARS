@@ -33,6 +33,7 @@ function ReviewList(props) {
               selectPhoto={selectPhoto}
               selectedPhoto={selectedPhoto}
               helpfulness={review.helpfulness}
+              recommend={review.recommend}
             />
           ))
         }
