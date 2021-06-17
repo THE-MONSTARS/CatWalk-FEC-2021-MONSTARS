@@ -14,19 +14,19 @@ const responsive={
 
 export default function RelatedContainer ({id, getOneProduct, getStyles, setCurrentProduct, currentProduct}) {
 
-  const [productsInfo, setProductsInfo]=useState([])
-  const [currentId, setCurrentId]=useState()
-  const dummyId=16059;
+  const [productsInfo, setProductsInfo] = useState([])
+  const [currentId, setCurrentId] = useState()
+  const dummyId = 16059;
 
 
     function getRelatedProducts(productId) {
-      const fetchedRelatedProducts= axios.get(`/products/${productId}/related`);
+      const fetchedRelatedProducts = axios.get(`/products/${productId}/related`);
       return fetchedRelatedProducts;
   }
 
     async function getAverageRating(productId) {
-      const fetchedReviewMetaData=await axios.get(`/reviews/${productId}/meta`)
-      const ratings=fetchedReviewMetaData.data.ratings
+      const fetchedReviewMetaData = await axios.get(`/reviews/${productId}/meta`)
+      const ratings = fetchedReviewMetaData.data.ratings
 
       let total=0;
       let ratingsTotal=0;
@@ -42,32 +42,18 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
 
 
   const startup=async () => {
-    let relatedProductIds=await getRelatedProducts(id)
-    const relatedProducts=[];
+    let relatedProductIds = await getRelatedProducts(id)
+    const relatedProducts = [];
 
     for (let productId of relatedProductIds.data) {
 
       const promises=[getOneProduct(productId), getStyles(productId), getAverageRating(productId)]
 
-      let [ productDetail, productStyles, productRating ]=await Promise.all(promises)
+      let [ productDetail, productStyles, productRating ] = await Promise.all(promises)
+      let defaultStyle = productStyles.find(entry => entry['default?'] === true || productStyles[0])
+      let rating = { rating: productRating }
 
-      let currentProductData={};
-
-      currentProductData.id=productDetail.id;
-      currentProductData.category=productDetail.category;
-      currentProductData.name=productDetail.name;
-      currentProductData.features=productDetail.features;
-
-      let defaultStyle=productStyles.find(entry => entry['default?'] === true || productStyles[0])
-
-      currentProductData.sale_price=defaultStyle.sale_price;
-      currentProductData.original_price=defaultStyle.original_price;
-      currentProductData.image=defaultStyle.photos[0].thumbnail_url
-
-      currentProductData.rating= productRating
-
-      currentProductData.slogan = productDetail.slogan;
-      currentProductData.description = productDetail.description;
+      let currentProductData = Object.assign({}, defaultStyle, productDetail, rating);
 
       relatedProducts.push(currentProductData);
     }
@@ -90,9 +76,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
       {productsInfo.map((entry, index) => (
         <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct={currentProduct}/>
       ))}
-
     </Carousel>
-
     </div>
   )
 
