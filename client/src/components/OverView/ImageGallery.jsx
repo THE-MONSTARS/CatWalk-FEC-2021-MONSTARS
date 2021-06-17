@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Thumbs, Keyboard, Controller, Zoom } from 'swiper';
 import 'swiper/swiper-bundle.css';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
-import useWindowDimensions from '../utils/getWindowDimensions.jsx';
 
 SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard, Controller, Zoom])
 
@@ -132,9 +131,6 @@ const ExpandedGallery = styled(Swiper)`
       /* transform: translate3d(${(props) => props.mouseposition[0]}px, ${(props) => props.mouseposition[1]}px, 0px); */
     }
   }
-  .swiper-button-disabled {
-    opacity: 0;
-  }
 `
 
 // Nav buttons
@@ -161,8 +157,6 @@ const ThumbsPreviousButton = styled(ThumbsNav)`
 const ThumbsNextButton = styled(ThumbsNav)`
   transform: rotate(-90deg);
 `
-
-
 // Main Nav
 const MainNav = styled(CleanButton)`
   position: relative;

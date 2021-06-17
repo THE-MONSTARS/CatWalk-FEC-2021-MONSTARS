@@ -8,6 +8,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+import ALS from '@createnextapp/async-local-storage';
 
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
@@ -64,25 +65,53 @@ const App = () => {
 
   // API calls
   const getProducts = async () => {
-    const fetchedProducts = await axios.get('/products');
-    return fetchedProducts.data;
+    const cachedProducts = await ALS.getItem('products');
+    if (cachedProducts) {
+      return cachedProducts;
+    } else {
+      const fetchedProducts = await axios.get('/products');
+      await ALS.setItem('products', fetchedProducts);
+      return fetchedProducts.data;
+    }
   }
 
   const getOneProduct = async (id) => {
-    const fetchedProduct = await axios.get(`/products/${id}`);
-    return fetchedProduct.data;
+    const cachedProductName = `product-id-${id}`;
+    const cachedProduct = await ALS.getItem(`${cachedProductName}`);
+    if (cachedProduct) {
+      return JSON.parse(cachedProduct);
+    } else {
+      const fetchedProduct = await axios.get(`/products/${id}`);
+      await ALS.setItem(cachedProductName, JSON.stringify(fetchedProduct.data));
+      return fetchedProduct.data;
+    }
   }
 
   const getStyles = async (id) => {
-    const fetchedStyles = await axios.get(`/products/${id}/styles`);
-    return fetchedStyles.data.results;
+    const cachedStyleName = `style-id-${id}`;
+    const cachedStyle = await ALS.getItem(`${cachedStyleName}`);
+    if (cachedStyle) {
+      return JSON.parse(cachedStyle);
+    } else {
+      const fetchedStyles = await axios.get(`/products/${id}/styles`);
+      await ALS.setItem(cachedStyleName, JSON.stringify(fetchedStyles.data.results));
+      return fetchedStyles.data.results;
+    }
   }
 
   const getReviews = async (id) => {
-    const fetchedReviews = await axios.get(`/reviews/${id}`);
-    return fetchedReviews.data.results;
+    const cachedReviewsName = `reviews-id-${id}`;
+    const cachedReviews = await ALS.getItem(`${cachedReviewsName}`);
+    if (cachedReviews) {
+      return JSON.parse(cachedReviews);
+    } else {
+      const fetchedReviews = await axios.get(`/reviews/${id}`);
+      await ALS.setItem(cachedReviewsName, JSON.stringify(fetchedReviews.data.results));
+      return fetchedReviews.data.results;
+    }
   }
 
+  //hooks and refs
   const handleScrollToRef = () => {
     reviewsRef.current.scrollIntoView({ behavior: 'smooth' })
   }
@@ -128,8 +157,6 @@ const App = () => {
       />
       </ModalProvider>
     </AppContainer>
-
-      
     )
   );
 
