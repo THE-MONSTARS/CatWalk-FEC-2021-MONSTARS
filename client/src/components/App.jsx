@@ -64,18 +64,38 @@ const App = () => {
 
   // API calls
   const getProducts = async () => {
-    const fetchedProducts = await axios.get('/products');
-    return fetchedProducts.data;
+    const cachedProducts = localStorage.getItem('products')
+    if (cachedProducts) {
+      return cachedProducts;
+    } else {
+      const fetchedProducts = await axios.get('/products');
+      localStorage.setItem('products', fetchedProducts)
+      return fetchedProducts.data;
+    }
   }
 
   const getOneProduct = async (id) => {
-    const fetchedProduct = await axios.get(`/products/${id}`);
-    return fetchedProduct.data;
+    const cachedProductName = `product-id-${id}`
+    const cachedProduct = localStorage.getItem(`${cachedProductName}`)
+    if (cachedProduct) {
+      return JSON.parse(cachedProduct);
+    } else {
+      const fetchedProduct = await axios.get(`/products/${id}`);
+      localStorage.setItem(cachedProductName, JSON.stringify(fetchedProduct.data));
+      return fetchedProduct.data;
+    }
   }
 
   const getStyles = async (id) => {
-    const fetchedStyles = await axios.get(`/products/${id}/styles`);
-    return fetchedStyles.data.results;
+    const cachedStyleName = `style-id-${id}`
+    const cachedStyle = localStorage.getItem(`${cachedStyleName}`)
+    if (cachedStyle) {
+      return JSON.parse(cachedStyle);
+    } else {
+      const fetchedStyles = await axios.get(`/products/${id}/styles`);
+      localStorage.setItem(cachedStyleName, JSON.stringify(fetchedStyles.data.results))
+      return fetchedStyles.data.results;
+    }
   }
 
   const getReviews = async (id) => {
@@ -129,7 +149,7 @@ const App = () => {
       </ModalProvider>
     </AppContainer>
 
-      
+
     )
   );
 
