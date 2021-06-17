@@ -9,10 +9,10 @@ const SizeDropDownContainer = styled.div`
   position: relative;
 `
 
-
 const SizeListContainer = styled(ListContainer)`
-  width: 99%;
+  width: 98.5%;
   max-width: 140px;
+  z-index: 200;
 `
 
 const SizeDropDownHeader = styled(DropDownHeader)`

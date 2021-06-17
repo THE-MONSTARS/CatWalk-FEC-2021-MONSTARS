@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 
@@ -28,6 +28,11 @@ const ProductSlogan = styled.h2`
   margin-bottom: 6px;
 `
 
+const FeatureContainer = styled.div`
+  border-left: 2px groove #343a40;
+  padding-left: 8vw;
+`
+
 const Feature = styled.li`
   font-family: 'Roboto';
 `
@@ -35,26 +40,31 @@ const Feature = styled.li`
 
 
 const ProductDescription = ({currentProduct}) => {
+  // const [ slogan, setSlogan ] = useState(currentProduct.slogan)
+  // const [ description, setDescription ] = useState(currentProduct.description)
   const slogan = currentProduct.slogan;
   const description = currentProduct.description;
   const features = currentProduct.features;
 
+  useEffect(() => {
 
+  }, [currentProduct.slogan])
 
   return (
     <DescriptionAndFeatures>
       <DescriptionContainer>
         {slogan &&
-        <ProductSlogan>{slogan}</ProductSlogan>}
+        <ProductSlogan>{slogan}</ProductSlogan>
+        }
         {description && <p className="description">{description}</p>}
       </DescriptionContainer>
-      <div>
-        {/* <ul>
+      <FeatureContainer>
+        <ul>
           {features && features.map((feature, idx) => (
             <Feature key={idx}>{feature.feature}: {feature.value}</Feature>
           ))}
-        </ul> */}
-      </div>
+        </ul>
+      </FeatureContainer>
     </DescriptionAndFeatures>
   )
 }

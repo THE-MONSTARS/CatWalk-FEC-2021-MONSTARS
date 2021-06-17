@@ -66,6 +66,8 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
 
       currentProductData.rating= productRating
 
+      currentProductData.slogan = productDetail.slogan;
+      currentProductData.description = productDetail.description;
 
       relatedProducts.push(currentProductData);
     }
