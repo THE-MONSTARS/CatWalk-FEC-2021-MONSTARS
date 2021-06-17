@@ -49,11 +49,11 @@ const ProductDescription = ({currentProduct}) => {
         {description && <p className="description">{description}</p>}
       </DescriptionContainer>
       <div>
-        <ul>
+        {/* <ul>
           {features && features.map((feature, idx) => (
             <Feature key={idx}>{feature.feature}: {feature.value}</Feature>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </DescriptionAndFeatures>
   )
