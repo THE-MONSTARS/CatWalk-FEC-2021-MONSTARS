@@ -146,7 +146,7 @@ const App = () => {
         getOneProduct={getOneProduct}
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
-        currentProduct = {currentProduct}
+        currentProduct={currentProduct}
       />
       <ReviewsContainer
         id={id}
