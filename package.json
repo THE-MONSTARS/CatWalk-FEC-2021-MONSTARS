@@ -39,6 +39,7 @@
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
+    "@createnextapp/async-local-storage": "^1.0.1",
     "@types/react-transition-group": "^4.4.1",
     "autoprefixer": "^10.2.6",
     "axios": "^0.21.1",
