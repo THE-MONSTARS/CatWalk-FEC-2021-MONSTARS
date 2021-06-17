@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { CSSTransition } from 'react-transition-group';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Pagination, Thumbs, Keyboard, Controller } from 'swiper';
+import SwiperCore, { Navigation, Pagination, Thumbs, Keyboard, Controller, Zoom } from 'swiper';
 import 'swiper/swiper-bundle.css';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+import useWindowDimensions from '../utils/getWindowDimensions.jsx';
 
-SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard, Controller])
+SwiperCore.use([Navigation, Pagination, Thumbs, Keyboard, Controller, Zoom])
 
 const GalleriesHolder = styled.div`
   display: flex;
@@ -96,7 +97,7 @@ const ThumbsGallery = styled(Swiper)`
   }
 `
 const ExpandedGallery = styled(Swiper)`
-  height: 100%;
+  height: 1000px;
 
   position: absolute;
   .swiper-wrapper {
@@ -113,23 +114,25 @@ const ExpandedGallery = styled(Swiper)`
     justify-content: center;
     overflow: hidden;
     background: none;
+    &:hover {
+      cursor: crosshair;
+      box-shadow:  1px 1px 2px 0.3px #1d62bd;
+    }
   }
   .swiper-slide img {
 	  object-fit: contain;
     flex-grow: 1;
     flex-shrink: 1;
+
+  }
+  .swiper-slide-zoomed {
+    &:hover {
+      cursor: zoom-out;
+      box-shadow:  1px 1px 2px 0.3px #1d62bd;
+      /* transform: translate3d(${(props) => props.mouseposition[0]}px, ${(props) => props.mouseposition[1]}px, 0px); */
+    }
   }
   .swiper-button-disabled {
-    opacity: 0;
-  }
-  .ReactModal__Overlay {
-    opacity: 0;
-    transition: opacity 2000ms ease-in-out;
-  }
-  .ReactModal__Overlay--after-open{
-    opacity: 1;
-  }
-  .ReactModal__Overlay--before-close{
     opacity: 0;
   }
 `
@@ -197,16 +200,17 @@ const ExpandedModal = Modal.styled`
 const ImageGallery = ({currentStyle}) => {
   const [ thumbsSwiper, setThumbsSwiper ] = useState(null);
   const [ mainSwiper, setMainSwiper ] = useState(null);
-  const [ expanded, setExpanded ] = useState(false);
+  const [ expandedSwiper, setExpandedSwiper ] = useState(false);
   const [ isOpen, setIsOpen ] = useState(false);
   const [ currentSlide, setCurrentSlide ] = useState(0);
   const [ modalOpacity, setModalOpacity ] = useState(0);
-  const sizeRef = useRef(null)
+  const [ [ mouseX, mouseY ] , setMousePosition ] = useState([0, 0])
+  const imageRef = useRef(null)
 
-  // variables for expanded modal classnames
-  const className = 'expanded';
-  const contentClassName = `${className}__content`;
-  const overlayClassName = `${className}__overlay`;
+  // styles
+  const transform = {
+    transformOrigin: `${mouseX}% ${mouseY}%`
+  }
 
   const slides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
@@ -220,8 +224,33 @@ const ImageGallery = ({currentStyle}) => {
     </SwiperSlide>
   ));
 
+  const zoomSlides = currentStyle.photos.map((photo, idx) => (
+    <SwiperSlide key={idx}>
+      <div
+        className="swiper-zoom-container"
+        data-swiper-zoom="2.5"
+        onMouseMove={e => handleMouseMove(e)}
+
+      >
+        <img src={photo.url}
+          style={{
+            ...transform
+          }}
+        />
+      </div>
+    </SwiperSlide>
+  ))
+
   const toggleExpandedView = () => {
     setIsOpen(prev => !prev);
+  }
+
+  const handleMouseMove = (e) => {
+    const { left: offsetLeft, top: offsetTop } = imageRef.current.getBoundingClientRect();
+    const { innerWidth: width, innerHeight: height } = window;
+    const x = ((e.nativeEvent.clientX - offsetLeft) / parseInt(1000, 10)) * 100;
+    const y = ((e.nativeEvent.clientY - offsetTop) / parseInt(height, 10)) * 100;
+    setMousePosition([ x, y ])
   }
 
 
@@ -270,7 +299,7 @@ const ImageGallery = ({currentStyle}) => {
           }}
           pagination
         >
-          {slides}
+            {slides}
         </MainGallery>
 
         <MainNextButton type="button" className="main-navigation-next">
@@ -288,14 +317,18 @@ const ImageGallery = ({currentStyle}) => {
         opacity={modalOpacity}
       >
         <ExpandedGallery
+          ref={imageRef}
           id="expanded"
-          ref={sizeRef}
+          onSwiper={setExpandedSwiper}
           controller={{ control: mainSwiper }}
           navigation
           initialSlide={currentSlide}
           keyboard
+          // zoom={true}
+          allowTouchMove={false}
+          onClick={() => expandedSwiper.zoom.toggle()}
         >
-            {slides}
+            {zoomSlides}
         </ExpandedGallery>
       </ExpandedModal>
 
