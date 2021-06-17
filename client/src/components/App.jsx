@@ -64,19 +64,19 @@ const App = () => {
 
   // API calls
   const getProducts = async () => {
-    const cachedProducts = localStorage.getItem('products')
+    const cachedProducts = localStorage.getItem('products');
     if (cachedProducts) {
       return cachedProducts;
     } else {
       const fetchedProducts = await axios.get('/products');
-      localStorage.setItem('products', fetchedProducts)
+      localStorage.setItem('products', fetchedProducts);
       return fetchedProducts.data;
     }
   }
 
   const getOneProduct = async (id) => {
-    const cachedProductName = `product-id-${id}`
-    const cachedProduct = localStorage.getItem(`${cachedProductName}`)
+    const cachedProductName = `product-id-${id}`;
+    const cachedProduct = localStorage.getItem(`${cachedProductName}`);
     if (cachedProduct) {
       return JSON.parse(cachedProduct);
     } else {
@@ -87,22 +87,30 @@ const App = () => {
   }
 
   const getStyles = async (id) => {
-    const cachedStyleName = `style-id-${id}`
-    const cachedStyle = localStorage.getItem(`${cachedStyleName}`)
+    const cachedStyleName = `style-id-${id}`;
+    const cachedStyle = localStorage.getItem(`${cachedStyleName}`);
     if (cachedStyle) {
       return JSON.parse(cachedStyle);
     } else {
       const fetchedStyles = await axios.get(`/products/${id}/styles`);
-      localStorage.setItem(cachedStyleName, JSON.stringify(fetchedStyles.data.results))
+      localStorage.setItem(cachedStyleName, JSON.stringify(fetchedStyles.data.results));
       return fetchedStyles.data.results;
     }
   }
 
   const getReviews = async (id) => {
-    const fetchedReviews = await axios.get(`/reviews/${id}`);
-    return fetchedReviews.data.results;
+    const cachedReviewsName = `reviews-id-${id}`;
+    const cachedReviews = localStorage.getItem(`${cachedReviewsName}`);
+    if (cachedReviews) {
+      return JSON.parse(cachedReviews);
+    } else {
+      const fetchedReviews = await axios.get(`/reviews/${id}`);
+      localStorage.setItem(cachedReviewsName, JSON.stringify(fetchedReviews.data.results));
+      return fetchedReviews.data.results;
+    }
   }
 
+  //hooks and refs
   const handleScrollToRef = () => {
     reviewsRef.current.scrollIntoView({ behavior: 'smooth' })
   }
@@ -148,8 +156,6 @@ const App = () => {
       />
       </ModalProvider>
     </AppContainer>
-
-
     )
   );
 
