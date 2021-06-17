@@ -22,13 +22,6 @@ export default function ReviewsContainer (props) {
     setCurrentStarRating(Number(e.target.value))
   }
 
-  // useEffect(() => {
-  //     return () => {
-  //       setCurrentStarRating(null)
-  //     }
-  //   }
-  // )
-
   return (
     <RVC ref={props.reference}>
       <ReviewSorter
