@@ -201,7 +201,7 @@ const ImageGallery = ({currentStyle}) => {
 
   // const image = product.photos ? product.photos[0].thumbnail_url : 'assets/MonstersMike.svg';
 
-  const slides = currentStyle.photos.map((photo, idx) => (
+ const slides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
       <img src={photo.url ? photo.url : 'assets/image-not-found.svg'}/>
     </SwiperSlide>
