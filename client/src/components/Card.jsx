@@ -19,16 +19,20 @@ font-family: 'Roboto-Bold';
 padding: 5px 0;
 `
 
-export default function Card ({product, setCurrentProduct, overviewProduct}) {
-  const image = product.photos[0].thumbnail_url;
+export default function Card ({product, setCurrentProduct, overviewProduct, isRelated, removeCard}) {
+   const image = product.photos[0].thumbnail_url;
+
   //Will need url and pricing from styles another get request
   //All Get functions will prob be on a component level higher...
 
   return (
     <StyleCard id={product.id} >
       <div style={{width: "100%", height: "75%"}}>
-      <RelatedAction product={product} overviewProduct={overviewProduct}/>
-      <img style={{objectFit: "cover", width: "250px", height: "262.5px"}} src={image} onClick={() => setCurrentProduct(product)}></img>
+      <RelatedAction product={product} overviewProduct={overviewProduct} related={isRelated} removeCard={removeCard}/>
+      {isRelated ?
+      <img style={{objectFit: "cover", width: "250px", height: "262.5px"}} src={image} onClick={() => setCurrentProduct(product)}></img> :
+      <img style={{objectFit: "cover", width: "250px", height: "262.5px"}} src={image}></img>
+      }
       </div>
       <div>
       <h4>{product.category}</h4>

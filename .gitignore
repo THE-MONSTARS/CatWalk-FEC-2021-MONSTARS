@@ -4,4 +4,4 @@ client/dist/bundle.js
 client/src/__tests__
 Tests/
 jest.config.js
-
+*.pem
