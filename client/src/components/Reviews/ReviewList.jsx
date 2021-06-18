@@ -7,6 +7,11 @@ const url = 'http://localhost:3000'
 
 import Review from './Review.jsx'
 
+const DefaultWidth = styled.div`
+  min-width: 600px;
+  position: left;
+`;
+
 //base component
 function ReviewList(props) {
   const [ selectedPhoto, setSelectedPhoto ] = useState(null) //496781
@@ -19,7 +24,9 @@ function ReviewList(props) {
   return (
     props.isLoading ?
     <div> Loading Reviews... </div> :
-    <div>
+    <DefaultWidth>
+        {!props.reviews && <DefaultWidth> No Reviews Yet! </DefaultWidth>}
+
         { props.reviews.filter(props.currentStarRating ? review => review.rating === props.currentStarRating : review => review)
           .map((review, index) => (
             <Review
@@ -37,7 +44,7 @@ function ReviewList(props) {
             />
           ))
         }
-    </div>
+    </DefaultWidth>
   )
 }
 

@@ -24,8 +24,9 @@ const ContainerDiv = styled.div`
   border-bottom: 2px solid gray;
   border-color: gray; */
   padding: 10px;
+  width: 100%;
   min-width: 400px;
-  max-width: 800px;
+  max-width: 600px;
 `;
 
 const StarUserDate = styled.div`
