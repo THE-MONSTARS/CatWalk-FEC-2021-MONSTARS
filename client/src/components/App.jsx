@@ -3,6 +3,7 @@ import Header from './Header.jsx';
 import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
+import OutfitContainer from './OutfitContainer.jsx';
 import ReviewsContainer from './ReviewsContainer.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -148,6 +149,11 @@ const App = () => {
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
         currentProduct={currentProduct}
+      />
+      <OutfitContainer
+        currentProduct = {currentProduct}
+        currentStyle={currentStyle}
+        reviews={reviews}
       />
       <ReviewsContainer
         id={id}

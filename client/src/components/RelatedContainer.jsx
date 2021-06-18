@@ -7,7 +7,7 @@ import 'react-multi-carousel/lib/styles.css';
 
 const responsive={
   desktop: {
-    breakpoint: { max: 3000, min: 1100 },
+    breakpoint: { max: 3000, min: 1000 },
     items: 3
   }
 };
@@ -86,7 +86,7 @@ export default function RelatedContainer ({id, getOneProduct, getStyles, setCurr
     <span style={{padding:"10px"}}>RELATED</span>
     <Carousel responsive={responsive} centerMode= {true}>
       {productsInfo.map((entry, index) => (
-        <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct={currentProduct}/>
+        <Card key={index} product={entry} setCurrentProduct={setCurrentProduct} overviewProduct={currentProduct} isRelated={true}/>
       ))}
 
     </Carousel>

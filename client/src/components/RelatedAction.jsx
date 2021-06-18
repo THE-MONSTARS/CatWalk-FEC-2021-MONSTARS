@@ -24,8 +24,8 @@ transition: all 0.3s ease-in-out;
 `
 
 
-export default function RelatedAction ({product, overviewProduct}) {
-  const [isRelated, setIsRelated]=useState(true);
+export default function RelatedAction ({product, overviewProduct, related, removeCard}) {
+  const [isRelated, setIsRelated]=useState(related);
   const [isOpen, setIsOpen]=useState(false);
   const [opacity, setOpacity]=useState(0);
   const [compareInfo, setCompareInfo]=useState([1,2,3]);
@@ -85,41 +85,46 @@ export default function RelatedAction ({product, overviewProduct}) {
     }
     setCompareInfo(compareData);
   }
-
-  return (
-    <div  style={{zIndex: "10", position: "absolute"}} >
-      <StyleImg onClick={(e) => clickHandle(e)} src= {isRelated? EmptyStar : CrossCircle}/>
-      <StyledModal
-        isOpen={isOpen}
-        afterOpen={ afterOpen}
-        beforeClose={beforeClose}
-        onBackgroundClick={toggleModal}
-        onEscapeKeydown={toggleModal}
-        opacity={opacity}
-        backgroundProps={{opacity}}
-      >
-        <div style={{padding: "8px",textAlign: "left"}}>COMPARING</div>
-        <table style={{width: "100%",tableLayout: "fixed"}}>
-          <thead>
-          <tr >
-            <th style={{padding: "5px 8px 15px", textAlign: "left", fontFamily: 'Roboto-Bold'}}>{product.name}</th>
-            <th style={{textAlign: "center"}}></th>
-            <th style={{padding: "5px 8px 15px", textAlign: "right", fontFamily: 'Roboto-Bold'}}>{overviewProduct.name}</th>
-          </tr>
-          </thead>
-          <tbody style={{overflowY: "scroll", maxHeight: "430px", overflow: "auto"}}>
-          {compareInfo.map((entry, index) => (
-            <tr key={index}>
-              <td style={{padding: "5px",textAlign: "left"}}>{entry.valueA === true ? "√" : entry.valueA}</td>
-              <td style={{padding: "5px",textAlign: "center"}}>{entry.feature}</td>
-              <td style={{padding: "5px",textAlign: "right"}}>{entry.valueB}</td>
+  if(isRelated) {
+    return (
+      <div  style={{zIndex: "10", position: "absolute"}} >
+        <StyleImg onClick={(e) => clickHandle(e)} src= {EmptyStar}/>
+        <StyledModal
+          isOpen={isOpen}
+          afterOpen={ afterOpen}
+          beforeClose={beforeClose}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+          opacity={opacity}
+          backgroundProps={{opacity}}
+        >
+          <div style={{padding: "8px",textAlign: "left"}}>COMPARING</div>
+          <table style={{width: "100%",tableLayout: "fixed"}}>
+            <thead>
+            <tr >
+              <th style={{padding: "5px 8px 15px", textAlign: "left", fontFamily: 'Roboto-Bold'}}>{product.name}</th>
+              <th style={{textAlign: "center"}}></th>
+              <th style={{padding: "5px 8px 15px", textAlign: "right", fontFamily: 'Roboto-Bold'}}>{overviewProduct.name}</th>
             </tr>
-          ))}
-          </tbody>
-        </table>
-      </StyledModal>
-    </div>
-
-
-  )
+            </thead>
+            <tbody style={{overflowY: "scroll", maxHeight: "430px", overflow: "auto"}}>
+            {compareInfo.map((entry, index) => (
+              <tr key={index}>
+                <td style={{padding: "5px",textAlign: "left"}}>{entry.valueA === true ? "√" : entry.valueA}</td>
+                <td style={{padding: "5px",textAlign: "center"}}>{entry.feature}</td>
+                <td style={{padding: "5px",textAlign: "right"}}>{entry.valueB}</td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        </StyledModal>
+      </div>
+    )
+  } else {
+    return (
+      <div  style={{zIndex: "10", position: "absolute"}} >
+        <StyleImg src= {CrossCircle} onClick={()=>{removeCard(product.id)}}/>
+      </div>
+    )
+  }
 }
