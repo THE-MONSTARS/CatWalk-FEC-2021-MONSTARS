@@ -41,7 +41,7 @@ const StyleList = ({styles, currentStyle, selectStyle}) => {
     <SelectedStyle>Style > {currentStyle.name}</SelectedStyle>
     <StyleContainer>
       {styles.map(style => (
-        <SelectableStyleImg current={currentStyle.style_id === style.style_id} key={style.style_id} id={style.style_id} src={style.photos[0].thumbnail_url} onClick={e=> selectStyle(e.target.id)}/>
+        <SelectableStyleImg current={currentStyle.style_id === style.style_id} key={style.style_id} id={style.style_id} src={style.photos[0].thumbnail_url ? style.photos[0].thumbnail_url : 'assets/image-not-found.svg'} onClick={e=> selectStyle(e.target.id)}/>
       ))}
     </StyleContainer>
   </StyleListContainer>
