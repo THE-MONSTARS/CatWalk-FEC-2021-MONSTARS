@@ -126,7 +126,7 @@ export default function OutfitContainer ({currentProduct,currentStyle,reviews}) 
     <OutfitSlider navigation pagination spaceBetween={0} slidesPerView={4}>
       <SwiperSlide key={0}>
         <StyleCardAdd onClick={addOutfitCard}>Add to Outfit
-        <AddIconImg src = {AddIcon} />
+        <AddIconImg src={AddIcon} />
         </StyleCardAdd>
       </SwiperSlide>
       {outfitData.map((entry, index) => (
