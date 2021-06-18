@@ -10,7 +10,8 @@ const QuantityDropDownContainer = styled.div`
 `
 
 const QuantityListContainer = styled(ListContainer)`
-  width: 98%;
+  width: 96.5%;
+  z-index: 200;
 `
 
 const QuantityDropDownHeader = styled(DropDownHeader)`

@@ -67,7 +67,6 @@ const ProductInformation = ({currentProduct, currentStyle, reviews, handleScroll
 
   useEffect(() => {
     let average = getAverageRating();
-    console.log(average);
     setAverageRating(average);
   }, [reviews])
 
