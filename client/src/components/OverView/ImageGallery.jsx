@@ -179,13 +179,7 @@ const MainNextButton = styled(MainNav)`
   right: 50px;
 `
 
-const ProductImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  object-fit: cover;
-`
+
 
 const ExpandedModal = Modal.styled`
   display: flex;
@@ -205,10 +199,6 @@ const ImageGallery = ({currentStyle}) => {
   const [ [ mouseX, mouseY ] , setMousePosition ] = useState([0, 0])
   const imageRef = useRef(null)
 
-  // styles
-  const transform = {
-
-  }
 
   const slides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>

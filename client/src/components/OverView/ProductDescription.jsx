@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 
@@ -40,15 +40,9 @@ const Feature = styled.li`
 
 
 const ProductDescription = ({currentProduct}) => {
-  // const [ slogan, setSlogan ] = useState(currentProduct.slogan)
-  // const [ description, setDescription ] = useState(currentProduct.description)
   const slogan = currentProduct.slogan;
   const description = currentProduct.description;
   const features = currentProduct.features;
-
-  useEffect(() => {
-
-  }, [currentProduct.slogan])
 
   return (
     <DescriptionAndFeatures>
