@@ -112,7 +112,6 @@ const ExpandedGallery = styled(Swiper)`
   .swiper-slide {
     display: flex;
     flex-grow: 1;
-    back
     flex-basis: 100%;
     justify-content: center;
     overflow: hidden;
@@ -235,7 +234,7 @@ const ImageGallery = ({currentStyle}) => {
   const handleMouseMove = (e) => {
     const { left: offsetLeft, top: offsetTop } = imageRef.current.getBoundingClientRect();
     const { innerWidth: width, innerHeight: height } = window;
-    const x = ((e.nativeEvent.clientX - offsetLeft) / parseInt(1000, 10)) * 100;
+    const x = ((e.nativeEvent.clientX - offsetLeft) / parseInt(width, 10)) * 100;
     const y = ((e.nativeEvent.clientY - offsetTop) / parseInt(height, 10)) * 100;
     setMousePosition([ x, y ])
   }
@@ -269,7 +268,7 @@ const ImageGallery = ({currentStyle}) => {
 
       <MainGalleryContainer>
         <MainPreviousButton type="button" className="main-navigation-prev">
-          <img src ="/assets/main-left-nav.png" />
+          <img src ="/assets/main-left-nav.png"/>
         </MainPreviousButton>
 
         <MainGallery

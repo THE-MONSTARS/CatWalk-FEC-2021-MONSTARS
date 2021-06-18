@@ -95,5 +95,36 @@ module.exports = {
       return err
     })
   },
+
+  addToCart: function(sku_id) {
+    return axios({
+      method: 'POST',
+      url: `${endpoint}/cart`,
+      headers: { 'Authorization': credentials.TOKEN },
+      data: sku_id
+    })
+    .then(res => {
+      return res.data
+    })
+    .catch(err => {
+      console.log(err)
+      return err
+    })
+  },
+
+  getCart: function() {
+    return axios({
+      method: 'GET',
+      url: `${endpoint}/cart`,
+      headers: { 'Authorization': credentials.TOKEN },
+    })
+    .then(res => {
+      return res
+    })
+    .catch(err => {
+      console.log(err)
+      return err
+    })
+  },
 };
 
