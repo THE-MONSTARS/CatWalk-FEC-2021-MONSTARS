@@ -76,10 +76,16 @@ export default function Review (props) {
         <HeaderDiv> {props.summary} </HeaderDiv>
         <TextDiv> {props.body} </TextDiv>
         <br></br>
-        <TextDiv>
-          {props.recommend && <img src={'../assets/icons8-checkmark-24.png'} /> }
-          {props.recommend && "yes, I recommend this product" }
-        </TextDiv>
+          {props.recommend &&
+            <TextDiv><img src={'../assets/icons8-checkmark-24.png'} />
+             "yes, I recommend this product"
+            </TextDiv>
+          }
+          {props.response &&
+            <TextDiv>
+              Seller Response: {props.response}
+            </TextDiv>
+          }
         <ReviewThumbs
           name={`Review photos`}
           photos={props.photos}
