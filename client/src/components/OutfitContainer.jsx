@@ -1,11 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import Card from './Card.jsx';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper-bundle.css';
 import styled from 'styled-components';
 
+SwiperCore.use([Navigation, Pagination])
 
-const StyleCardAdd=styled.div`
+const AddIcon = '../assets/add_circle_outline_black_24dp.svg';
+
+const AddIconImg = styled.img`
+width: 50%;
+height: 50%;
+`
+
+const StyleCardAdd = styled.div`
 display: flex;
 position: relative;
 flex-direction: column;
@@ -14,6 +23,47 @@ width: 250px;
 height: 350px;
 border: 1px solid;
 padding: 10px;
+justify-content: center;
+align-items: center;
+`
+
+const OutfitSlider = styled(Swiper)`
+  .swiper-wrapper {
+    width: 1200px;
+    minHeight: '400px';
+    display: flex;
+    transition: all 0.2s;
+  }
+
+  .swiper-button-disabled {
+    opacity: 0;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    outline: 0;
+    border-radius: 35px;
+    z-index: 1000;
+    border: 0;
+    background: rgba(0, 0, 0, 0.5);
+    min-width: 43px;
+    min-height: 43px;
+    cursor: pointer;
+    right: 40px;
+  }
+
+  .swiper-button-prev {
+    left: 40px;
+  }
+
+  .swiper-button-prev:after, .swiper-button-next:after {
+    font-size: 20px;
+    color: white;
+  }
+  .swiper-pagination-bullets {
+    display: none;
+
+  }
 `
 
 export default function OutfitContainer ({currentProduct,currentStyle,reviews}) {
@@ -73,12 +123,18 @@ export default function OutfitContainer ({currentProduct,currentStyle,reviews}) 
   return (
     <div style={{width: '1200px', minHeight: '400px'}}>
     <span style={{padding: "10px"}}>OUTFITS</span>
-    <Carousel responsive={responsive} centerMode={true}>
-      <StyleCardAdd onClick={addOutfitCard}>Add to Outfit</StyleCardAdd>
+    <OutfitSlider navigation pagination spaceBetween={0} slidesPerView={4}>
+      <SwiperSlide key={0}>
+        <StyleCardAdd onClick={addOutfitCard}>Add to Outfit
+        <AddIconImg src = {AddIcon} />
+        </StyleCardAdd>
+      </SwiperSlide>
       {outfitData.map((entry, index) => (
-        <Card key={index} product={entry} isRelated={false} removeCard={removeCard}/>
+        <SwiperSlide key={index+1}>
+          <Card key={index} product={entry} isRelated={false} removeCard={removeCard}/>
+        </SwiperSlide>
       ))}
-    </Carousel>
+    </OutfitSlider>
     </div>
   )
 }
