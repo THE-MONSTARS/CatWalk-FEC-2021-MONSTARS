@@ -6,6 +6,9 @@ const Thumb = styled.img`
   max-height: 50px;
   border: solid black 1px;
   margin: 5px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const FullImg = styled.img`
@@ -13,6 +16,9 @@ const FullImg = styled.img`
   min-height: 100px;
   border: solid blue 1px;
   margin 5px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default function ReviewThumbs(props) {
