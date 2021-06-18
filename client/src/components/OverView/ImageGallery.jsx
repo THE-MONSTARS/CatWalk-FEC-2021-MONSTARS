@@ -199,12 +199,17 @@ const ImageGallery = ({currentStyle}) => {
   const [ [ mouseX, mouseY ] , setMousePosition ] = useState([0, 0])
   const imageRef = useRef(null)
 
+  // const image = product.photos ? product.photos[0].thumbnail_url : 'assets/MonstersMike.svg';
 
-  const slides = currentStyle.photos.map((photo, idx) => (
+  const slides = currentStyle.photos
+    ? currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
       <img src={photo.url}/>
     </SwiperSlide>
-  ));
+    ))
+    : <SwiperSlide key={idx}>
+    <img src='assets/MonstersIncMike.png'/>
+     </SwiperSlide>
 
   const thumbSlides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
