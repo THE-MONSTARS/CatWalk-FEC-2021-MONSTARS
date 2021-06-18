@@ -23,6 +23,9 @@ width: 250px;
 height: 350px;
 border: 1px solid;
 padding: 10px;
+&:hover {
+  cursor: pointer;
+}
 justify-content: center;
 align-items: center;
 `
@@ -101,7 +104,7 @@ export default function OutfitContainer ({currentProduct,currentStyle,reviews}) 
       data.category = currentProduct.category;
       data.original_price = currentStyle.original_price;
       data.sale_price = currentStyle.sale_price;
-      data.image = currentStyle.photos[0].thumbnail_url;
+      data.photos = currentStyle.photos;
       data.rating = getAverageRating();
       setOutfitData(outfitData => {
         localStorage.setItem('userOutfitData', JSON.stringify([...outfitData, data]))

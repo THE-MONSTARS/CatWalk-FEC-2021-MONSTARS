@@ -18,6 +18,9 @@ const Header = styled.div`
 const Button = styled.button`
   background-color: transparent;
   border: none;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default function ReviewSorter (props) {
@@ -56,7 +59,7 @@ export default function ReviewSorter (props) {
     <RDC> <br/>
       <Header> Sort by Rating: </Header>
       {starRatings}
-      <button value={null} onClick={ props.setStarRatingFilter }> All Ratings </button>
+      <Button value={null} onClick={ props.setStarRatingFilter }> View All Ratings </Button>
     </RDC> :
     <div> Loading... </div>
 

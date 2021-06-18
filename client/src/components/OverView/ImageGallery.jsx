@@ -199,16 +199,18 @@ const ImageGallery = ({currentStyle}) => {
   const [ [ mouseX, mouseY ] , setMousePosition ] = useState([0, 0])
   const imageRef = useRef(null)
 
+  // const image = product.photos ? product.photos[0].thumbnail_url : 'assets/MonstersMike.svg';
 
-  const slides = currentStyle.photos.map((photo, idx) => (
+ const slides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
-      <img src={photo.url}/>
+      <img src={photo.url ? photo.url : 'assets/image-not-found.svg'}/>
     </SwiperSlide>
-  ));
+    ))
+
 
   const thumbSlides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
-      <img src={photo.thumbnail_url}/>
+      <img src={photo.thumbnail_url ? photo.thumbnail_url : 'assets/image-not-found.svg'}/>
     </SwiperSlide>
   ));
 
@@ -243,6 +245,7 @@ const ImageGallery = ({currentStyle}) => {
 
   return (
     <GalleriesHolder>
+
       <ThumbsGalleryContainer>
         <ThumbsPreviousButton type="button" className="swiper-navigation-prev">
           <img src ="/assets/left-arrow.png"/>
@@ -258,7 +261,7 @@ const ImageGallery = ({currentStyle}) => {
             nextEl: ".swiper-navigation-next",
             prevEl: ".swiper-navigation-prev"
           }}
-        >
+          >
           {thumbSlides}
         </ThumbsGallery>
 
@@ -266,6 +269,7 @@ const ImageGallery = ({currentStyle}) => {
           <img src ="/assets/left-arrow.png" />
         </ThumbsNextButton>
       </ThumbsGalleryContainer>
+
 
       <MainGalleryContainer>
         <MainPreviousButton type="button" className="main-navigation-prev">

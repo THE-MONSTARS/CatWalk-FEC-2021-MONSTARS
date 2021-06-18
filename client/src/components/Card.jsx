@@ -12,6 +12,9 @@ width: 250px;
 height: 350px;
 border: 1px solid;
 padding: 10px;
+&:hover {
+  cursor: pointer;
+}
 `
 
 const StyleName=styled.h2`
@@ -20,7 +23,7 @@ padding: 5px 0;
 `
 
 export default function Card ({product, setCurrentProduct, overviewProduct, isRelated, removeCard}) {
-   const image = product.photos[0].thumbnail_url;
+   const image = product.photos[0].thumbnail_url ? product.photos[0].thumbnail_url : 'assets/image-not-found.svg';
 
   //Will need url and pricing from styles another get request
   //All Get functions will prob be on a component level higher...

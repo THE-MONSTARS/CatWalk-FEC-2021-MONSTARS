@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 
@@ -48,6 +48,8 @@ const FeatureBold = styled.b`
 
 
 const ProductDescription = ({currentProduct}) => {
+  // const [ slogan, setSlogan ] = useState(currentProduct.slogan)
+  // const [ description, setDescription ] = useState(currentProduct.description)
   const slogan = currentProduct.slogan;
   const description = currentProduct.description;
   const features = currentProduct.features;
