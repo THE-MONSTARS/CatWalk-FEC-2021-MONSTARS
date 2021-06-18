@@ -19,19 +19,28 @@ const HeaderContainer = styled.div`
 
 const UselessSearchBar = styled.input`
   border-radius: 5px;
-
 `
 
-const Header = () => {
+const DevButton = styled.button`
+  opacity: 0;
+  &:hover {
+    opacity: 1;
+    transition: all 1s ease;
+  }
+`
+
+const Header = ({setShowClickTracking}) => {
   return (
     <HeaderContainer>
       <div>
         Monstars Inc.
       </div>
+      <DevButton onClick={() => setShowClickTracking(prev => !prev)} >
+        Secret Dev Button
+      </DevButton>
       <div>
         <label htmlFor="search"> Search: </label>
         <UselessSearchBar type="search" id="search"></UselessSearchBar>
-
       </div>
     </HeaderContainer>
   )

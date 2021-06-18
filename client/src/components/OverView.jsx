@@ -30,7 +30,7 @@ const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getSty
   }
 
   return (
-    <React.Fragment>
+    <>
       <OverViewContainer>
         <ImageGallery currentStyle={currentStyle}/>
         <ProductContainer>
@@ -41,7 +41,7 @@ const OverView = ({currentProduct, styles, currentStyle, setCurrentStyle, getSty
       </OverViewContainer>
 
       <ProductDescription currentProduct={currentProduct} />
-    </React.Fragment>
+    </>
   )
 }
 

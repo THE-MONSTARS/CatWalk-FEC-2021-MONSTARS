@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 import ALS from '@createnextapp/async-local-storage';
+import useClickData from './utils/useClickData.jsx'
 
 const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
@@ -29,8 +30,12 @@ const App = () => {
   const [ styles, setStyles ] = useState([])
   const [ currentStyle, setCurrentStyle ] = useState({})
   const [ reviews, setReviews ] = useState([])
-
+  const [ showClickTracking, setShowClickTracking ] = useState(false);
   const reviewsRef = useRef(null);
+
+  // currently widget is not functional
+  const { clickData, time, widget } = useClickData()
+
 
   // product update on startup
   const fetchProductAndId = async () => {
@@ -132,9 +137,11 @@ const App = () => {
     ? <div>Loading...</div>
     : (
     <AppContainer>
-      <Header/>
+      <Header setShowClickTracking={setShowClickTracking}/>
       <ModalProvider backgroundComponent={FadingBackground}>
+      { (clickData && showClickTracking) && <p>Clicked -- {clickData.toString()} @{widget} {time} </p>}
       <OverView
+        name="OverView"
         id={id}
         currentProduct={currentProduct}
         styles={styles}
@@ -144,6 +151,7 @@ const App = () => {
         handleScrollToRef={handleScrollToRef}
       />
       <RelatedContainer
+        name="Related-Products"
         id={id}
         getOneProduct={getOneProduct}
         getStyles={getStyles}
@@ -151,11 +159,13 @@ const App = () => {
         currentProduct={currentProduct}
       />
       <OutfitContainer
+        name="Related-Products"
         currentProduct = {currentProduct}
         currentStyle={currentStyle}
         reviews={reviews}
       />
       <ReviewsContainer
+        name="Reviews"
         id={id}
         reviews={reviews}
         isLoading={isLoading}
