@@ -95,5 +95,14 @@ module.exports = {
       return err
     })
   },
+
+  postInteraction: function(clickData) {
+    return axios({
+      method: 'POST',
+      url: `${endpoint}/interactions`,
+      headers: { 'Authorization': credentials.TOKEN },
+      data: clickData
+    })
+  }
 };
 
