@@ -83,7 +83,7 @@ export default function Review (props) {
           }
           {props.response &&
             <TextDiv>
-              Seller Response: {props.response}
+              Response from Seller: {props.response}
             </TextDiv>
           }
         <ReviewThumbs
