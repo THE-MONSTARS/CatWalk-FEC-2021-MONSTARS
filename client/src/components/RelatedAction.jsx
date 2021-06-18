@@ -5,7 +5,7 @@ import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 const EmptyStar='../assets/icons8-star-24-empty.png'
 
-const CrossCircle='../assets/outline_highlight_off_black_24dp.png'
+const CrossCircle='../assets/cancel_white_24dp.svg'
 
 const StyleImg=styled.img`
 width: 24px;
