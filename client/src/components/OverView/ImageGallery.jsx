@@ -20,11 +20,15 @@ const ThumbsGalleryContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-shrink: 1;
+  position: relative;
+  left: 30px;
 `
 
 const MainGalleryContainer = styled.div`
   height: 100%;
   display: flex;
+
 `
 
 // Swiper instances
@@ -39,7 +43,7 @@ const MainGallery = styled(Swiper)`
     display: flex;
     justify-content: center;
     overflow: hidden;
-    background: #EEEEEE;
+    /* background: #EEEEEE; */
   }
   .swiper-slide img {
 	  object-fit: contain;
@@ -96,13 +100,13 @@ const ThumbsGallery = styled(Swiper)`
   }
 `
 const ExpandedGallery = styled(Swiper)`
-  height: 1000px;
+  height: 100vh;
 
   position: absolute;
   .swiper-wrapper {
     display: flex;
     flex-shrink: 1;
-    max-width: 1000px;
+    width: 80vw;
     transition: all 0.2s;
   }
   .swiper-slide {
@@ -175,13 +179,7 @@ const MainNextButton = styled(MainNav)`
   right: 50px;
 `
 
-const ProductImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  object-fit: cover;
-`
+
 
 const ExpandedModal = Modal.styled`
   display: flex;
@@ -201,10 +199,6 @@ const ImageGallery = ({currentStyle}) => {
   const [ [ mouseX, mouseY ] , setMousePosition ] = useState([0, 0])
   const imageRef = useRef(null)
 
-  // styles
-  const transform = {
-    transformOrigin: `${mouseX}% ${mouseY}%`
-  }
 
   const slides = currentStyle.photos.map((photo, idx) => (
     <SwiperSlide key={idx}>
@@ -224,11 +218,10 @@ const ImageGallery = ({currentStyle}) => {
         className="swiper-zoom-container"
         data-swiper-zoom="2.5"
         onMouseMove={e => handleMouseMove(e)}
-
       >
         <img src={photo.url}
           style={{
-            ...transform
+            transformOrigin: `${mouseX}% ${mouseY}%`
           }}
         />
       </div>

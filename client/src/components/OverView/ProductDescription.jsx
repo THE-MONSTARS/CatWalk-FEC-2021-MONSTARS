@@ -28,10 +28,23 @@ const ProductSlogan = styled.h2`
   margin-bottom: 6px;
 `
 
-const Feature = styled.li`
-  font-family: 'Roboto';
+const FeatureContainer = styled.div`
+  border-left: 2px groove #343a40;
+  padding-left: 8vw;
 `
 
+const Feature = styled.li`
+  font-family: 'Roboto';
+  font-size: 12px;
+  margin: 10px 0;
+
+`
+const FeatureBold = styled.b`
+  font-family: 'Roboto';
+  font-size: 14px;
+  border-bottom: 1px dotted #343a40;
+  padding 2px;
+`
 
 
 const ProductDescription = ({currentProduct}) => {
@@ -39,22 +52,21 @@ const ProductDescription = ({currentProduct}) => {
   const description = currentProduct.description;
   const features = currentProduct.features;
 
-
-
   return (
     <DescriptionAndFeatures>
       <DescriptionContainer>
         {slogan &&
-        <ProductSlogan>{slogan}</ProductSlogan>}
+        <ProductSlogan>{slogan}</ProductSlogan>
+        }
         {description && <p className="description">{description}</p>}
       </DescriptionContainer>
-      <div>
-        {/* <ul>
+      <FeatureContainer>
+        <ul>
           {features && features.map((feature, idx) => (
-            <Feature key={idx}>{feature.feature}: {feature.value}</Feature>
+            <Feature key={idx}><FeatureBold>{feature.feature}</FeatureBold> -        {feature.value}</Feature>
           ))}
-        </ul> */}
-      </div>
+        </ul>
+      </FeatureContainer>
     </DescriptionAndFeatures>
   )
 }

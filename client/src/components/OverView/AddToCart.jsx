@@ -163,6 +163,9 @@ const AddToCart = ({currentStyle}) => {
     setItemStock(stock)
   }, [sizeId])
 
+  useEffect(() => {
+    setSize(['', ''])
+  }, [currentStyle])
 
   return (
     <AddToCartContainer>
