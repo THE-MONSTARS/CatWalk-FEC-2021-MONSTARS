@@ -20,7 +20,7 @@ padding: 5px 0;
 `
 
 export default function Card ({product, setCurrentProduct, overviewProduct, isRelated, removeCard}) {
-   const image = product.photos[0].thumbnail_url;
+   const image = product.photos ? product.photos[0].thumbnail_url : 'assets/MonstersMike.svg';
 
   //Will need url and pricing from styles another get request
   //All Get functions will prob be on a component level higher...
