@@ -23,6 +23,9 @@ width: 250px;
 height: 350px;
 border: 1px solid;
 padding: 10px;
+&:hover {
+  cursor: pointer;
+}
 justify-content: center;
 align-items: center;
 `
