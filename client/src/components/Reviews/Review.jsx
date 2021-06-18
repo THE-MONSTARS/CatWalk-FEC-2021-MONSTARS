@@ -45,6 +45,9 @@ const Helpful = styled.div`
 
 const TextLink = styled.a`
   text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default function Review (props) {
