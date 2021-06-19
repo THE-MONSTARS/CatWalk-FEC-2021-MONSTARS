@@ -27,7 +27,6 @@ function ReviewList(props) {
 
   function changeSortOrder(e){
     setSortBy(e.target.value)
-    console.log(e.target.value)
   }
 
   return (

@@ -3,20 +3,6 @@ import styled from 'styled-components';
 import { DefaultWidth, Header, Button, TextLink } from './styles'
 import FontAwesome from 'react-fontawesome'
 
-// export default class Dropdown extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       isListOpen: false,
-//       sortBy: this.props.sortBy,
-//       options: [
-//         "date",
-//         "Helpfulness"
-//       ]
-//     }
-//   }
-// }
-
 const CenteredList = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,7 +17,6 @@ export default function Dropdown (props) {
     setIsListOpen(newValue);
   }
 
-  // render() {
   return (
     isListOpen ?
     <React.Fragment>
@@ -57,7 +42,7 @@ export default function Dropdown (props) {
         </Button>
       </CenteredList>
     </React.Fragment> :
-      <React.Fragment>
+    <React.Fragment>
       <Button onClick={toggleList}>
         <TextLink>
           {options[0]}
@@ -66,5 +51,4 @@ export default function Dropdown (props) {
       </Button>
     </React.Fragment>
   )
-  // }
 }
