@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import moment from 'moment'
 import StarRating from '../StarRating.jsx'
 import ReviewThumbs from './ReviewThumbs.jsx'
+import { TextLink } from './styles'
 
-const HeaderDiv = styled.div`
+const ReviewHeaderDiv = styled.div`
   color: Black;
   font-weight: bold;
   font-size: large;
@@ -43,21 +44,14 @@ const Helpful = styled.div`
   color: #3a3a3a;
 `;
 
-const TextLink = styled.a`
-  text-decoration: underline;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 export default function Review (props) {
   const [ helpfulness, setHelpfulness] = useState(props.helpfulness)
   const [ selectedHelpfulness, setSelectedHelpfulness ] = useState(false)
 
-  function incrementHelpfulness(e) {
+  function changeHelpfulness(e) {
     if (!selectedHelpfulness) {
       e.target.style.fontWeight ='bold';
-      setHelpfulness(props.helpfulness + e.target.getAttribute('data-addvalue'))
+      setHelpfulness(props.helpfulness + Number(e.target.getAttribute('data-addvalue')))
       setSelectedHelpfulness(true)
     }
   }
@@ -76,7 +70,7 @@ export default function Review (props) {
         <StarRating rating={props.rating}/>
         {props.reviewer_name} on {moment(props.date).calendar()}
       </StarUserDate>
-        <HeaderDiv> {props.summary} </HeaderDiv>
+        <ReviewHeaderDiv> {props.summary} </ReviewHeaderDiv>
         <TextDiv> {props.body} </TextDiv>
         <br></br>
           {props.recommend &&
@@ -96,9 +90,9 @@ export default function Review (props) {
           selectedPhoto={props.selectedPhoto}
         />
         <br></br>
-        <Helpful> Helpful? &nbsp; <TextLink data-addvalue={1} onClick={incrementHelpfulness}> Yes </TextLink> &nbsp;
+        <Helpful> Helpful? &nbsp; <TextLink data-addvalue={1} onClick={changeHelpfulness}> Yes </TextLink> &nbsp;
             ({helpfulness}) &nbsp;
-            <TextLink addValue={-1} onClick={decrementHelpfulness}> No </TextLink> &nbsp;
+            <TextLink data-addvalue={-1} onClick={changeHelpfulness}> No </TextLink> &nbsp;
             &nbsp; | &nbsp; <TextLink>  Report  </TextLink>
         </Helpful>
         <br></br>

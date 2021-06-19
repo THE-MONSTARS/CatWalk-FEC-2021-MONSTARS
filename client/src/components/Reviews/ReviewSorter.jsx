@@ -3,29 +3,14 @@ import styled from 'styled-components';
 import StarRating from '../StarRating.jsx';
 import { Line } from 'rc-progress';
 import { HeaderDiv } from '../ReviewsContainer';
+import { DefaultWidth, Header, Button } from './styles'
 
 
-const RDC = styled.div`
+const ReviewDivContainer = styled.div`
   font-family: Helvetica, sans-serif;
   margin-left: 10px;
   margin-right: 10px;
   width: 450px;
-`;
-
-const Header = styled.div`
-  font-size: large;
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
-
-const Button = styled.button`
-  font-size: medium;
-  font-weight: bold;
-  background-color: transparent;
-  border: none;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const SingleLine = styled.div`
@@ -41,8 +26,6 @@ line-height: 1px;
 export default function ReviewSorter (props) {
   const [ starRatings, setStarRatings ] = useState([]);
   const [ currentStarRating, setCurrentStarRating ] = useState(null)
-
-
 
   function starCategories() {
     let allStarRatings = [];
@@ -73,12 +56,12 @@ export default function ReviewSorter (props) {
 
   return (
     starRatings ?
-    <RDC> <br/>
+    <ReviewDivContainer>
       <Header> Sort by Rating: </Header>
       {starRatings}
       <br></br>
       <Button value={null} onClick={ props.setStarRatingFilter }> View All Ratings </Button>
-    </RDC> :
+    </ReviewDivContainer> :
     <div> Loading... </div>
   )
 }
