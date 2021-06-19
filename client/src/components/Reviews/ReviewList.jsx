@@ -6,8 +6,7 @@ import Dropdown from './Dropdown'
 
 import Review from './Review.jsx'
 
-//base component
-function ReviewList(props) {
+export default function ReviewList(props) {
   const [ selectedPhoto, setSelectedPhoto ] = useState(null) //496781
   const [ sortBy, setSortBy ] = useState('date')
 
@@ -57,5 +56,3 @@ function ReviewList(props) {
     </DefaultWidth>
   )
 }
-
-export default ReviewList;
