@@ -10,6 +10,10 @@ const CrossCircle='../assets/cancel_white_24dp.svg'
 const StyleImg=styled.img`
 width: 24px;
 height: 24px;
+border-radius: 35px;
+z-index: -1;
+border: 0;
+background: rgba(0, 0, 0, 1);
 `
 const StyledModal=Modal.styled`
 width: 500px;
