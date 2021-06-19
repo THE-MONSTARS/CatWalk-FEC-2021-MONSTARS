@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { DefaultWidth, Header, TextLink, Button } from './styles'
-
-import credentials from '../../../../config.js'
-const url = 'http://localhost:3000'
+import Dropdown from './Dropdown'
 
 import Review from './Review.jsx'
 
@@ -27,11 +25,16 @@ function ReviewList(props) {
     }
   }
 
+  function changeSortOrder(e){
+    setSortBy(e.target.value)
+    console.log(e.target.value)
+  }
+
   return (
     props.isLoading ?
     <div> Loading Reviews... </div> :
     <DefaultWidth>
-        <Header> {props.reviews.length} Reviews, sorted by <Button> <TextLink>Date</TextLink></Button> </Header>
+        <Header> {props.reviews.length} Reviews, sorted by <Dropdown sortBy={sortBy} changeSortOrder={changeSortOrder}/> </Header>
         {!props.reviews && <DefaultWidth> No Reviews Yet! </DefaultWidth>}
         { props.reviews
           .sort(compareForSort(sortBy))
