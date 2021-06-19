@@ -57,7 +57,6 @@ export default function Review (props) {
   function incrementHelpfulness(e) {
     if (!selectedHelpfulness) {
       e.target.style.fontWeight ='bold';
-      console.log(e.target.getAttribute('data-addvalue'))
       setHelpfulness(props.helpfulness + e.target.getAttribute('data-addvalue'))
       setSelectedHelpfulness(true)
     }

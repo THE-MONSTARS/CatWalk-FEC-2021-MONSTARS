@@ -48,20 +48,20 @@ export default function ReviewSorter (props) {
     let allStarRatings = [];
     for (let i = 5; i > 0; i--) {
       allStarRatings.push(
-          <Button
-            key={i}
-            value={i}
-            onClick={ props.setStarRatingFilter }
-            name={`click to view only ${i}-star reviews`}
-            >
+        <Button
+          key={i}
+          value={i}
+          onClick={ props.setStarRatingFilter }
+          name={`click to view only ${i}-star reviews`}
+          >
           <StarRating
             rating={i}
             />
-          <SingleLine>
-           <Line percent = {props.totalRatings[i]/props.totalRatings.total*100} strokeWidth={5} strokeColor={`#092677`} trailWidth={5} trailColor={'#b19f9f'}/>
-           &nbsp; {props.totalRatings[i]}
-          </SingleLine>
-          </Button>
+            <SingleLine>
+              <Line percent={props.totalRatings[i]/props.totalRatings.total*100} strokeWidth={5} strokeColor={`#092677`} trailWidth={5} trailColor={'#b19f9f'}/>
+              &nbsp; {props.totalRatings[i]}
+            </SingleLine>
+        </Button>
       )
     }
     setStarRatings(allStarRatings);
@@ -80,6 +80,5 @@ export default function ReviewSorter (props) {
       <Button value={null} onClick={ props.setStarRatingFilter }> View All Ratings </Button>
     </RDC> :
     <div> Loading... </div>
-
   )
 }
