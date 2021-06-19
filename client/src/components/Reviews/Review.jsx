@@ -54,10 +54,10 @@ export default function Review (props) {
   const [ helpfulness, setHelpfulness] = useState(props.helpfulness)
   const [ selectedHelpfulness, setSelectedHelpfulness ] = useState(false)
 
-  function incrementHelpfulness(e) {
+  function changeHelpfulness(e) {
     if (!selectedHelpfulness) {
       e.target.style.fontWeight ='bold';
-      setHelpfulness(props.helpfulness + e.target.getAttribute('data-addvalue'))
+      setHelpfulness(props.helpfulness + Number(e.target.getAttribute('data-addvalue')))
       setSelectedHelpfulness(true)
     }
   }
@@ -96,9 +96,9 @@ export default function Review (props) {
           selectedPhoto={props.selectedPhoto}
         />
         <br></br>
-        <Helpful> Helpful? &nbsp; <TextLink data-addvalue={1} onClick={incrementHelpfulness}> Yes </TextLink> &nbsp;
+        <Helpful> Helpful? &nbsp; <TextLink data-addvalue={1} onClick={changeHelpfulness}> Yes </TextLink> &nbsp;
             ({helpfulness}) &nbsp;
-            <TextLink addValue={-1} onClick={decrementHelpfulness}> No </TextLink> &nbsp;
+            <TextLink data-addvalue={-1} onClick={changeHelpfulness}> No </TextLink> &nbsp;
             &nbsp; | &nbsp; <TextLink>  Report  </TextLink>
         </Helpful>
         <br></br>
