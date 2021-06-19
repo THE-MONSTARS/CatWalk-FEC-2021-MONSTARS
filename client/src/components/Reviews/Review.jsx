@@ -22,7 +22,7 @@ const TextDiv = styled.div`
 const ContainerDiv = styled.div`
   margin: 11px;
   border-bottom: 2px solid gray;
-  border-color: gray; */
+  border-color: 3a3a3a
   padding: 10px;
   width: 100%;
   min-width: 400px;
@@ -33,14 +33,14 @@ const StarUserDate = styled.div`
 font-family: 'Roboto';
 font-weight: bold;
 font-size: medium;
-color: gray;
+color: #3a3a3a;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
 const Helpful = styled.div`
-  color: gray;
+  color: #3a3a3a;
 `;
 
 const TextLink = styled.a`
@@ -58,6 +58,7 @@ export default function Review (props) {
   function incrementHelpfulness(e) {
     if (!selectedHelpfulness) {
       e.target.style.fontWeight ='bold';
+      console.log(Number(e.target))
       setHelpfulness(props.helpfulness + 1)
       setSelectedHelpfulness(true)
     }
@@ -66,7 +67,7 @@ export default function Review (props) {
   function decrementHelpfulness(e) {
     if (!selectedHelpfulness) {
       e.target.style.fontWeight ='bold';
-      setUnhelpfulness(unhelpfulness + 1)
+      setHelpfulness(props.helpfulness - 1)
       setSelectedHelpfulness(true)
     }
   }
@@ -97,9 +98,9 @@ export default function Review (props) {
           selectedPhoto={props.selectedPhoto}
         />
         <br></br>
-        <Helpful> Helpful? &nbsp; <TextLink value={1} onClick={incrementHelpfulness}> Yes </TextLink>
+        <Helpful> Helpful? &nbsp; <TextLink value={1} onClick={incrementHelpfulness}> Yes </TextLink> &nbsp;
             ({helpfulness}) &nbsp;
-            <TextLink value={-1} onClick={decrementHelpfulness}> No </TextLink> ({unhelpfulness}) &nbsp;
+            <TextLink value={-1} onClick={decrementHelpfulness}> No </TextLink> &nbsp;
             &nbsp; | &nbsp; <TextLink>  Report  </TextLink>
         </Helpful>
         <br></br>
