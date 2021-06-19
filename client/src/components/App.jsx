@@ -29,8 +29,15 @@ const App = () => {
   const [ styles, setStyles ] = useState([])
   const [ currentStyle, setCurrentStyle ] = useState({})
   const [ reviews, setReviews ] = useState([])
+  const [ averageRating, setAverageRating ] = useState(3)
 
   const reviewsRef = useRef(null);
+
+  const getAverageRating = () => {
+    return reviews.reduce((acc, review) => {
+      return acc + review.rating
+    }, 0) / reviews.length;
+  }
 
   // product update on startup
   const fetchProductAndId = async () => {
@@ -125,6 +132,11 @@ const App = () => {
     updateProductAndId();
   }, [currentProduct])
 
+  useEffect(() => {
+    let average = getAverageRating();
+    setAverageRating(average);
+  }, [reviews])
+
   let id = currentProduct.id;
 
   return (
@@ -139,13 +151,14 @@ const App = () => {
         currentProduct={currentProduct}
         styles={styles}
         currentStyle={currentStyle}
-        reviews={reviews}
+        averageRating={averageRating}
         setCurrentStyle={setCurrentStyle}
         handleScrollToRef={handleScrollToRef}
       />
       <RelatedContainer
         id={id}
         getOneProduct={getOneProduct}
+        averageRating={averageRating}
         getStyles={getStyles}
         setCurrentProduct={setCurrentProduct}
         currentProduct={currentProduct}
@@ -158,6 +171,7 @@ const App = () => {
       <ReviewsContainer
         id={id}
         reviews={reviews}
+        averageRating={averageRating}
         isLoading={isLoading}
         reference={reviewsRef}
       />
