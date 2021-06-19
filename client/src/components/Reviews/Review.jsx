@@ -21,12 +21,12 @@ const TextDiv = styled.div`
 
 const ContainerDiv = styled.div`
   margin: 11px;
-  border-bottom: 2px solid gray;
+  border-bottom: 1px solid gray;
   border-color: 3a3a3a
   padding: 10px;
   width: 100%;
-  min-width: 400px;
-  max-width: 600px;
+  min-width: 300px;
+  max-width: 500px;
 `;
 
 const StarUserDate = styled.div`
@@ -52,14 +52,13 @@ const TextLink = styled.a`
 
 export default function Review (props) {
   const [ helpfulness, setHelpfulness] = useState(props.helpfulness)
-  const [ unhelpfulness, setUnhelpfulness ] = useState(0)
   const [ selectedHelpfulness, setSelectedHelpfulness ] = useState(false)
 
   function incrementHelpfulness(e) {
     if (!selectedHelpfulness) {
       e.target.style.fontWeight ='bold';
-      console.log(Number(e.target))
-      setHelpfulness(props.helpfulness + 1)
+      console.log(e.target.getAttribute('data-addvalue'))
+      setHelpfulness(props.helpfulness + e.target.getAttribute('data-addvalue'))
       setSelectedHelpfulness(true)
     }
   }
@@ -98,9 +97,9 @@ export default function Review (props) {
           selectedPhoto={props.selectedPhoto}
         />
         <br></br>
-        <Helpful> Helpful? &nbsp; <TextLink value={1} onClick={incrementHelpfulness}> Yes </TextLink> &nbsp;
+        <Helpful> Helpful? &nbsp; <TextLink data-addvalue={1} onClick={incrementHelpfulness}> Yes </TextLink> &nbsp;
             ({helpfulness}) &nbsp;
-            <TextLink value={-1} onClick={decrementHelpfulness}> No </TextLink> &nbsp;
+            <TextLink addValue={-1} onClick={decrementHelpfulness}> No </TextLink> &nbsp;
             &nbsp; | &nbsp; <TextLink>  Report  </TextLink>
         </Helpful>
         <br></br>

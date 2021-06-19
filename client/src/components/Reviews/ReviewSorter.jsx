@@ -9,7 +9,7 @@ const RDC = styled.div`
   font-family: Helvetica, sans-serif;
   margin-left: 10px;
   margin-right: 10px;
-  min-width: 240px;
+  width: 450px;
 `;
 
 const Header = styled.div`
@@ -28,6 +28,16 @@ const Button = styled.button`
   }
 `;
 
+const SingleLine = styled.div`
+display: inline-flex;
+flex-direction: row;
+flex-wrap: nowrap;
+min-width: 300px;
+align-items: center;
+justify-content: center;
+line-height: 1px;
+`;
+
 export default function ReviewSorter (props) {
   const [ starRatings, setStarRatings ] = useState([]);
   const [ currentStarRating, setCurrentStarRating ] = useState(null)
@@ -38,20 +48,20 @@ export default function ReviewSorter (props) {
     let allStarRatings = [];
     for (let i = 5; i > 0; i--) {
       allStarRatings.push(
-        <div key={i}>
-          <br></br>
           <Button
+            key={i}
             value={i}
             onClick={ props.setStarRatingFilter }
             name={`click to view only ${i}-star reviews`}
-          >
+            >
           <StarRating
             rating={i}
-          />
-          &nbsp; {props.totalRatings[i]} Reviews
-          <Line percent = {props.totalRatings[i]/props.totalRatings.total*100} strokeWidth={5} strokeColor={`#092677`} trailWidth={5} trailColor={'#b19f9f'}/>
+            />
+          <SingleLine>
+           <Line percent = {props.totalRatings[i]/props.totalRatings.total*100} strokeWidth={5} strokeColor={`#092677`} trailWidth={5} trailColor={'#b19f9f'}/>
+           &nbsp; {props.totalRatings[i]}
+          </SingleLine>
           </Button>
-        </div>
       )
     }
     setStarRatings(allStarRatings);
