@@ -6,6 +6,7 @@ const Thumb = styled.img`
   max-height: 50px;
   border: solid black 1px;
   margin: 5px;
+  box-shadow: 0px 2.5px 10px #1d62bd;
   &:hover {
     cursor: pointer;
   }

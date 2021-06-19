@@ -4,7 +4,7 @@ import OverView from './OverView.jsx';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RelatedContainer from './RelatedContainer.jsx';
 import OutfitContainer from './OutfitContainer.jsx';
-import ReviewsContainer from './ReviewsContainer.jsx';
+import { ReviewsContainer } from './ReviewsContainer.jsx';
 import axios from 'axios';
 import styled from 'styled-components';
 import useEffectAfterRender from './utils/useEffectAfterRender.jsx';
