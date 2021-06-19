@@ -20,7 +20,6 @@ import FontAwesome from 'react-fontawesome'
 const CenteredList = styled.div`
   display: flex;
   flex-direction: column;
-
 `;
 
 export default function Dropdown (props) {
@@ -36,10 +35,26 @@ export default function Dropdown (props) {
   return (
     isListOpen ?
     <React.Fragment>
-        <Button onClick={props.changeSortOrder} value={options[0]}> {options[0]} </Button>
+        <Button
+          onClick={props.changeSortOrder}
+          value={options[0]}
+          style={props.sortBy === options[0] ?
+            {textDecoration: 'underline'} :
+            {fontWeight: 'none'}}
+        >
+          {options[0]}
+        </Button>
         <Button onClick={toggleList}><FontAwesome name="angle-up" /></Button> <br/>
       <CenteredList>
-        <Button onClick={props.changeSortOrder}value={options[1]}> {options[1]} </Button>
+        <Button
+          onClick={props.changeSortOrder}
+          value={options[1]}
+          style={props.sortBy === options[1] ?
+            {textDecoration: 'underline'} :
+            {fontWeight: 'none'}}
+        >
+          {options[1]}
+        </Button>
       </CenteredList>
     </React.Fragment> :
       <React.Fragment>
