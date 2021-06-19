@@ -13,8 +13,38 @@ const RVC = styled.div`
   justify-content: left;
 `;
 
-export default function ReviewsContainer (props) {
+const HeaderDiv = styled.div`
+  color: Black;
+  font-weight: bold;
+  font-size: large;
+  font-family: 'Bebas Neue';
+  letter-spacing: 1px;
+  margin: none;
+`;
+
+function ReviewsContainer (props) {
   const [ currentStarRating, setCurrentStarRating ] = useState(null)
+  const [ ratingsLoaded, setRatingsLoaded ] = useState(false)
+  const [ totalRatings, setTotalRatings ] = useState({
+    'total': 0,
+      5: 0,
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0
+    })
+
+  function getTotalRatings(reviews) {
+    let newTotalRatings = totalRatings;
+    newTotalRatings.total = reviews.length;
+    reviews.forEach(review => {
+      newTotalRatings[review.rating] = newTotalRatings[review.rating] + 1;
+
+    })
+    console.log(newTotalRatings);
+    setTotalRatings(newTotalRatings);
+    setRatingsLoaded(true);
+  }
 
   function setStarRatingFilter(e) {
     e.preventDefault();
@@ -22,10 +52,17 @@ export default function ReviewsContainer (props) {
     setCurrentStarRating(Number(e.target.value))
   }
 
+  useEffect(() => {
+    getTotalRatings(props.reviews)
+
+  }, []);
+
   return (
+    ratingsLoaded &&
     <RVC ref={props.reference}>
       <ReviewSorter
         setStarRatingFilter={setStarRatingFilter}
+        totalRatings={totalRatings}
       />
       <ReviewList
         id={props.id}
@@ -35,4 +72,9 @@ export default function ReviewsContainer (props) {
       />
     </RVC>
   )
+}
+
+export {
+  ReviewsContainer,
+  HeaderDiv
 }
