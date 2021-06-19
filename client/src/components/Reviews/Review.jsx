@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import moment from 'moment'
 import StarRating from '../StarRating.jsx'
 import ReviewThumbs from './ReviewThumbs.jsx'
+import { TextLink } from './styles'
 
-const HeaderDiv = styled.div`
+const ReviewHeaderDiv = styled.div`
   color: Black;
   font-weight: bold;
   font-size: large;
@@ -43,13 +44,6 @@ const Helpful = styled.div`
   color: #3a3a3a;
 `;
 
-const TextLink = styled.a`
-  text-decoration: underline;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 export default function Review (props) {
   const [ helpfulness, setHelpfulness] = useState(props.helpfulness)
   const [ selectedHelpfulness, setSelectedHelpfulness ] = useState(false)
@@ -76,7 +70,7 @@ export default function Review (props) {
         <StarRating rating={props.rating}/>
         {props.reviewer_name} on {moment(props.date).calendar()}
       </StarUserDate>
-        <HeaderDiv> {props.summary} </HeaderDiv>
+        <ReviewHeaderDiv> {props.summary} </ReviewHeaderDiv>
         <TextDiv> {props.body} </TextDiv>
         <br></br>
           {props.recommend &&
