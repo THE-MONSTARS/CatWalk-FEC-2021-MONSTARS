@@ -52,23 +52,11 @@ const StruckThroughPrice = styled.span`
   text-decoration: line-through;
 `
 
-const ProductInformation = ({currentProduct, currentStyle, reviews, handleScrollToRef}) => {
-  const [ averageRating, setAverageRating ] = useState(3)
+const ProductInformation = ({currentProduct, currentStyle, averageRating, handleScrollToRef}) => {
   const productName = currentProduct.name;
   const productCategory = currentProduct.category;
   const salePrice = currentStyle.sale_price;
   const originalPrice = currentStyle.original_price;
-
-  const getAverageRating = () => {
-    return reviews.reduce((acc, review) => {
-      return acc + review.rating
-    }, 0) / reviews.length;
-  }
-
-  useEffect(() => {
-    let average = getAverageRating();
-    setAverageRating(average);
-  }, [reviews])
 
   return (
     <ProductInfoContainer>
